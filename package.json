@@ -6,7 +6,8 @@
   "scripts": {
     "start": "ts-node server/server.ts",
     "dev": "nodemon -x ts-node server/server.ts",
-    "heroku-postbuild": "tsc & cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "tsc & cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "client": "npm start --prefix client"
   },
   "keywords": [],
   "author": "",
