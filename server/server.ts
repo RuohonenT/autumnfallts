@@ -24,3 +24,21 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.listen(PORT, () => console.log(`hosting @${PORT}`));
+
+const config: PostgresConnectionOptions = {
+	type: 'postgres',
+	host: String(process.env.DB_HOST),
+	port: Number(process.env.DB_PORT),
+	username: String(process.env.DB_USERNAME),
+	password: String(process.env.DB_PASSWORD),
+	database: String(process.env.DB_DATABASE),
+	synchronize: true,
+	logging: false,
+	entities: [
+		News
+	]
+};
+
+createConnection(config).then(async () => {
+	console.log('Server is connected to PostgreSQL database.');
+}).catch(e => console.log(e));
