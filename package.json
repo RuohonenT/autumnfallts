@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@types/cors": "^2.8.10",
-    "pg": "^8.6.0"
+    "pg": "^8.6.0",
+    "@types/nodemailer": "^6.4.1"
   }
 }
