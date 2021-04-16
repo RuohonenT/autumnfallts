@@ -4,12 +4,15 @@ import 'reflect-metadata';
 import { createConnection, Connection } from 'typeorm';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import 'dotenv/config';
+import nodemailer = require('nodemailer');
+const router = express.Router();
 const cors = require('cors')
 const app = express()
 const PORT: string | number = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+app.use('/', router);
 
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '../client/build')));
@@ -45,3 +48,40 @@ const config: PostgresConnectionOptions = {
 createConnection(config).then(async () => {
 	console.log('Server is connected to PostgreSQL database.');
 }).catch(e => console.log(e));
+
+// Nodemailer for Contact
+const contactEmail = nodemailer.createTransport({
+	host: String(process.env.CONTACT_HOST),
+	port: Number(process.env.CONTACT_PORT),
+	auth: {
+		user: String(process.env.CONTACT_USER),
+		pass: (process.env.CONTACT_PASS),
+	},
+});
+
+contactEmail.verify((err) => {
+	if (err) {
+		console.log(err);
+	} else {
+		console.log('Ready to Send');
+	}
+});
+
+router.post('/contact', (req, res) => {
+	const name = req.body.name;
+	const email = req.body.email;
+	const message = req.body.message;
+	const mail = {
+		from: name,
+		to: 'gallowssong@gmail.com',
+		subject: 'Contact Form Message',
+		html: `<p>Name: ${name}</p><p>Email: ${email}</p><p>Message: ${message}</p>`,
+	};
+	contactEmail.sendMail(mail, (err) => {
+		if (err) {
+			res.json({ status: 'failed' });
+		} else {
+			res.json({ status: 'sent' });
+		}
+	});
+});
