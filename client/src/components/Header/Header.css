@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pinyon+Script&display=swap');
+
+.header_container {
+    background-color: transparent;
+    width: 750px;
+    justify-content: center;
+}
+
+.header_content {
+    display: flex;
+    background-color: black;
+    justify-content: center;
+    flex-flow: row wrap;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(235, 6, 6, 0.19);
+    border-style: solid;
+    border-width: 1px 1px 0px 1px;
+    border-color: white;
+    margin-top: 10px;
+}
+
+.header_navigation {
+    display: flex;
+    justify-content: center;
+    flex-flow: row-wrap;
+    width: 100%;
+}
+
+.header_content p {
+    display: flex;
+    font-family: 'Pinyon Script', georgia;
+    font-size: 35px;
+    height: 20px;
+    color: #9e9277
+}
+
+.header_link {
+    text-decoration: none;
+    padding: 0 10px 0px 0;
+    color: #9e9277;
+}
+
+.header_content hr {
+    width: 65%;
+    color: white;
+    height: 0.5px solid;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    background: black;
+    width: 500px;
+    height: 100px;
+    padding: 5px 0 0 0;
+}
+
