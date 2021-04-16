@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/config/server.ts",
-    "dev": "nodemon -x ts-node src/config/server.ts"
+    "start": "ts-node server/server.ts",
+    "dev": "nodemon -x ts-node server/server.ts"
   },
   "keywords": [],
   "author": "",
