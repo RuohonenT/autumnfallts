@@ -4,7 +4,7 @@ import 'reflect-metadata';
 import { createConnection, Connection } from 'typeorm';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import 'dotenv/config';
-import nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 const router = express.Router();
 const cors = require('cors')
 const app = express()

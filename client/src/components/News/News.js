@@ -13,15 +13,15 @@ const News = () => {
 		setNews(result);
 		console.log(news);
 
-		// axios.get(`${URL}/news`)
-		// 	.then((response) => {
-		// 		console.log(response);
-		// 		setNews(response)
-		// 	})
-		// 	.catch((error) => {
-		// 		console.log(error);
-		// 		setNews('erroria', error)
-		// 	})
+		axios.get(`${URL}/news`)
+			.then((response) => {
+				console.log(response);
+				setNews(response)
+			})
+			.catch((error) => {
+				console.log(error);
+				setNews('erroria', error)
+			})
 
 	};
 
