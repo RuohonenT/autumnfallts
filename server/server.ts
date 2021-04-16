@@ -4,6 +4,8 @@ import cors from 'cors';
 const app = express()
 const PORT: string | number = process.env.PORT || 5000;
 
+app.use(cors());
+
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '../client/build')));
 	// 'catching-all' handler to send back React's index.html if a req doesn't match any endpoints above
