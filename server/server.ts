@@ -4,7 +4,7 @@ import 'reflect-metadata';
 import { createConnection, Connection } from 'typeorm';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import 'dotenv/config';
-import nodemailer from 'nodemailer';
+const nodemailer = require('nodemailer');
 const router = express.Router();
 const cors = require('cors')
 const app = express()
@@ -59,9 +59,9 @@ const contactEmail = nodemailer.createTransport({
 	},
 });
 
-contactEmail.verify((err) => {
-	if (err) {
-		console.log(err);
+contactEmail.verify((error: any) => {
+	if (error) {
+		console.log(error);
 	} else {
 		console.log('Ready to Send');
 	}
@@ -77,8 +77,8 @@ router.post('/contact', (req, res) => {
 		subject: 'Contact Form Message',
 		html: `<p>Name: ${name}</p><p>Email: ${email}</p><p>Message: ${message}</p>`,
 	};
-	contactEmail.sendMail(mail, (err) => {
-		if (err) {
+	contactEmail.sendMail(mail, (error: any) => {
+		if (error) {
 			res.json({ status: 'failed' });
 		} else {
 			res.json({ status: 'sent' });
