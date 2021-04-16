@@ -1,5 +1,9 @@
 import express from 'express';
 import path from 'path';
+import 'reflect-metadata';
+import { createConnection, Connection } from 'typeorm';
+import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
+import 'dotenv/config';
 const cors = require('cors')
 const app = express()
 const PORT: string | number = process.env.PORT || 5000;
@@ -35,7 +39,6 @@ const config: PostgresConnectionOptions = {
 	synchronize: true,
 	logging: false,
 	entities: [
-		News
 	]
 };
 
