@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 // import getNews from '../../controllers/fetchFunctions';
-const URL = process.env.DATABASE_URL || 'http://localhost:5000/api';
+const URL = process.env.DATABASE_URL;
 // import NotFound from '../NotFound/NotFound';
 
 const News = () => {
