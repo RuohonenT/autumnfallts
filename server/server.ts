@@ -4,6 +4,7 @@ import 'reflect-metadata';
 import { createConnection, Connection } from 'typeorm';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import 'dotenv/config';
+import { createRoutes } from './routes/routes';
 const nodemailer = require('nodemailer');
 const router = express.Router();
 const cors = require('cors')
@@ -13,6 +14,7 @@ const PORT: string | number = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 app.use('/', router);
+app.use('/api', createRoutes());
 
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '../client/build')));
