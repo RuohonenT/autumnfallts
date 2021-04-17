@@ -5,6 +5,7 @@ import { createConnection, Connection } from 'typeorm';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import 'dotenv/config';
 import { createRoutes } from './routes/routes';
+import { News } from './models/News';
 const nodemailer = require('nodemailer');
 const router = express.Router();
 const cors = require('cors')
@@ -44,6 +45,7 @@ const config: PostgresConnectionOptions = {
 	synchronize: true,
 	logging: false,
 	entities: [
+		News
 	]
 };
 

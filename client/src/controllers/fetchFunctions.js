@@ -1,4 +1,4 @@
-const URL = process.env.DB_URL || 'http://localhost:5000/api';
+const URL = process.env.DATABASE_URL || 'http://localhost:5000/api';
 const axios = require('axios');
 
 export default async function getNews() {
