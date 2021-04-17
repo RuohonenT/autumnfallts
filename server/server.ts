@@ -15,7 +15,7 @@ const PORT: string | number = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 app.use('/', router);
-app.use('/api', createRoutes());
+app.use('/', createRoutes());
 
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '../client/build')));
