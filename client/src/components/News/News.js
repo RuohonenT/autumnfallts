@@ -14,8 +14,8 @@ const News = () => {
 				setNews(response)
 			})
 			.catch((error) => {
-				console.log(error);
-				setNews('erroria', error)
+				console.log('erroria', error);
+				setNews('ei yhdistä')
 			})
 	}, [news]);
 
@@ -25,7 +25,7 @@ const News = () => {
 
 			<div className="news_content">
 				<div>
-					{/* {news.map(news => news._content)} */}
+					{news}
 				</div>
 			</div>
 
