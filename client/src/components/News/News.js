@@ -1,14 +1,14 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 // import getNews from '../../controllers/fetchFunctions';
-const URL = process.env.DATABASE_URL;
+// const URL = process.env.DATABASE_URL;
 // import NotFound from '../NotFound/NotFound';
 
 const News = () => {
 	const [news, setNews] = useState();
 
 	useEffect(() => {
-		axios.get(`${URL}/news`)
+		axios.get('api/news')
 			.then((response) => {
 				console.log(response);
 				setNews(response)
