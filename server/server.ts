@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
 import 'reflect-metadata';
-import { createConnection, Connection, ConnectionOptions, getConnectionOptions } from 'typeorm';
+import { createConnection, ConnectionOptions, getConnectionOptions } from 'typeorm';
 import 'dotenv/config';
 import { createRoutes } from './routes/routes';
 const nodemailer = require('nodemailer');
@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '../client/build')));
 	// 'catching-all' handler to send back React's index.html if a req doesn't match any endpoints above
 	app.use((_req, res) => {
-		res.sendFile(path.join(__dirname, './client/build/index.html'));
+		res.sendFile(path.join(__dirname, '/app/client/build/index.html'));
 	});
 }
 
