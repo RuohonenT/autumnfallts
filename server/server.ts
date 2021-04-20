@@ -1,8 +1,8 @@
 import express from 'express';
 import path from 'path';
 import 'reflect-metadata';
-// import { createConnection, Connection } from 'typeorm';
-// import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
+import { createConnection, Connection, ConnectionOptions, getConnectionOptions } from 'typeorm';
+import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import 'dotenv/config';
 import { createRoutes } from './routes/routes';
 import { News } from './models/News';
@@ -37,22 +37,36 @@ if (process.env.NODE_ENV === 'development') {
 app.listen(PORT, () => console.log(`hosting @${PORT}`));
 
 
-
-const client = new Client({
-	connectionString: process.env.DATABASE_URL,
-	ssl: {
-		rejectUnauthorized: false
+const getOptions = async () => {
+	let connectionOptions: ConnectionOptions;
+	connectionOptions = {
+		type: 'postgres',
+		synchronize: false,
+		logging: false,
+		extra: {
+			ssl: true,
+		},
+		entities: ['models/*.*'],
+	};
+	if (process.env.DATABASE_URL) {
+		Object.assign(connectionOptions, { url: process.env.DATABASE_URL });
+	} else {
+		// gets your default configuration
+		// you could get a specific config by name getConnectionOptions('production')
+		// or getConnectionOptions(process.env.NODE_ENV)
+		connectionOptions = await getConnectionOptions();
 	}
-});
 
-client.connect();
+	return connectionOptions;
+};
 
-client.query('SELECT * FROM news;', (err: any, res: { rows: any; }) => {
-	if (err) throw err;
-	for (let row of res.rows) {
-		console.log(JSON.stringify(row));
-	}
-	client.end();
+const connect2Database = async (): Promise<void> => {
+	const typeormconfig = await getOptions();
+	await createConnection(typeormconfig);
+};
+
+connect2Database().then(async () => {
+	console.log('Connected to database');
 });
 
 // const config: PostgresConnectionOptions = {
