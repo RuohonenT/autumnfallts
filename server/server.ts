@@ -2,11 +2,8 @@ import express from 'express';
 import path from 'path';
 import 'reflect-metadata';
 import { createConnection, Connection, ConnectionOptions, getConnectionOptions } from 'typeorm';
-import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import 'dotenv/config';
 import { createRoutes } from './routes/routes';
-import { News } from './models/News';
-const { Client } = require('pg');
 const nodemailer = require('nodemailer');
 const router = express.Router();
 const cors = require('cors')
@@ -51,9 +48,6 @@ const getOptions = async () => {
 	if (process.env.DATABASE_URL) {
 		Object.assign(connectionOptions, { url: process.env.DATABASE_URL });
 	} else {
-		// gets your default configuration
-		// you could get a specific config by name getConnectionOptions('production')
-		// or getConnectionOptions(process.env.NODE_ENV)
 		connectionOptions = await getConnectionOptions();
 	}
 
@@ -69,23 +63,6 @@ connect2Database().then(async () => {
 	console.log('Connected to database');
 });
 
-// const config: PostgresConnectionOptions = {
-// 	type: 'postgres',
-// 	host: String(process.env.DB_HOST),
-// 	port: Number(process.env.DB_PORT),
-// 	username: String(process.env.DB_USERNAME),
-// 	password: String(process.env.DB_PASSWORD),
-// 	database: String(process.env.DB_DATABASE),
-// 	synchronize: true,
-// 	logging: false,
-// 	entities: [
-// 		News
-// 	]
-// };
-
-// createConnection(config).then(async () => {
-// 	console.log('Server is connected to PostgreSQL database.');
-// }).catch(e => console.log(e));
 
 // Nodemailer for Contact
 const contactEmail = nodemailer.createTransport({

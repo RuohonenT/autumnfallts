@@ -5,13 +5,13 @@ import React, { useState, useEffect } from 'react';
 // import NotFound from '../NotFound/NotFound';
 
 const News = () => {
-	const [news, setNews] = useState();
+	const [news, setNews] = useState([]);
 
 	useEffect(() => {
 		axios.get('api/news')
 			.then((response) => {
+				// setNews(response)
 				console.log(response);
-				setNews(response)
 			})
 			.catch((error) => {
 				console.log('erroria', error);
