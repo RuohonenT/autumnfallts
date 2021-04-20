@@ -1,9 +1,10 @@
 import express from 'express';
 import path from 'path';
 import 'reflect-metadata';
-import { createConnection, ConnectionOptions, getConnectionOptions } from 'typeorm';
+import { createConnection, ConnectionOptions, getConnectionOptions, MetadataAlreadyExistsError } from 'typeorm';
 import 'dotenv/config';
 import { createRoutes } from './routes/routes';
+const axios = require('axios');
 const nodemailer = require('nodemailer');
 const router = express.Router();
 const cors = require('cors')
@@ -14,7 +15,16 @@ app.use(cors());
 app.use(express.json());
 app.use('/', router);
 app.use('/api', createRoutes());
-app.get('/');
+// app.get('/api/getNews', (req, res) => {
+// 	axios.get('api/news')
+// 		.then((response: any) => {
+// 			// setNews(response)
+// 			console.log(response);
+// 		})
+// 		.catch((error: any) => {
+// 			console.log('erroria', error);
+// 		});
+// });
 
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '../client/build')));

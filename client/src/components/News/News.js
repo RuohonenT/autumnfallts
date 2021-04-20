@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-// import getNews from '../../controllers/fetchFunctions';
+import getNews from '../../controllers/fetchFunctions';
 // const URL = process.env.DATABASE_URL;
 // import NotFound from '../NotFound/NotFound';
 
@@ -8,15 +8,7 @@ const News = () => {
 	const [news, setNews] = useState([]);
 
 	useEffect(() => {
-		axios.get('api/news')
-			.then((response) => {
-				// setNews(response)
-				console.log(response);
-			})
-			.catch((error) => {
-				console.log('erroria', error);
-				setNews('ei yhdistä')
-			})
+		getNews();
 	}, [news]);
 
 
