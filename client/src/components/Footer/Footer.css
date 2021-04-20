@@ -47,7 +47,11 @@
 }
 
 .footer_content a:visited {
-    color: #aeaeae;
+    color: #808080;
+}
+
+.footer_content a:visited:hover {
+    color: #9e9277;
 }
 
 .footer_content a:active {
