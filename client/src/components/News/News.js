@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import getNews from '../../controllers/fetchFunctions';
 // const URL = process.env.DATABASE_URL;

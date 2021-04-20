@@ -4,7 +4,6 @@ import 'reflect-metadata';
 import { createConnection, ConnectionOptions, getConnectionOptions, MetadataAlreadyExistsError } from 'typeorm';
 import 'dotenv/config';
 import { createRoutes } from './routes/routes';
-const axios = require('axios');
 const nodemailer = require('nodemailer');
 const router = express.Router();
 const cors = require('cors')
