@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getNews } from '../controllers/newsControllers';
+import { getNews } from '../database/controllers/newsControllers';
 
 const newsRoutes = (): Router => {
 	const router = Router();

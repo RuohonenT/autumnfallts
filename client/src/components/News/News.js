@@ -8,7 +8,7 @@ const News = () => {
 	const [news, setNews] = useState([]);
 
 	useEffect(() => {
-		axios.get('/news')
+		axios.get('api/news')
 			.then((response) => {
 				// setNews(response)
 				console.log(response);

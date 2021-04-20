@@ -16,10 +16,10 @@ app.use('/', router);
 app.use('/api', createRoutes());
 
 if (process.env.NODE_ENV === 'production') {
-	app.use(express.static(path.join(__dirname, '../app/client/build')));
+	app.use(express.static(path.join(__dirname, '../client/build')));
 	// 'catching-all' handler to send back React's index.html if a req doesn't match any endpoints above
 	app.use((_req, res) => {
-		res.sendFile(path.join(__dirname, '/app/client/build/index.html'));
+		res.sendFile(path.join(__dirname, './app/client/build/index.html'));
 	});
 }
 
