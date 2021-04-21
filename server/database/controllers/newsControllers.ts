@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
-import { News } from '../models/News';
+import { news } from '../models/News';
 
 
 export const getNews = async () => {
-	const newsRepository = getRepository(News);
-	let news = await newsRepository;
-	return News;
+	const newsRepository = getRepository(news);
+	let News = await newsRepository;
+	return news;
 }
 
 

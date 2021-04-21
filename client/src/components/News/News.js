@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import getNews from '../../controllers/fetchFunctions';
 const axios = require('axios');
@@ -8,11 +9,17 @@ const News = () => {
 	const [news, setNews] = useState([]);
 
 	useEffect(() => {
-		const getAllNews = async () => {
-			const result = axios.get(`${URL}/news`)
-			console.log(result);
+		async function getNews() {
+			try {
+				const response = await axios.get(`${URL}/news`);
+				console.log(response);
+			} catch (error) {
+				console.error(error);
+			}
+
 		}
-	}, [news]);
+		getNews();
+	}, []);
 
 
 	return (

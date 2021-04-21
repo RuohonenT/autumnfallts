@@ -1,7 +1,7 @@
 import { Entity, PrimaryColumn, Column } from 'typeorm';
 
 @Entity()
-export class News {
+export class news {
 
 	@PrimaryColumn()
 	id!: number;

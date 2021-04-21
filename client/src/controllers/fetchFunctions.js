@@ -1,4 +1,4 @@
-const URL = process.env.DATABASE_URL || 'http://localhost:5000/api';
+const URL = process.env.DATABASE_URL || 'http://localhost:5000/';
 const axios = require('axios');
 
 export default async function getNews() {
@@ -9,15 +9,3 @@ export default async function getNews() {
 		console.error('fetchFunctions error', error);
 	}
 }
-// 	// console.log(`${URL}/news`);
-// 	return axios.get(`${URL}/news`, {
-// 		method: "POST",
-// 		headers: {
-// 			"Content-Type": "application/json",
-// 			"Authorization": `Bearer ${token}`
-// 		},
-// 		mode: 'cors',
-// 		credentials: "include",
-// 		body: JSON.stringify({ book_id })
-// 	});
-// };
