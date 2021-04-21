@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import getNews from '../../controllers/fetchFunctions';
-// const URL = process.env.DATABASE_URL;
+const axios = require('axios');
+const URL = process.env.DB_URL || 'http://localhost:5000/api';
 // import NotFound from '../NotFound/NotFound';
 
 const News = () => {
 	const [news, setNews] = useState([]);
 
 	useEffect(() => {
-		getNews();
+		const getAllNews = async () => {
+			const result = axios.get(`${URL}/news`)
+			console.log(result);
+		}
 	}, [news]);
 
 

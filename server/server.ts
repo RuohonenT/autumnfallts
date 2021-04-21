@@ -14,16 +14,6 @@ app.use(cors());
 app.use(express.json());
 app.use('/', router);
 app.use('/api', createRoutes());
-// app.get('/api/getNews', (req, res) => {
-// 	axios.get('api/news')
-// 		.then((response: any) => {
-// 			// setNews(response)
-// 			console.log(response);
-// 		})
-// 		.catch((error: any) => {
-// 			console.log('erroria', error);
-// 		});
-// });
 
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '../client/build')));
@@ -41,7 +31,7 @@ if (process.env.NODE_ENV === 'development') {
 	}));
 }
 
-app.listen(PORT, () => console.log(`hosting @${PORT}`));
+app.listen(PORT, () => console.log(`hosting port ${PORT}`));
 
 
 const getOptions = async () => {
@@ -53,7 +43,7 @@ const getOptions = async () => {
 		extra: {
 			ssl: true,
 		},
-		entities: ['models/*.*'],
+		entities: ['database/models/*.*'],
 	};
 	if (process.env.DATABASE_URL) {
 		Object.assign(connectionOptions, { url: process.env.DATABASE_URL });
