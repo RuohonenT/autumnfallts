@@ -10,15 +10,15 @@ const News = () => {
 	useEffect(() => {
 		axios.get('api/news')
 			.then((response) => {
-				// setNews(response)
-				console.log(response);
+				setNews([response.data[0]])
+				// console.log(response.data[0]);
 			})
 			.catch((error) => {
 				console.log('erroria', error);
 				setNews('ei yhdistä')
 			})
 		getNews();
-	}, [news]);
+	}, []);
 
 
 	return (
@@ -26,7 +26,7 @@ const News = () => {
 
 			<div className="news_content">
 				<div>
-					{news}
+					{news.map(el => el.content)}
 				</div>
 			</div>
 
