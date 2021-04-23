@@ -12,7 +12,7 @@ const News = () => {
 
 	useEffect(() => {
 		const fetchNews = () => {
-			axios.get('news')
+			axios.get('api/news')
 				.then(res => setData(res.data))
 				.catch(error => setData('not connecting', error));
 
@@ -28,7 +28,7 @@ const News = () => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		axios
-			.post('news/add', { subject, content })
+			.post('api/news/add', { subject, content })
 			.then(res => setNews([res.data]))
 			.catch(err => console.log('error', err));
 	};
