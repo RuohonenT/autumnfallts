@@ -37,3 +37,25 @@ export const addNews = async (
 	}
 };
 
+export const deleteNews = async (
+	req: Request,
+	res: Response
+): Promise<Response> => {
+	try {
+		const { id } = req.body;
+		const newsRepository = getRepository(News);
+		const found = await newsRepository.find({ id });
+		if (found[0] !== undefined) {
+			const news = await newsRepository.delete({ id });
+			if (news) {
+				return res.status(200).json({ msg: "News removed" });
+			}
+			return res.status(501).json({ error: "Server error" });
+		}
+		return res.status(404).json({ error: "News not found" });
+	}
+	catch (err) {
+		return res.status(501).json({ error: "Server error" });
+	}
+};
+

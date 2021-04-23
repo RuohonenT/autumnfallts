@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 
 
 const News = () => {
+	const [data, setData] = useState([]);
 	const [news, setNews] = useState([]);
 	const [subject, setSubject] = useState('');
 	const [content, setContent] = useState('');
@@ -11,11 +12,17 @@ const News = () => {
 	useEffect(() => {
 		const fetchNews = async () => {
 			axios.get('api/news')
-				.then(async res => { setNews([res.data.sort((a, b) => { if (a.date > b.date) { return -1 } return -1 })]) })
-				.catch(async error => setNews('not connecting', error));
-		}
+				.then(async res => setData(res.data))
+				.catch(async error => setData('not connecting', error));
+
+			const arrangedData = [...data].sort((a, b) => { if (a.id > b.id) { return -1 } return -1 });
+			setNews(arrangedData);
+			console.log()
+		};
+
 		fetchNews();
-	}, [news])
+	}, [data])
+
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -30,8 +37,8 @@ const News = () => {
 
 			<div className="news_content">
 				<div className='news_content'>
-					{news.map((topic, idx) => (
-						<div key={idx}>
+					{news.map((topic, i) => (
+						<div id={topic.id} key={i}>
 							<div><h1>{topic.subject}</h1></div>
 							<div><h1>{topic.date}</h1></div>
 							<div><p>{topic.content}</p></div>
