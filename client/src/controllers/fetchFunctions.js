@@ -10,9 +10,10 @@ export const getNews = async () => {
 	}
 };
 
-export const deleteNews = async (id) => {
-	const result = await deleteNews(id);
-	if (result.status === 200) {
-		getNews();
-	}
-};
+// export const deleteNews = async () => {
+// 	try {
+// 		const response = await axios
+// 		.delete(`${URL}/news/delete`, (id))
+// 		.then(res=>console.log(res.data))
+// 	}
+// }

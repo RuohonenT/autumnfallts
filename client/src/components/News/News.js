@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import './News.css'
 // import { getNews } from '../../controllers/fetchFunctions';
 
 
@@ -10,10 +11,10 @@ const News = () => {
 	const [content, setContent] = useState('');
 
 	useEffect(() => {
-		const fetchNews = async () => {
+		const fetchNews = () => {
 			axios.get('api/news')
-				.then(async res => setData(res.data))
-				.catch(async error => setData('not connecting', error));
+				.then(res => setData(res.data))
+				.catch(error => setData('not connecting', error));
 
 			const arrangedData = [...data].sort((a, b) => { if (a.id > b.id) { return -1 } return -1 });
 			setNews(arrangedData);
@@ -35,35 +36,35 @@ const News = () => {
 	return (
 		<div className='news_container'>
 
-			<div className="news_content">
-				<div className='news_content'>
-					{news.map((topic, i) => (
-						<div id={topic.id} key={i}>
-							<div><h1>{topic.subject}</h1></div>
-							<div><h1>{topic.date}</h1></div>
-							<div><p>{topic.content}</p></div>
-						</div>
-					))}
-					<input
-						placeholder='Add subject'
-						id={'subject'}
-						name='subject'
-						type='text'
-						value={subject}
-						onChange={event => setSubject(event.target.value)}
-					/>
-					<input
-						placeholder='Add content'
-						id={'content'}
-						name='content'
-						type='text'
-						value={content}
-						onChange={event => setContent(event.target.value)}
-					/>
-					<button onClick={(event) => handleSubmit(event, subject, content)}>Lissää</button>
-				</div>
-			</div >
-		</div>
+			<div className='news_content'>
+
+				{news.map((topic, i) => (
+					<div id={topic.id} key={i}>
+						<div className='news_header'><h1>{topic.subject}</h1></div>
+						<div><h1>{topic.date}</h1></div>
+						<div><p>{topic.content}</p></div>
+						{/* <button onClick={() => deleteNews(topic.id)}>Delete</button> */}
+					</div>
+				))}
+				<input
+					placeholder='Add subject'
+					id={'subject'}
+					name='subject'
+					type='text'
+					value={subject}
+					onChange={event => setSubject(event.target.value)}
+				/>
+				<input
+					placeholder='Add content'
+					id={'content'}
+					name='content'
+					type='text'
+					value={content}
+					onChange={event => setContent(event.target.value)}
+				/>
+				<button onClick={(event) => handleSubmit(event, subject, content)}>Lissää</button>
+			</div>
+		</div >
 	)
 }
 
