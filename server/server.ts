@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use(cors());
 app.use(express.json());
 app.use('/', router);
-app.use('/api', createRoutes());
+app.use('/', createRoutes());
 app.get('/');
 app.listen(PORT, () => console.log(`hosting port ${PORT}`));
 
@@ -39,7 +39,7 @@ const getOptions = async () => {
 	let connectionOptions: ConnectionOptions;
 	connectionOptions = {
 		type: 'postgres',
-		synchronize: false,
+		synchronize: true,
 		logging: false,
 		extra: {
 			ssl: true,
@@ -55,12 +55,12 @@ const getOptions = async () => {
 	return connectionOptions;
 };
 
-const connect2Database = async (): Promise<void> => {
+const connectToDatabase = async (): Promise<void> => {
 	const typeormconfig = await getOptions();
 	await createConnection(typeormconfig);
 };
 
-connect2Database().then(async () => {
+connectToDatabase().then(async () => {
 	console.log('Connected to database');
 });
 
