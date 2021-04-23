@@ -1,27 +1,21 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { getNews } from '../../controllers/fetchFunctions';
+// import { getNews } from '../../controllers/fetchFunctions';
 
 
 const News = () => {
 	const [news, setNews] = useState([]);
-	const [arranged, setArranged] = useState([]);
+	// const [arranged, setArranged] = useState([]);
 	const [subject, setSubject] = useState('');
 	const [content, setContent] = useState('');
 
 	useEffect(() => {
 		const fetchNews = async () => {
 			axios.get('api/news')
-				.then(async res => { setNews(res.data) })
+				.then(async res => { setNews(res.data.sort((a, b) => { if (a.date > b.date) { return -1 } return -1 })) })
 				.catch(async error => setNews('not connecting', error));
 		}
 		fetchNews();
-
-		// const sorted = [...news].sort((a, b) => { if (a.date > b.date) { return -1 } return -1 })
-		// console.log('sorted', sorted)
-		// setArranged(sorted);
-		// console.log(arranged);
-
 	}, [news])
 
 	const handleSubmit = (event) => {
