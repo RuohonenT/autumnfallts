@@ -5,14 +5,13 @@ import React, { useState, useEffect } from 'react';
 
 const News = () => {
 	const [news, setNews] = useState([]);
-	// const [arranged, setArranged] = useState([]);
 	const [subject, setSubject] = useState('');
 	const [content, setContent] = useState('');
 
 	useEffect(() => {
 		const fetchNews = async () => {
 			axios.get('api/news')
-				.then(async res => { setNews(res.data.sort((a, b) => { if (a.date > b.date) { return -1 } return -1 })) })
+				.then(async res => { setNews([res.data.sort((a, b) => { if (a.date > b.date) { return -1 } return -1 })]) })
 				.catch(async error => setNews('not connecting', error));
 		}
 		fetchNews();

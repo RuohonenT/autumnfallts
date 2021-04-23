@@ -10,10 +10,11 @@ export async function getNews() {
 	}
 };
 
-// export async function addNews(subject, content) {
-// 	try {
-// 		await axios.post(`${URL}/news/add`, { subject, content });
-// 	} catch (error) {
-// 		console.error('addNews error', error);
+// const deleteNews = async (id) => {
+// 	if (token) {
+// 		const result = await deleteProductFromCart(cart_id, token);
+// 		if (result.status === 200) {
+// 			getProducts()
+// 		}
 // 	}
 // }
