@@ -4,7 +4,7 @@ import { getNews, addNews, deleteNews } from '../database/controllers/newsContro
 const newsRoutes = (): Router => {
 	const router = Router();
 	router.get('/', getNews);
-	router.post('/', addNews);
+	router.post('/post', addNews);
 	router.delete('/delete', deleteNews);
 	return router;
 };
