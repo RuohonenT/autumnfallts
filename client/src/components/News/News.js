@@ -28,7 +28,7 @@ const News = () => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		axios
-			.post('api/news/post', { subject, content })
+			.post('api/news/add', { subject, content })
 			.then(res => setNews([res.data]))
 			.catch(err => console.log('error', err));
 	};
@@ -37,8 +37,32 @@ const News = () => {
 		<div className='news_container'>
 
 			<div className='news_content'>
-				<p>Uutiset</p>
 
+				{news.map((topic, i) => (
+					<div id={topic.id} key={i}>
+						<div className='news_header'><h1>{topic.subject}</h1></div>
+						<div><h1>{topic.date}</h1></div>
+						<div><p>{topic.content}</p></div>
+						{/* <button onClick={() => deleteNews(topic.id)}>Delete</button> */}
+					</div>
+				))}
+				<input
+					placeholder='Add subject'
+					id={'subject'}
+					name='subject'
+					type='text'
+					value={subject}
+					onChange={event => setSubject(event.target.value)}
+				/>
+				<input
+					placeholder='Add content'
+					id={'content'}
+					name='content'
+					type='text'
+					value={content}
+					onChange={event => setContent(event.target.value)}
+				/>
+				<button onClick={(event) => handleSubmit(event, subject, content)}>Lissää</button>
 			</div>
 		</div >
 	)
