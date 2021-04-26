@@ -1,9 +1,11 @@
 import express from 'express';
 import path from 'path';
 import 'reflect-metadata';
-import { createConnection, ConnectionOptions, getConnectionOptions } from 'typeorm';
+import { createConnection, ConnectionOptions, getConnectionOptions, getRepository } from 'typeorm';
 import 'dotenv/config';
 import { createRoutes } from './routes/routes';
+import { News } from './models/News'
+import { Request, Response } from 'express';
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const router = express.Router();
@@ -31,7 +33,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use(cors());
 app.use(express.json());
 // app.use('/', router);
-app.use('/api', createRoutes);
+// app.use('/api', createRoutes);
 // app.get('/');
 app.listen(PORT, () => console.log(`hosting port ${PORT}`));
 
@@ -58,7 +60,40 @@ const getOptions = async () => {
 
 const connectToDatabase = async (): Promise<void> => {
 	const typeormconfig = await getOptions();
-	await createConnection(typeormconfig);
+	await createConnection(typeormconfig)
+		.then(connection => {
+			const app = express();
+			app.use(express.json());
+
+			app.get('api/news'), async function (req: Request, res: Response): Promise<Response> {
+				try {
+					const newsRepository = connection.getRepository(News);
+					const allNews = await newsRepository.find();
+					return res.status(200).json(allNews);
+				} catch (err) {
+					console.log(err);
+					return res.status(501).json({ error: 'Server error' });
+				}
+			};
+
+			app.post('api/news'), async function (req: Request, res: Response) {
+				const { subject, content } = req.body;
+				try {
+					const newsRepository = connection.getRepository(News);
+					const news = new News();
+					let time = new Date();
+					news.subject = subject;
+					news.content = content;
+					news.date = time.toLocaleString();
+					await newsRepository.save(news)
+					return res.status(200).json({ msg: 'News added', news });
+				} catch (err) {
+					console.log(err);
+					return res.status(501).json({ error: 'Server error with addNews' });
+				}
+			};
+
+		});
 };
 
 connectToDatabase().then(async () => {
