@@ -52,7 +52,7 @@ export const deleteNews = async (
 			}
 			return res.status(501).json({ error: "Server error" });
 		}
-		return res.status(404).json({ error: "News not found" });
+		return res.status(404).json({ error: "Genre not found" });
 	}
 	catch (err) {
 		return res.status(501).json({ error: "Server error" });
