@@ -39,8 +39,8 @@ router.get('/', (req, res) => {
 	res.send({ message: 'API initialized!' });
 	console.log('API init!');
 })
-app.use('/api', router, createRoutes());
-// app.use('/api', createRoutes());
+app.use('/api', router);
+app.use('/api', createRoutes());
 app.listen(PORT, () => console.log(`hosting port ${PORT}`));
 
 
