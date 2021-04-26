@@ -3,6 +3,7 @@ import newsRoutes from './newsRoutes';
 
 export const createRoutes = (): Router => {
 	const router = Router();
+	router.use('/');
 	router.use('/news', newsRoutes());
 	return router;
 };
