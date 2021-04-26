@@ -44,7 +44,6 @@ app.use('/api', createRoutes());
 app.listen(PORT, () => console.log(`hosting port ${PORT}`));
 
 
-
 const getOptions = async () => {
 	let connectionOptions: ConnectionOptions;
 	connectionOptions = {
