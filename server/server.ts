@@ -4,6 +4,7 @@ import 'reflect-metadata';
 import { createConnection, ConnectionOptions, getConnectionOptions } from 'typeorm';
 import 'dotenv/config';
 import { createRoutes } from './routes/routes';
+const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const router = express.Router();
 const cors = require('cors')
@@ -13,9 +14,12 @@ const PORT: string | number = process.env.PORT || 5000;
 
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '../client/build')));
+	app.use((req, res) => {
+		res.sendFile(path.join(__dirname, '/../client/build/index.html'));
+	});
 	// 'catching-all' handler to send back React's index.html if a req doesn't match any endpoints above
 	app.get('*', (req, res) => {
-		res.sendFile(path.join(__dirname + '/../client/build/index.html'));
+		res.sendFile(path.resolve(__dirname, '..', 'client', 'build', 'index.html'));
 	});
 }
 
@@ -27,12 +31,18 @@ if (process.env.NODE_ENV === 'development') {
 	}));
 }
 
-app.use(cors());
 app.use(express.json());
-app.use('/', router);
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+router.get('/', (req, res) => {
+	res.send({ message: 'API initialized!' });
+	console.log('API init!');
+})
+// app.use('/api', router);
 app.use('/api', createRoutes());
-app.get('/');
 app.listen(PORT, () => console.log(`hosting port ${PORT}`));
+
 
 
 const getOptions = async () => {
@@ -66,38 +76,38 @@ connectToDatabase().then(async () => {
 
 
 // Nodemailer for Contact
-const contactEmail = nodemailer.createTransport({
-	host: String(process.env.CONTACT_HOST),
-	port: Number(process.env.CONTACT_PORT),
-	auth: {
-		user: String(process.env.CONTACT_USER),
-		pass: (process.env.CONTACT_PASS),
-	},
-});
+// const contactEmail = nodemailer.createTransport({
+// 	host: String(process.env.CONTACT_HOST),
+// 	port: Number(process.env.CONTACT_PORT),
+// 	auth: {
+// 		user: String(process.env.CONTACT_USER),
+// 		pass: (process.env.CONTACT_PASS),
+// 	},
+// });
 
-contactEmail.verify((error: any) => {
-	if (error) {
-		console.log(error);
-	} else {
-		console.log('Ready to Send');
-	}
-});
+// contactEmail.verify((error: any) => {
+// 	if (error) {
+// 		console.log(error);
+// 	} else {
+// 		console.log('Ready to Send');
+// 	}
+// });
 
-router.post('/contact', (req, res) => {
-	const name = req.body.name;
-	const email = req.body.email;
-	const message = req.body.message;
-	const mail = {
-		from: name,
-		to: 'gallowssong@gmail.com',
-		subject: 'Contact Form Message',
-		html: `<p>Name: ${name}</p><p>Email: ${email}</p><p>Message: ${message}</p>`,
-	};
-	contactEmail.sendMail(mail, (error: any) => {
-		if (error) {
-			res.json({ status: 'failed' });
-		} else {
-			res.json({ status: 'sent' });
-		}
-	});
-});
+// router.post('/contact', (req, res) => {
+// 	const name = req.body.name;
+// 	const email = req.body.email;
+// 	const message = req.body.message;
+// 	const mail = {
+// 		from: name,
+// 		to: 'gallowssong@gmail.com',
+// 		subject: 'Contact Form Message',
+// 		html: `<p>Name: ${name}</p><p>Email: ${email}</p><p>Message: ${message}</p>`,
+// 	};
+// 	contactEmail.sendMail(mail, (error: any) => {
+// 		if (error) {
+// 			res.json({ status: 'failed' });
+// 		} else {
+// 			res.json({ status: 'sent' });
+// 		}
+// 	});
+// });
