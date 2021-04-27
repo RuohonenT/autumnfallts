@@ -49,7 +49,7 @@ const getOptions = async () => {
 			entitiesDir: 'models'
 		},
 		extra: {
-			ssl: true,
+			ssl: true, rejectUnauthorized: false
 		},
 		entities: ['models/*.*'],
 	};
