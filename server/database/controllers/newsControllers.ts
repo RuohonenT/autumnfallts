@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
-import { News } from '../../models/News';
+import { news } from '../../models/News';
 
 
 export const getNews = async (
@@ -8,7 +8,7 @@ export const getNews = async (
 	res: Response
 ): Promise<Response> => {
 	try {
-		const newsRepository = getRepository(News);
+		const newsRepository = getRepository(news);
 		const allNews = await newsRepository.find();
 		return res.status(200).json(allNews);
 	} catch (err) {
@@ -23,14 +23,14 @@ export const addNews = async (
 ): Promise<Response> => {
 	const { subject, content } = req.body;
 	try {
-		const newsRepository = getRepository(News);
-		const news = new News();
+		const newsRepository = getRepository(news);
+		const News = new news();
 		let time = new Date();
-		news.subject = subject;
-		news.content = content;
-		news.date = time.toLocaleString();
-		await newsRepository.save(news)
-		return res.status(200).json({ msg: 'News added', news });
+		News.subject = subject;
+		News.content = content;
+		News.date = time.toLocaleString();
+		await newsRepository.save(News)
+		return res.status(200).json({ msg: 'News added', News });
 	} catch (err) {
 		console.log(err);
 		return res.status(501).json({ error: 'Server error with addNews' });
@@ -43,11 +43,11 @@ export const deleteNews = async (
 ): Promise<Response> => {
 	try {
 		const { id } = req.body;
-		const newsRepository = getRepository(News);
+		const newsRepository = getRepository(news);
 		const found = await newsRepository.find({ id });
 		if (found[0] !== undefined) {
-			const news = await newsRepository.delete({ id });
-			if (news) {
+			const News = await newsRepository.delete({ id });
+			if (News) {
 				return res.status(200).json({ msg: "News removed" });
 			}
 			return res.status(501).json({ error: "Server error" });
