@@ -33,6 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use('/', router);
+app.use('/api', createRoutes());
 app.get('/');
 app.listen(PORT, () => console.log(`hosting port ${PORT}`));
 
@@ -41,6 +42,7 @@ const getOptions = async () => {
 	let connectionOptions: ConnectionOptions;
 	connectionOptions = {
 		type: 'postgres',
+		url: process.env.DATABASE_URL,
 		synchronize: true,
 		logging: false,
 		extra: {
@@ -60,7 +62,6 @@ const getOptions = async () => {
 const connectToDatabase = async (): Promise<void> => {
 	const typeormconfig = await getOptions();
 	await createConnection(typeormconfig);
-	app.use('/api', createRoutes());
 };
 
 connectToDatabase().then(async () => {
