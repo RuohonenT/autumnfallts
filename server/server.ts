@@ -45,12 +45,10 @@ const getOptions = async () => {
 			next();
 		});
 		app.use('/api', createRoutes());
-		app.get('/');
-		app.listen(PORT, () => console.log(`hosting port ${PORT}`));
 	}
-	// else {
-	// 	connectionOptions = await getConnectionOptions();
-	// }
+	else {
+		connectionOptions = await getConnectionOptions();
+	}
 
 	return connectionOptions;
 };
@@ -83,6 +81,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use('/', router);
+app.get('/');
+app.listen(PORT, () => console.log(`hosting port ${PORT}`));
 
 // Nodemailer for Contact
 const contactEmail = nodemailer.createTransport({
