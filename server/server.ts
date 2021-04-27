@@ -65,7 +65,7 @@ const connectToDatabase = async (): Promise<void> => {
 			const app = express();
 			app.use(express.json());
 
-			app.get('api/news'), async function (req: Request, res: Response): Promise<Response> {
+			app.get('HEROKU_POSTGRESQL_BLUE_URL/api/news'), async function (req: Request, res: Response): Promise<Response> {
 				try {
 					const newsRepository = connection.getRepository(News);
 					const allNews = await newsRepository.find();
