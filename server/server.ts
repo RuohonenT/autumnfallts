@@ -4,7 +4,6 @@ import 'reflect-metadata';
 import { createConnection, ConnectionOptions, getConnectionOptions } from 'typeorm';
 import dotenv from 'dotenv';
 import { createRoutes } from './routes/routes';
-import { newsRoutes } from './routes/newsRoutes';
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const router = express.Router();
@@ -25,12 +24,29 @@ const getOptions = async () => {
 			entitiesDir: 'models'
 		},
 		extra: {
-			ssl: true, rejectUnauthorized: false
+			ssl: true
 		},
 		entities: ['models/*.*'],
 	};
 	if (process.env.DATABASE_URL) {
 		Object.assign(connectionOptions, { url: process.env.DATABASE_URL });
+		app.use(cors());
+		app.use(bodyParser.urlencoded({ extended: false }));
+		app.use(bodyParser.json());
+		app.use(express.json());
+		app.use((req, res, next) => {
+			res.header("Access-Control-Allow-Origin", "*");
+			res.header("Access-Control-Allow-Methods", "*");
+			res.header(
+				"Access-Control-Allow-Headers",
+				"Origin, X-Requested-With, Content-Type, Accept"
+			);
+			next();
+		});
+		app.use('/api', createRoutes());
+		app.use('/', router);
+		app.get('/');
+		app.listen(PORT, () => console.log(`hosting port ${PORT}`));
 	}
 	// else {
 	// 	connectionOptions = await getConnectionOptions();
@@ -49,6 +65,7 @@ connectToDatabase().then(async () => {
 });
 
 
+
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '../client/build')));
 	// 'catching-all' handler to send back React's index.html if a req doesn't match any endpoints above
@@ -65,23 +82,6 @@ if (process.env.NODE_ENV === 'development') {
 	}));
 }
 
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(express.json());
-app.use((req, res, next) => {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Methods", "*");
-	res.header(
-		"Access-Control-Allow-Headers",
-		"Origin, X-Requested-With, Content-Type, Accept"
-	);
-	next();
-});
-app.use('/api', newsRoutes());
-app.use('/', router);
-app.get('/');
-app.listen(PORT, () => console.log(`hosting port ${PORT}`));
 
 
 
