@@ -13,38 +13,13 @@ const PORT: string | number = process.env.PORT || 5000;
 dotenv.config();
 
 
-if (process.env.NODE_ENV === 'production') {
-	app.use(express.static(path.join(__dirname, '../client/build')));
-	// 'catching-all' handler to send back React's index.html if a req doesn't match any endpoints above
-	app.get('*', (req, res) => {
-		res.sendFile(path.join(__dirname + '/../client/build/index.html'));
-	});
-}
-
-if (process.env.NODE_ENV === 'development') {
-	app.use(cors({
-		origin: 'http://localhost:3000',
-		credentials: true,
-		methods: 'GET, PUT, POST, PATCH, DELETE'
-	}));
-}
-
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(express.json());
-app.use('/', router);
-app.use('/api', createRoutes());
-app.get('/');
-app.listen(PORT, () => console.log(`hosting port ${PORT}`));
-
-
 const getOptions = async () => {
 	let connectionOptions: ConnectionOptions;
 	connectionOptions = {
 		type: 'postgres',
 		synchronize: false,
 		logging: false,
+		url: process.env.DATABASE_URL,
 		cli: {
 			entitiesDir: 'models'
 		},
@@ -71,6 +46,34 @@ const connectToDatabase = async (): Promise<void> => {
 connectToDatabase().then(async () => {
 	console.log('Connected to database');
 });
+
+
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static(path.join(__dirname, '../client/build')));
+	// 'catching-all' handler to send back React's index.html if a req doesn't match any endpoints above
+	app.get('*', (req, res) => {
+		res.sendFile(path.join(__dirname + '/../client/build/index.html'));
+	});
+}
+
+if (process.env.NODE_ENV === 'development') {
+	app.use(cors({
+		origin: 'http://localhost:3000',
+		credentials: true,
+		methods: 'GET, PUT, POST, PATCH, DELETE'
+	}));
+}
+
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(express.json());
+app.use('/', router);
+app.use('/api', createRoutes());
+app.get('/');
+app.listen(PORT, () => console.log(`hosting port ${PORT}`));
+
+
 
 
 // Nodemailer for Contact
