@@ -28,7 +28,7 @@ const News = () => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		axios
-			.post('api/news', { subject, content })
+			.post('api/news/add', { subject, content })
 			.then(res => setNews([res.data]))
 			.catch(err => console.log('error', err));
 	};
