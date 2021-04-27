@@ -13,6 +13,10 @@ const app = express()
 const PORT: string | number = process.env.PORT || 5000;
 dotenv.config();
 
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(express.json());
 
 const getOptions = async () => {
 	let connectionOptions: ConnectionOptions;
@@ -31,10 +35,6 @@ const getOptions = async () => {
 	};
 	if (process.env.DATABASE_URL) {
 		Object.assign(connectionOptions, { url: process.env.DATABASE_URL });
-		app.use(cors());
-		app.use(bodyParser.urlencoded({ extended: false }));
-		app.use(bodyParser.json());
-		app.use(express.json());
 		app.use((req, res, next) => {
 			res.header("Access-Control-Allow-Origin", "*");
 			res.header("Access-Control-Allow-Methods", "*");

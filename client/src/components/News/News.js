@@ -22,7 +22,7 @@ const News = () => {
 		};
 
 		fetchNews();
-	}, [])
+	}, [data])
 
 
 	const handleSubmit = (event) => {
