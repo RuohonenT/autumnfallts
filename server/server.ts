@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use('/', router);
-app.use('/api', createRoutes());
+app.use('/news', createRoutes());
 app.get('/');
 app.listen(PORT, () => console.log(`hosting port ${PORT}`));
 
