@@ -44,8 +44,8 @@ const getOptions = async () => {
 			next();
 		});
 		app.use('/api', createRoutes());
+		app.get('/');
 		// app.use('/', router);
-		// app.get('/');
 		app.listen(PORT, () => console.log(`hosting port ${PORT}`));
 	}
 	// else {
