@@ -43,8 +43,11 @@ const getOptions = async () => {
 	connectionOptions = {
 		type: 'postgres',
 		url: process.env.DATABASE_URL,
-		synchronize: true,
+		synchronize: false,
 		logging: false,
+		cli: {
+			entitiesDir: 'models'
+		},
 		extra: {
 			ssl: true,
 		},
