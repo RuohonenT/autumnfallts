@@ -33,7 +33,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use('/', router);
-app.use('/', createRoutes());
 app.get('/');
 app.listen(PORT, () => console.log(`hosting port ${PORT}`));
 
@@ -61,6 +60,7 @@ const getOptions = async () => {
 const connectToDatabase = async (): Promise<void> => {
 	const typeormconfig = await getOptions();
 	await createConnection(typeormconfig);
+	app.use('/api', createRoutes());
 };
 
 connectToDatabase().then(async () => {
