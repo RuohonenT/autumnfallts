@@ -55,9 +55,10 @@ const getOptions = async () => {
 	};
 	if (process.env.DATABASE_URL) {
 		Object.assign(connectionOptions, { url: process.env.DATABASE_URL });
-	} else {
-		connectionOptions = await getConnectionOptions();
 	}
+	// else {
+	// 	connectionOptions = await getConnectionOptions();
+	// }
 
 	return connectionOptions;
 };
@@ -96,7 +97,7 @@ router.post('/contact', (req, res) => {
 	const message = req.body.message;
 	const mail = {
 		from: name,
-		to: 'gallowssong@gmail.com',
+		to: String(process.env.CONTANT_TO),
 		subject: 'Contact Form Message',
 		html: `<p>Name: ${name}</p><p>Email: ${email}</p><p>Message: ${message}</p>`,
 	};
