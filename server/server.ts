@@ -50,7 +50,7 @@ const getOptions = async () => {
 		entities: ['models/*.*'],
 	};
 	if (process.env.DATABASE_URL) {
-		Object.assign(connectionOptions, { url: process.env.DATABASE_URL });
+		Object.assign(connectionOptions, { url: process.env.HEROKU_POSTGRESQL_BLUE_URL });
 	} else {
 		connectionOptions = await getConnectionOptions();
 	}
