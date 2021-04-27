@@ -46,7 +46,6 @@ const getOptions = async () => {
 		});
 		app.use('/api', createRoutes());
 		app.get('/');
-		app.use('/', router);
 		app.listen(PORT, () => console.log(`hosting port ${PORT}`));
 	}
 	// else {
@@ -83,6 +82,7 @@ if (process.env.NODE_ENV === 'development') {
 	}));
 }
 
+app.use('/', router);
 
 // Nodemailer for Contact
 const contactEmail = nodemailer.createTransport({
