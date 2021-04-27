@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 import 'reflect-metadata';
 import { createConnection, ConnectionOptions, getConnectionOptions } from 'typeorm';
-import 'dotenv/config';
+import dotenv from 'dotenv';
 import { createRoutes } from './routes/routes';
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
@@ -10,6 +10,7 @@ const router = express.Router();
 const cors = require('cors')
 const app = express()
 const PORT: string | number = process.env.PORT || 5000;
+dotenv.config();
 
 
 if (process.env.NODE_ENV === 'production') {
@@ -33,7 +34,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use('/', router);
-app.use('/news', createRoutes());
+app.use('/api', createRoutes());
 app.get('/');
 app.listen(PORT, () => console.log(`hosting port ${PORT}`));
 
@@ -42,7 +43,6 @@ const getOptions = async () => {
 	let connectionOptions: ConnectionOptions;
 	connectionOptions = {
 		type: 'postgres',
-		url: process.env.DATABASE_URL,
 		synchronize: false,
 		logging: false,
 		cli: {
