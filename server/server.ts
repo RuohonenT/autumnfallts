@@ -77,7 +77,7 @@ app.use((req, res, next) => {
 	);
 	next();
 });
-app.use('/api', createRoutes);
+app.use('/api', createRoutes());
 app.use('/', router);
 app.get('/');
 app.listen(PORT, () => console.log(`hosting port ${PORT}`));
