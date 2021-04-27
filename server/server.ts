@@ -46,7 +46,7 @@ const getOptions = async () => {
 		});
 		app.use('/api', createRoutes());
 		app.get('/');
-		// app.use('/', router);
+		app.use('/', router);
 		app.listen(PORT, () => console.log(`hosting port ${PORT}`));
 	}
 	// else {
@@ -84,42 +84,39 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 
-
-
-
 // Nodemailer for Contact
-// const contactEmail = nodemailer.createTransport({
-// 	host: String(process.env.CONTACT_HOST),
-// 	port: Number(process.env.CONTACT_PORT),
-// 	auth: {
-// 		user: String(process.env.CONTACT_USER),
-// 		pass: (process.env.CONTACT_PASS),
-// 	},
-// });
+const contactEmail = nodemailer.createTransport({
+	host: String(process.env.CONTACT_HOST),
+	port: Number(process.env.CONTACT_PORT),
+	auth: {
+		user: String(process.env.CONTACT_USER),
+		pass: (process.env.CONTACT_PASS),
+	},
+});
 
-// contactEmail.verify((error: any) => {
-// 	if (error) {
-// 		console.log(error);
-// 	} else {
-// 		console.log('Ready to Send');
-// 	}
-// });
+contactEmail.verify((error: any) => {
+	if (error) {
+		console.log(error);
+	} else {
+		console.log('Ready to Send');
+	}
+});
 
-// router.post('/contact', (req, res) => {
-// 	const name = req.body.name;
-// 	const email = req.body.email;
-// 	const message = req.body.message;
-// 	const mail = {
-// 		from: name,
-// 		to: String(process.env.CONTANT_TO),
-// 		subject: 'Contact Form Message',
-// 		html: `<p>Name: ${name}</p><p>Email: ${email}</p><p>Message: ${message}</p>`,
-// 	};
-// 	contactEmail.sendMail(mail, (error: any) => {
-// 		if (error) {
-// 			res.json({ status: 'failed' });
-// 		} else {
-// 			res.json({ status: 'sent' });
-// 		}
-// 	});
-// });
+router.post('/contact', (req, res) => {
+	const name = req.body.name;
+	const email = req.body.email;
+	const message = req.body.message;
+	const mail = {
+		from: name,
+		to: String(process.env.CONTANT_TO),
+		subject: 'Contact Form Message',
+		html: `<p>Name: ${name}</p><p>Email: ${email}</p><p>Message: ${message}</p>`,
+	};
+	contactEmail.sendMail(mail, (error: any) => {
+		if (error) {
+			res.json({ status: 'failed' });
+		} else {
+			res.json({ status: 'sent' });
+		}
+	});
+});
