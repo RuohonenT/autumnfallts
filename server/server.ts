@@ -4,6 +4,7 @@ import 'reflect-metadata';
 import { createConnection, ConnectionOptions, getConnectionOptions } from 'typeorm';
 import dotenv from 'dotenv';
 import { createRoutes } from './routes/routes';
+import { newsRoutes } from './routes/newsRoutes';
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const router = express.Router();
@@ -77,7 +78,7 @@ app.use((req, res, next) => {
 	);
 	next();
 });
-app.use('/api', createRoutes());
+app.use('/api', newsRoutes());
 app.use('/', router);
 app.get('/');
 app.listen(PORT, () => console.log(`hosting port ${PORT}`));
