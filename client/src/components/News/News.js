@@ -21,7 +21,7 @@ const News = () => {
 			// setNews(arrangedData);
 		};
 		fetchNews();
-	}, [setData])
+	}, [data])
 
 
 	const handleSubmit = (event) => {
