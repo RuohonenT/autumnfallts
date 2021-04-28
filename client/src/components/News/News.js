@@ -13,21 +13,24 @@ const News = () => {
 	useEffect(() => {
 		const fetchNews = () => {
 			axios.get('api/news')
-				.then(res => setData(res.data))
-				.catch(error => setData('not connecting', error));
+				.then(res => setNews(res.data))
+				.catch(error => setNews('not connecting', error));
 
-			const arrangedData = [...data].sort((a, b) => { if (a.id > b.id) { return -1 } return -1 });
-			setNews(arrangedData);
 		};
+
+		// const arrange = () => {
+		// 	const arrangedData = [...data].sort((a, b) => { if (a.id > b.id) { return -1 } return -1 });
+		// 	setNews(arrangedData);
+		// };
 		fetchNews();
-	}, [data])
+	}, [setNews])
 
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		axios
 			.post('api/news/add', { subject, content })
-			.then(res => setNews([res.data]))
+			.then(res => setData([res.data]))
 			.catch(err => console.log('error', err));
 	};
 
