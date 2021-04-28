@@ -1,8 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import './News.css'
-// import { deleteNews } from '../../controllers/fetchFunctions';
-
 
 const News = () => {
 	const [news, setNews] = useState([]);
@@ -15,16 +13,16 @@ const News = () => {
 			.catch(error => setNews('not connecting', error));
 	};
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
-		axios
+		await axios
 			.post('api/news/add', { subject, content })
 			.then(res => setNews((news) => [res.data, ...news]))
 			.catch(err => console.log('error', err));
 
+		getNews()
 		setSubject('');
 		setContent('');
-		getNews()
 	};
 
 	const newsDelete = async (id) => {
@@ -36,7 +34,7 @@ const News = () => {
 
 	useEffect(() => {
 		getNews();
-	}, [setNews])
+	}, [setNews], [])
 
 	return (
 		<div className='news_container'>
