@@ -17,11 +17,11 @@ const News = () => {
 				.then(res => setData(res.data))
 				.catch(error => setData('not connecting', error));
 
-			// const arrangedData = [...data].sort((a, b) => { if (a.id > b.id) { return -1 } return -1 });
-			// setNews(arrangedData);
+			const arrangedData = [...data].sort((a, b) => { if (a.id > b.id) { return -1 } return -1 });
+			setNews(arrangedData);
 		};
 		fetchNews();
-	}, [data])
+	}, [setNews])
 
 
 	const handleSubmit = (event) => {
@@ -37,7 +37,7 @@ const News = () => {
 
 			<div className='news_content'>
 
-				{data.map((topic, i) => (
+				{news.map((topic, i) => (
 					<div id={topic.id} key={i}>
 						<div className='news_header'><h1>{topic.subject}</h1></div>
 						<div><h1>{topic.date}</h1></div>
