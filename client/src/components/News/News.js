@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import './News.css'
-const URL = process.env.DATABASE_URL || 'http://localhost:5000/api';
 // import { getNews } from '../../controllers/fetchFunctions';
 
 
@@ -13,7 +12,7 @@ const News = () => {
 
 	useEffect(() => {
 		const fetchNews = () => {
-			axios.get(`${URL}/news`)
+			axios.get('api/news')
 				.then(res => setData(res.data))
 				.catch(error => setData('not connecting', error));
 
