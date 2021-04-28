@@ -34,7 +34,7 @@ const News = () => {
 
 	useEffect(() => {
 		getNews();
-	}, [setNews], [])
+	}, [setNews], [handleSubmit], [newsDelete])
 
 	return (
 		<div className='news_container'>
