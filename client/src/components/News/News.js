@@ -1,38 +1,44 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import './News.css'
-// import { getNews } from '../../controllers/fetchFunctions';
+import { deleteNews } from '../../controllers/fetchFunctions';
 
 
-const News = () => {
+const News = (props) => {
 	const [data, setData] = useState([]);
 	const [news, setNews] = useState([]);
 	const [subject, setSubject] = useState('');
 	const [content, setContent] = useState('');
 
-	useEffect(() => {
-		const fetchNews = () => {
-			axios.get('api/news')
-				.then(res => setNews(res.data))
-				.catch(error => setNews('not connecting', error));
-
-		};
-
-		// const arrange = () => {
-		// 	const arrangedData = [...data].sort((a, b) => { if (a.id > b.id) { return -1 } return -1 });
-		// 	setNews(arrangedData);
-		// };
-		fetchNews();
-	}, [setNews])
-
+	const getNews = () => {
+		axios.get('api/news')
+			.then(res => setNews(res.data))
+			.catch(error => setNews('not connecting', error));
+	};
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		axios
 			.post('api/news/add', { subject, content })
-			.then(res => setData([res.data]))
+			.then(res => setNews((news) => [res.data, ...news]))
 			.catch(err => console.log('error', err));
+
+		setSubject('');
+		setContent('');
+		getNews()
 	};
+
+	useEffect(() => {
+		getNews();
+	}, [setNews])
+
+
+
+	const newsDelete = async (id) => {
+		const result = await deleteNews(id);
+		console.log(result)
+	};
+
 
 	return (
 		<div className='news_container'>
@@ -44,7 +50,7 @@ const News = () => {
 						<div className='news_header'><h1>{topic.subject}</h1></div>
 						<div><h1>{topic.date}</h1></div>
 						<div><p>{topic.content}</p></div>
-						{/* <button onClick={() => deleteNews(topic.id)}>Delete</button> */}
+						<button onClick={() => newsDelete(topic.id)}>Delete</button>
 					</div>
 				))}
 				<input
@@ -67,6 +73,13 @@ const News = () => {
 			</div>
 		</div >
 	)
-}
 
+
+
+	// useEffect(() => {
+	// 	const arrangedData = [...data].sort((a, b) => { if (a.id > b.id) { return -1 } return -1 });
+	// 	setNews(arrangedData);
+	// }, [arrangedData])
+
+}
 export default News;

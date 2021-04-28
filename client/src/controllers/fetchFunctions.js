@@ -10,10 +10,6 @@ export const getNews = async () => {
 	}
 };
 
-// export const deleteNews = async () => {
-// 	try {
-// 		const response = await axios
-// 		.delete(`${URL}/news/delete`, (id))
-// 		.then(res=>console.log(res.data))
-// 	}
-// }
+export const deleteNews = async (id) => {
+	await axios.delete(`${URL}/news/delete`, { data: id })
+};
