@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import './News.css'
+const URL = process.env.DATABASE_URL || 'http://localhost:5000/api';
 // import { getNews } from '../../controllers/fetchFunctions';
 
 
@@ -12,17 +13,15 @@ const News = () => {
 
 	useEffect(() => {
 		const fetchNews = () => {
-			axios.get('api/news')
+			axios.get(`${URL}/news`)
 				.then(res => setData(res.data))
 				.catch(error => setData('not connecting', error));
 
-			const arrangedData = [...data].sort((a, b) => { if (a.id > b.id) { return -1 } return -1 });
-			setNews(arrangedData);
-			console.log()
+			// const arrangedData = [...data].sort((a, b) => { if (a.id > b.id) { return -1 } return -1 });
+			// setNews(arrangedData);
 		};
-
 		fetchNews();
-	}, [data])
+	}, [setData])
 
 
 	const handleSubmit = (event) => {
@@ -38,7 +37,7 @@ const News = () => {
 
 			<div className='news_content'>
 
-				{news.map((topic, i) => (
+				{data.map((topic, i) => (
 					<div id={topic.id} key={i}>
 						<div className='news_header'><h1>{topic.subject}</h1></div>
 						<div><h1>{topic.date}</h1></div>
