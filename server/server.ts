@@ -17,7 +17,6 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
-app.use('/api', createRoutes());
 
 const getOptions = async () => {
 	let connectionOptions: ConnectionOptions;
@@ -45,6 +44,7 @@ const getOptions = async () => {
 			);
 			next();
 		});
+		app.use('/api', createRoutes());
 	}
 	else {
 		connectionOptions = await getConnectionOptions();
