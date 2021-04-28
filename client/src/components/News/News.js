@@ -1,11 +1,10 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import './News.css'
-import { deleteNews } from '../../controllers/fetchFunctions';
+// import { deleteNews } from '../../controllers/fetchFunctions';
 
 
-const News = (props) => {
-	const [data, setData] = useState([]);
+const News = () => {
 	const [news, setNews] = useState([]);
 	const [subject, setSubject] = useState('');
 	const [content, setContent] = useState('');
@@ -28,17 +27,16 @@ const News = (props) => {
 		getNews()
 	};
 
+	const newsDelete = async (id) => {
+		await axios
+			.delete('api/news/delete', { data: { id } })
+			.then(res => setNews((news) => [res.data, ...news]))
+		getNews();
+	};
+
 	useEffect(() => {
 		getNews();
 	}, [setNews])
-
-
-
-	const newsDelete = async (id) => {
-		const result = await deleteNews(id);
-		console.log(result)
-	};
-
 
 	return (
 		<div className='news_container'>
