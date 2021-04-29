@@ -29,6 +29,7 @@ const News = () => {
 		await axios
 			.delete('api/news/delete', { data: { id } })
 			.then(res => setNews((news) => [res.data, ...news]))
+			.catch(err => console.log('newsDelete', err))
 		getNews();
 	};
 
@@ -41,31 +42,40 @@ const News = () => {
 
 			<div className='news_content'>
 
-				{news.map((topic, i) => (
-					<div id={topic.id} key={i}>
-						<div className='news_header'><h1>{topic.subject}</h1></div>
-						<div><h1>{topic.date}</h1></div>
-						<div><p>{topic.content}</p></div>
-						<button onClick={() => newsDelete(topic.id)}>Delete</button>
-					</div>
-				))}
-				<input
-					placeholder='Add subject'
-					id={'subject'}
-					name='subject'
-					type='text'
-					value={subject}
-					onChange={event => setSubject(event.target.value)}
-				/>
-				<input
-					placeholder='Add content'
-					id={'content'}
-					name='content'
-					type='text'
-					value={content}
-					onChange={event => setContent(event.target.value)}
-				/>
-				<button onClick={(event) => handleSubmit(event, subject, content)}>Lissää</button>
+				<div className='news_content_innards'>
+					<input className='add_subject'
+						placeholder='Add subject'
+						id={'subject'}
+						name='subject'
+						type='text'
+						value={subject}
+						onChange={event => setSubject(event.target.value)}
+					/>
+					<textarea className='add_content'
+						placeholder='Add content'
+						id={'content'}
+						name='content'
+						type='text'
+						value={content}
+						onChange={event => setContent(event.target.value)}
+					/>
+					<button onClick={(event) => handleSubmit(event, subject, content)}>Lisää</button>
+					<div className='break' />
+					{news.length > 0 ?
+						<>
+							{
+								news.map((topic, i) => {
+									return (
+										<div className='news_content_innards' id={topic.id} key={i}>
+											<div className='news_header'><h1>{topic.subject}</h1>{topic.date !== undefined ? <h2>{topic.date.slice(0, 10)}</h2> : <></>}</div>
+											<div className='news_content_content'><p>{topic.content}</p></div>
+											<button onClick={() => newsDelete(topic.id)}>Delete</button>
+										</div>
+									)
+								})
+							}
+						</> : <div className='news_header'><p>No News</p></div>};
+				</div>
 			</div>
 		</div >
 	)

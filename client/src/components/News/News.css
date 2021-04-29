@@ -9,8 +9,9 @@
   }
   
 .news_content {
-    background-color: black;
+    display: flex;
     justify-content: center;
+    background-color: black;
     width: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(235, 6, 6, 0.19);
     border-style: solid;
@@ -19,82 +20,70 @@
     min-height: 50vh;
 }
 
-.news_content p {
-    color: #9e9277;
+.news_content_innards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    width: 90%;
+    max-width: 90%;
+    min-height: 50vh;
 }
 
 .news_header {
     display: flex;
-    flex-direction: row wrap;
+    flex-direction: row;
     justify-content: center;
-    color: #9e9277;
-    max-width: 100%;
+    align-content: center;
+    align-items : top; 
+    background-color: #9e9277;
+    width: 100%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .news_header h1 {
-    color: #9e9277;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    color: black;
     font-size: 18px;
-
+    max-width: 80%;
+    word-wrap: break-word;   
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
-.news_header p { 
-    color: #9e9277;
-}
-
-.news_form {
+.news_header h2 { 
     display: flex;
-    flex-direction: row wrap;
-    background-color: black;
-    max-width: 100%;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-end;
+    color: black;
+    font-size: 12px;
+    max-width: 20%;
 }
 
-.news_row {
-    display: flex;
-    flex-direction: col;
-    justify-content: left;    
+
+.news_content_content p {
     color: #9e9277;
-    width: 100%;
+    text-align: justify;
+    text-justify: inter-character;
 }
 
-.news_label {
+
+.add_subject {
     display: flex;
     justify-content: flex-end;
     color: #9e9277;
-    width: 10px;
+    width: 500px;
     padding: 0 5px 0 0 ;
 }
 
-.news_input { 
-    font-family: Arial, Helvetica, sans-serif;
-    color: #9e9277;
-    width: 350px;
-}
-
-.news_submit {
-    display: flex;
-    justify-content: center;
-    color: #9e9277;
-    margin: 5px 5px 5px 5px;
-    width: 100%;
-}
-
-.news_submit p {
-    color: #9e9277;
-    font-size: 16px;
-    font-style: italic;
-    font-weight: bold;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-}
-
-.text-area {
+.add_content {
     color: black;
     font-family: Arial, Helvetica, sans-serif;
-    width: 352px;
-    min-height: 125px;
+    width: 500px;
+    min-height: 200px;
+    padding: 0 5px 0 0 ;
 }
+
 
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from './components/Header/Header';
-import News from './components/News/News';
+import News from './components/News/News.jsx';
 import Bio from './components/Bio/Bio';
 import Footer from './components/Footer/Footer';
 import Contact from './components/Contact/Contact';
