@@ -60,7 +60,9 @@ const News = () => {
 						onChange={event => setContent(event.target.value)}
 					/>
 					<button onClick={(event) => handleSubmit(event, subject, content)}>Lisää</button>
-					<div className='break' />
+
+					<br />
+
 					{news.length > 0 ?
 						<>
 							{

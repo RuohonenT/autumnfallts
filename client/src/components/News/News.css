@@ -27,7 +27,7 @@
     background-color: black;
     width: 90%;
     max-width: 90%;
-    min-height: 50vh;
+    min-height: 20vh;
 }
 
 .news_header {
@@ -47,6 +47,7 @@
     justify-content: flex-start;
     color: black;
     font-size: 18px;
+    width: 80%;
     max-width: 80%;
     word-wrap: break-word;   
     overflow-wrap: break-word;
@@ -58,6 +59,7 @@
     justify-content: flex-end;
     color: black;
     font-size: 12px;
+    width: 20%;
     max-width: 20%;
 }
 
