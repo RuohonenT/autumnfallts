@@ -12,12 +12,13 @@ const NewsEditForm = () => {
 	const [content, setContent] = useState('');
 
 	useEffect(() => {
-		const getNewsData = async () => {
+		const getNews = async () => {
 			await axios.get(`process.env.DATABASE_URL/api/news/${id}`)
-				.then(res => setNews([res.data]))
+				.then(res => setNews(res.data))
+				.catch(error => setNews('not connecting', error))
 		}
-		return getNewsData();
-	}, [setNews, id])
+		return getNews();
+	}, [setNews, id], [])
 
 
 	let history = useHistory();
