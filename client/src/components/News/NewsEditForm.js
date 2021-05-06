@@ -13,7 +13,7 @@ const NewsEditForm = () => {
 
 	const getNews = async () => {
 		await axios.get(URL + '/api/news/' + id)
-			.then(res => setNews(res.data))
+			.then(res => setNews([res.data]))
 			.catch(error => setNews('not connecting', error));
 	};
 
