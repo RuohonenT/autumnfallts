@@ -13,7 +13,7 @@ const NewsEditForm = () => {
 
 	useEffect(() => {
 		const getNews = async () => {
-			await axios.get(`process.env.DATABASE_URL/api/news/${id}`)
+			await axios.get(`${id}`)
 				.then(res => setNews(res.data))
 				.catch(error => setNews('not connecting', error))
 		}
