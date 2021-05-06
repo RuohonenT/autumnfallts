@@ -13,7 +13,7 @@ const NewsEditForm = () => {
 
 	useEffect(() => {
 		const getNewsData = () => {
-			axios.get(`${URL}/news/${id}`)
+			axios.get(`/news/${id}`)
 				.then(res => setNews(res.data))
 		}
 		return getNewsData();
