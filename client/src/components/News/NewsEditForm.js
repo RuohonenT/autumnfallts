@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { updateNews } from '../../controllers/fetchFunctions';
 import './News.css'
 const axios = require('axios');
-const URL = process.env.DATABASE_URL || 'http://localhost:5000';
+const URL = process.env.DATABASE_URL;
 
 const NewsEditForm = () => {
 	const { id } = useParams();
