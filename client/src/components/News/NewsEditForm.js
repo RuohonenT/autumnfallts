@@ -3,17 +3,17 @@ import { useParams, useHistory } from 'react-router-dom';
 import { updateNews } from '../../controllers/fetchFunctions';
 import './News.css'
 const axios = require('axios');
-const URL = process.env.DATABASE_URL || 'http://localhost:5000/api';
+const URL = process.env.DATABASE_URL;
 
 const NewsEditForm = () => {
 	const { id } = useParams();
 	const [news, setNews] = useState([]);
-	const [subject, setSubject] = useState('cvxxvxv');
+	const [subject, setSubject] = useState('3333333');
 	const [content, setContent] = useState('cxvcxcv');
 
 	useEffect(() => {
 		const getNewsData = () => {
-			axios.get(`api/news/${id}`)
+			axios.get(`${URL}/news/${id}`)
 				.then(res => setNews(res.data))
 		}
 		return getNewsData();

@@ -82,9 +82,9 @@ export const updateNewsById = async (
 	const id = req.body.id;
 	try {
 		const newsRepository = getRepository(news);
-		const News = await newsRepository.find({ where: { id } });
+		const News = await newsRepository.find({ id });
 		if (News) {
-			newsRepository.update({ id }, { subject });
+			newsRepository.update({ id }, { subject }).then(res => res.raw[0]);
 			return res.status(200).json("News updated");
 		}
 		else {
