@@ -3,18 +3,17 @@ import { useParams, useHistory } from 'react-router-dom';
 import { updateNews } from '../../controllers/fetchFunctions';
 import './News.css'
 const axios = require('axios');
-const URL = process.env.DATABASE_URL;
+const URL = process.env.DATABASE_URL || 'http://localhost:5000';
 
 const NewsEditForm = () => {
 	const { id } = useParams();
-	console.log(id)
 	const [news, setNews] = useState([]);
 	const [subject, setSubject] = useState('');
 	const [content, setContent] = useState('');
 
 	useEffect(() => {
 		const getNewsData = () => {
-			axios.get(`${URL}/news/${id}`)
+			axios.get(`${URL}/api/news/${id}`)
 				.then(res => setNews(res.data))
 		}
 		return getNewsData();
@@ -26,7 +25,6 @@ const NewsEditForm = () => {
 	const handleSubmit = async (event, id, subject, content) => {
 		event.preventDefault();
 		const update = await updateNews(id, subject, content);
-		console.log(update.status);
 		if (update.status === 200) {
 			console.log(update)
 			history.push('/news');
