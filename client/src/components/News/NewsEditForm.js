@@ -12,8 +12,8 @@ const NewsEditForm = () => {
 	const [content, setContent] = useState('');
 
 	useEffect(() => {
-		const getNewsData = () => {
-			axios.get(`${URL}/api/news/${id}`)
+		const getNewsData = async () => {
+			await axios.get(`${URL}/api/news/${id}`)
 				.then(res => setNews(res.data))
 		}
 		return getNewsData();
