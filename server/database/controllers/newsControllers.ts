@@ -48,14 +48,50 @@ export const deleteNews = async (
 		if (found[0] !== undefined) {
 			const News = await newsRepository.delete({ id });
 			if (News) {
-				return res.status(200).json({ msg: "News removed" });
+				return res.status(200).json({ msg: 'News removed' });
 			}
-			return res.status(501).json({ error: "Server error" });
+			return res.status(501).json({ error: 'Server error' });
 		}
-		return res.status(404).json({ error: "News not found" });
+		return res.status(404).json({ error: 'News not found' });
 	}
 	catch (err) {
-		return res.status(501).json({ error: "Server error" });
+		return res.status(501).json({ error: 'Server error' });
 	}
 };
 
+export const getNewsById = async (
+	req: Request,
+	res: Response
+): Promise<Response> => {
+	try {
+		const { id } = req.params;
+		const newsRepository = getRepository(news);
+		const News = await newsRepository.find({ where: { id } });
+		return res.status(200).json(News);
+	} catch (err) {
+		console.log(err);
+		return res.status(501).json({ error: 'Server error' });
+	}
+};
+
+export const updateNewsById = async (
+	req: Request,
+	res: Response
+): Promise<Response> => {
+	const { subject } = req.body;
+	const id = req.body.id;
+	try {
+		const newsRepository = getRepository(news);
+		const News = await newsRepository.find({ where: { id } });
+		if (News) {
+			newsRepository.update({ id }, { ...news, subject });
+			return res.status(200).json("News updated");
+		}
+		else {
+			return res.status(501).json({ error: "Database error" });
+		}
+	} catch (err) {
+		console.log(err);
+		return res.status(501).json({ error: "Server error" });
+	}
+};

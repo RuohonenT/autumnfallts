@@ -1,13 +1,16 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from './components/Header/Header';
-import News from './components/News/News.jsx';
+import News from './components/News/News';
 import Bio from './components/Bio/Bio';
 import Footer from './components/Footer/Footer';
 import Contact from './components/Contact/Contact';
+import NewsForm from './components/News/NewsForm';
+import NewsEditForm from './components/News/NewsEditForm';
 import "reflect-metadata"
 
 function App() {
+
   return (
     <>
       <Router>
@@ -23,10 +26,19 @@ function App() {
             <Route exact path='/contact'>
               <Contact />
             </Route>
+            <Route path="/NewsForm"><NewsForm /></Route>
+            <Route exact path="/news/edit/:id">
+              <NewsEditForm />
+            </Route>
+
           </Switch>
         </div>
+
+
         <Footer />
+
       </Router>
+
 
     </>
   );
