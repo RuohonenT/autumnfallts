@@ -45,7 +45,7 @@ const NewsEditForm = () => {
 							id={subject}
 							placeholder={'subject'}
 							name='subject'
-							value={news.subject}
+							value={subject}
 							onChange={event => setSubject(event.target.value)}
 						/>
 					</form>
@@ -53,7 +53,7 @@ const NewsEditForm = () => {
 						type='text'
 						id={content}
 						name='content'
-						value={news.content}
+						value={content}
 						onChange={event => setContent(event.target.value)}
 					/>
 					<button onClick={(event) => handleSubmit(event, id, subject, content)} > Edit</button>
