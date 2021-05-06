@@ -3,6 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { updateNews } from '../../controllers/fetchFunctions';
 import './News.css'
 const axios = require('axios');
+const URL = process.env.DATABASE_URL || 'http://localhost:5000'
 
 const NewsEditForm = () => {
 	const { id } = useParams();
@@ -10,15 +11,11 @@ const NewsEditForm = () => {
 	const [subject, setSubject] = useState('');
 	const [content, setContent] = useState('');
 
-	useEffect(() => {
-		const getNews = async () => {
-			await axios.get(`api/${id}`)
-				.then(res => setNews([res.data]))
-				.catch(error => setNews('not connecting', error))
-		}
-		return getNews();
-	}, [setNews, id], [])
-
+	const getNews = async () => {
+		await axios.get(`${URL}` + '/api/news/' + id)
+			.then(res => setNews(res.data))
+			.catch(error => setNews('not connecting', error));
+	};
 
 	let history = useHistory();
 
@@ -30,8 +27,11 @@ const NewsEditForm = () => {
 			history.push('/news');
 		} else {
 		}
-
 	};
+
+	useEffect(() => {
+		return getNews();
+	}, [setNews], [handleSubmit])
 
 	return (
 		<div className='news_container'>
