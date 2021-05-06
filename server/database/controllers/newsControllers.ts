@@ -85,13 +85,13 @@ export const updateNewsById = async (
 		const News = await newsRepository.find({ where: { id } });
 		if (News) {
 			newsRepository.update(id, { subject: subject, content: content });
-			return res.status(200).json("News updated");
+			return res.status(200).json('News updated');
 		}
 		else {
-			return res.status(501).json({ error: "Database error" });
+			return res.status(501).json({ error: 'Database error' });
 		}
 	} catch (err) {
 		console.log(err);
-		return res.status(501).json({ error: "Server error" });
+		return res.status(501).json({ error: 'Server error' });
 	}
 };
