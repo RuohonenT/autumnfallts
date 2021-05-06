@@ -42,10 +42,9 @@ const NewsEditForm = () => {
 					<form>
 						<input className='add_subject'
 							type='text'
-							id={subject}
-							placeholder={'subject'}
+							id={news.subject}
 							name='subject'
-							value={subject}
+							value={news.subject}
 							onChange={event => setSubject(event.target.value)}
 						/>
 					</form>
