@@ -3,10 +3,11 @@ import { useParams, useHistory } from 'react-router-dom';
 import { updateNews } from '../../controllers/fetchFunctions';
 import './News.css'
 const axios = require('axios');
-const URL = process.env.DATABASE_URL;
+const URL = process.env.DATABASE_URL || 'http://localhost:5000/api';
 
 const NewsEditForm = () => {
 	const { id } = useParams();
+	console.log(id)
 	const [news, setNews] = useState([]);
 	const [subject, setSubject] = useState('3333333');
 	const [content, setContent] = useState('cxvcxcv');
@@ -22,11 +23,18 @@ const NewsEditForm = () => {
 
 	let history = useHistory();
 
-	const handleSubmit = async (event, subject, content) => {
+	// const handleSubmit = async (event, id, subject) => {
+	// 	event.preventDefault();
+	// 	await axios.put(`${URL}/news/edit/${id}`, { id }, { subject })
+	// 		.then(res => console.log(id))
+	// }
+
+	const handleSubmit = async (event, id, subject, content) => {
 		event.preventDefault();
-		const update = await updateNews(subject, content);
+		const update = await updateNews(id, subject, content);
 		console.log(update.status);
 		if (update.status === 200) {
+			console.log(update)
 			history.push('/news');
 		} else {
 		}
@@ -45,7 +53,7 @@ const NewsEditForm = () => {
 							id={subject}
 							placeholder={'subject'}
 							name='subject'
-							value={subject}
+							value={news.subject}
 							onChange={event => setSubject(event.target.value)}
 						/>
 					</form>
@@ -56,7 +64,7 @@ const NewsEditForm = () => {
 						value={content}
 						onChange={event => setContent(event.target.value)}
 					/>
-					<button onClick={handleSubmit}>Edit</button>
+					<button onClick={(event) => handleSubmit(event, id, subject, content)} > Edit</button>
 
 
 					<br />
