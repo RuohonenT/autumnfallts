@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-// import { getNewsById } from '../../controllers/fetchFunctions';
 import './News.css'
 
 
@@ -25,7 +24,7 @@ const NewsForm = () => {
 		await axios
 			.post('api/news/add', { subject, content })
 			.then(res => {
-				setNews(news => [news])
+				setNews(news => [...news, res.data])
 				history.push('/news')
 			})
 			.catch(err => console.log('error', err));
@@ -38,7 +37,7 @@ const NewsForm = () => {
 	const newsDelete = async (id) => {
 		await axios
 			.delete('api/news/delete', { data: { id } })
-			.then(res => setNews((news) => [res.data, ...news]))
+			.then(res => setNews((news) => [...news, res.data]))
 			.catch(err => console.log('newsDelete', err))
 		getNews();
 	};

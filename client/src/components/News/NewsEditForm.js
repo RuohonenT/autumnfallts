@@ -3,7 +3,6 @@ import { useParams, useHistory } from 'react-router-dom';
 import { updateNews } from '../../controllers/fetchFunctions';
 import './News.css'
 const axios = require('axios');
-const URL = process.env.DATABASE_URL || 'http://localhost:5000';
 
 const NewsEditForm = () => {
 	const { id } = useParams();
@@ -12,8 +11,8 @@ const NewsEditForm = () => {
 	const [content, setContent] = useState('');
 
 	const getNews = async () => {
-		await axios.get(URL + '/api/news/' + id)
-			.then(res => setNews([res.data]))
+		await axios.get('/api/news/' + id)
+			.then(res => setNews(res.data))
 			.catch(error => setNews('not connecting', error));
 	};
 
@@ -42,7 +41,7 @@ const NewsEditForm = () => {
 					<form>
 						<input className='add_subject'
 							type='text'
-							id={news.subject}
+							id={subject}
 							name='subject'
 							value={news.subject}
 							onChange={event => setSubject(event.target.value)}
