@@ -66,7 +66,7 @@ const NewsEditForm = () => {
 								news.map((topic, i) => {
 									return (
 										<div className='news_content_innards' id={topic.id} key={i}>
-											<div className='news_header'><h1>{topic.subject}</h1>{topic.date !== undefined ? <h2>{topic.date.slice(0, 10)}</h2> : <></>}</div>
+											<div className='news_header'><h1>{topic.subject}</h1>{topic.date !== undefined ? <h2>{topic.date.slice(0, 9)}</h2> : <></>}</div>
 											<div className='news_content_content'><p>{topic.content}</p></div>
 										</div>
 									)
