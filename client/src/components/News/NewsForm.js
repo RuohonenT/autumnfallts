@@ -24,7 +24,7 @@ const NewsForm = () => {
 		await axios
 			.post('api/news/add', { subject, content })
 			.then(res => {
-				setNews(news => [...news, res.data])
+				setNews(news => [res.data, ...news])
 				history.push('/news')
 			})
 			.catch(err => console.log('error', err));
@@ -37,7 +37,6 @@ const NewsForm = () => {
 	const newsDelete = async (id) => {
 		await axios
 			.delete('api/news/delete', { data: { id } })
-			.then(res => setNews((news) => [...news, res.data]))
 			.catch(err => console.log('newsDelete', err))
 		getNews();
 	};
@@ -87,7 +86,7 @@ const NewsForm = () => {
 											<div className='news_header'><h1>{topic.subject}</h1>{topic.date !== undefined ? <h2>{topic.date.slice(0, 9)}</h2> : <></>}</div>
 											<div className='news_content_content'><p>{topic.content}</p></div>
 											<button onClick={() => newsDelete(topic.id)}>Delete</button>
-											<button onClick={() => updateNews(topic.id)}>Edit</button>
+											{/* <button onClick={() => updateNews(topic.id)}>Edit</button> */}
 										</div>
 									)
 								})

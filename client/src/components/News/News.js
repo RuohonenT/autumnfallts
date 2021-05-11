@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
-// import { ShowNews } from './ShowNews';
+import { Link } from 'react-router-dom';
+import NewsForm from './NewsForm';
+import NewsEditForm from './NewsEditForm';
 import './News.css'
+import UnderConstruction from '../under';
 const axios = require('axios');
 
 
@@ -23,6 +25,7 @@ const News = () => {
 
 			<div className='news_content'>
 				<div className='news_content_innards'>
+					<><UnderConstruction /></>
 					<>
 						<Link to="/NewsForm">Add a new item</Link>
 					</>
@@ -32,8 +35,11 @@ const News = () => {
 								news.map((topic, i) => {
 									return (
 										<div className='news_content_innards' id={topic.id} key={i}>
-											<div className='news_header'><h1>{topic.subject}</h1>{topic.date !== undefined ? <h2>{topic.date.slice(0, 10)}</h2> : <></>}</div>
+											<div className='news_header'><h1>{topic.subject}</h1>{topic.date !== undefined ? <h2>{topic.date.slice(0, 9)}</h2> : <></>}</div>
 											<div><p>{topic.content}</p></div>
+											<>
+												<Link to={<NewsForm setNews={setNews} />}>EDIT</Link>
+											</>
 
 										</div>
 									)

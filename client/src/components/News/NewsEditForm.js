@@ -4,21 +4,20 @@ import { updateNews } from '../../controllers/fetchFunctions';
 import './News.css'
 const axios = require('axios');
 
-const NewsEditForm = () => {
+const NewsEditForm = (z) => {
 	const { id } = useParams();
 	const [news, setNews] = useState([]);
 	const [subject, setSubject] = useState('');
 	const [content, setContent] = useState('');
 
-	useEffect(() => {
-		const getNews = async () => {
-			await axios.get('/api/news/' + id)
-				.then(res => setNews(res.data))
-				.catch(error => setNews('not connecting', error));
-		};
 
-		return getNews();
-	}, [id, setNews])
+	// const getNews = async () => {
+	// 	await axios.get('/api/news/' + id)
+	// 		.then(res => setNews(res.data))
+	// 		.catch(error => setNews('not connecting', error));
+	// };
+
+	// getNews();
 
 	let history = useHistory();
 
@@ -42,17 +41,17 @@ const NewsEditForm = () => {
 					<form>
 						<input className='add_subject'
 							type='text'
-							id={subject}
+							id={'subject'}
 							name='subject'
-							value={news.subject}
+							value={subject}
 							onChange={event => setSubject(event.target.value)}
 						/>
 					</form>
 					<textarea className='add_content'
 						type='text'
-						id={content}
+						id={'content'}
 						name='content'
-						value={news.content}
+						value={content}
 						onChange={event => setContent(event.target.value)}
 					/>
 					<button onClick={(event) => handleSubmit(event, id, subject, content)} > Edit</button>
@@ -60,7 +59,7 @@ const NewsEditForm = () => {
 
 					<br />
 
-					{news.length > 0 ?
+					{/* {news.length > 0 ?
 						<>
 							{
 								news.map((topic, i) => {
@@ -72,7 +71,7 @@ const NewsEditForm = () => {
 									)
 								})
 							}
-						</> : <div className='news_header'><p>No News</p></div>}
+						</> : <div className='news_header'><p>No News</p></div>} */}
 				</div>
 			</div>
 		</div >
