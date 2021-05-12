@@ -12,21 +12,19 @@ const BioEdit = ({ bio, setBio, deleteBio }) => {
 		const getBio = async () => {
 			await axios.get('api/bio')
 				.then(res => {
-					setBio([res.data[0].content])
+					setBio([res.data])
 				})
 				.catch(err => console.log(err))
 		};
 		return getBio();
 	}, [setBio], []);
 
-	console.log(bio)
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		await axios
-			.post('api/bio/add', content)
+			.post('api/bio/add', { content })
 			.then(res => {
-				setBio(...bio, res.data)
+				setBio([...bio, res.data])
 				history.push('/bio');
 			})
 			.catch(err => console.log(err));

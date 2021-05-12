@@ -1,7 +1,7 @@
 import React from 'react';
 import './Bio.css';
 
-const ShowBio = ({ bio }) => {
+const ShowBio = ( bio ) => {
 	return (
 		<div className='bio_content_innards'>
 			{bio.length > 0 ?
