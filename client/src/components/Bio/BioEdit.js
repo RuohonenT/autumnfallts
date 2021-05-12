@@ -12,7 +12,7 @@ const BioEdit = ({ bio, setBio, deleteBio }) => {
 		const getBio = async () => {
 			await axios.get('api/bio')
 				.then(res => {
-					setBio([res.data])
+					setBio(res.data)
 				})
 				.catch(err => console.log(err))
 		};
@@ -24,7 +24,7 @@ const BioEdit = ({ bio, setBio, deleteBio }) => {
 		await axios
 			.post('api/bio/add', { content })
 			.then(res => {
-				setBio([...bio, res.data])
+				setBio(...bio, res.data)
 				history.push('/bio');
 			})
 			.catch(err => console.log(err));
