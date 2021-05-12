@@ -4,7 +4,8 @@ import 'reflect-metadata';
 import { createConnection, ConnectionOptions, getConnectionOptions } from 'typeorm';
 import dotenv from 'dotenv';
 import { createRoutes } from './routes/routes';
-import { news } from './models/News';
+import { News } from './models/News';
+import { Bio } from './models/Bio';
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const router = express.Router();
@@ -32,7 +33,7 @@ const getOptions = async () => {
 		extra: {
 			ssl: { rejectUnauthorized: false }
 		},
-		entities: [news],
+		entities: [News, Bio],
 	};
 	if (process.env.DATABASE_URL) {
 		Object.assign(connectionOptions, { url: process.env.DATABASE_URL });

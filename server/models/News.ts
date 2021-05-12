@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
-export class news {
+export class News {
 
 	@PrimaryGeneratedColumn()
 	id!: number;
@@ -14,4 +14,4 @@ export class news {
 
 	@Column()
 	date!: string;
-}
+};

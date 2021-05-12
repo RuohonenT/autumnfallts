@@ -1,9 +1,13 @@
 import React from 'react';
 import './Bio.css';
 
-const ShowBio = (props) => {
+const ShowBio = ({ bio }) => {
 	return (
-		<div className='bio_content_innards'><p>ShowBio</p></div>
+		<div className='bio_content_innards'>
+			{bio.length > 0 ?
+				<>{bio.map((cont, i) => { return <div key={i}><p>{cont}</p></div> })}</>
+				: <div><p>No Bio Found</p></div>}
+		</div >
 	)
 };
 

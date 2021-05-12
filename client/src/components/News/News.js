@@ -7,13 +7,16 @@ import UnderConstruction from '../under';
 const axios = require('axios');
 
 
-const News = () => {
+function News() {
 	const [news, setNews] = useState([]);
 
 	useEffect(() => {
 		const getNews = () => {
 			axios.get('api/news')
-				.then(res => setNews(res.data))
+				.then(res => {
+					setNews(res.data)
+					console.log(res.data)
+				})
 				.catch(error => setNews('not connecting', error));
 		};
 
