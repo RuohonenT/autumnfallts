@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ShowBio from './ShowBio';
 import BioEdit from './BioEdit';
 import './Bio.css';
@@ -7,21 +7,25 @@ import axios from 'axios';
 const Bio = () => {
     const [bio, setBio] = useState([]);
 
-    const deleteBio = async (content) => {
-        const delBio = bio.filter(txt => txt.content !== content);
+    const addBio = async (content) => {
         await axios
-            .delete('api/bio/delete', { data: { delBio } })
-            .catch(err => console.log('deleteBio', err))
+            .post('api/bio/add', { content })
+            .then(res => {
+                setBio([res.data])
+            })
+            .catch(err => console.log(err));
     };
+
+
 
     return (
         <div className='bio_container'>
             <div className='bio_content'>
                 <>
-                    <ShowBio bio={bio} />
+                    <BioEdit bio={bio} setBio={setBio} addBio={addBio} />
                 </>
                 <>
-                    <BioEdit bio={bio} setBio={setBio} delete={deleteBio} />
+                    <ShowBio bio={bio} />
                 </>
             </div>
         </div>

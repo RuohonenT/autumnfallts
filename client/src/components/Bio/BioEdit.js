@@ -3,10 +3,9 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import './Bio.css';
 
-const BioEdit = ({ bio, setBio, deleteBio }) => {
-	const [content, setContent] = useState([]);
-
-	let history = useHistory();
+const BioEdit = props => {
+	const { setBio, addBio } = props;
+	const [content, setContent] = useState('');
 
 	useEffect(() => {
 		const getBio = async () => {
@@ -17,27 +16,16 @@ const BioEdit = ({ bio, setBio, deleteBio }) => {
 				.catch(err => console.log(err))
 		};
 		return getBio();
-	}, [setBio], []);
+	}, [setBio, addBio]);
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		await axios
-			.post('api/bio/add', { content })
-			.then(res => {
-				setBio(...bio, res.data)
-				history.push('/bio');
-			})
-			.catch(err => console.log(err));
-	};
-
-	const removeBio = () => {
-		deleteBio(content);
+	const handleSubmit = event => {
+		event.preventDefault();
+		addBio(content);
 	};
 
 	return (
 		<div className='bio_content_innards'>
 			<form>
-				<>{bio}</>
 				<input
 					type='text'
 					id={content}
@@ -46,7 +34,6 @@ const BioEdit = ({ bio, setBio, deleteBio }) => {
 					onChange={e => setContent(e.target.value)}
 				/>
 				<button onClick={handleSubmit}>Add</button>
-				<button onClick={removeBio}>Delete</button>
 			</form>
 		</div>
 	)

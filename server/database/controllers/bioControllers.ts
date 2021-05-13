@@ -12,7 +12,7 @@ export const addBio = async (
 		const bio = new Bio();
 		bio.content = content;
 		await bioRepository.save(bio);
-		return res.status(200).json({ msg: 'Bio added' });
+		return res.status(200).json({ msg: 'Bio added', bio });
 	} catch (err) {
 		console.log('addBio serverside error', err);
 		return res.status(501).json({ error: 'Server error with addBio' });
