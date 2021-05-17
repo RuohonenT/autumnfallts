@@ -37,12 +37,13 @@ export const editBio = async (
 	req: Request,
 	res: Response
 ): Promise<Response> => {
+	const { id } = req.params;
 	const { content } = req.body;
 	try {
 		const bioRepository = getRepository(Bio);
 		const bio = await bioRepository.find({ content });
 		if (bio) {
-			bioRepository.update(content, { content: content });
+			bioRepository.update(id, { content: content });
 			return res.status(200).json('Bio updated');
 		} else {
 			return res.status(501).json({ error: 'Database error with editBio' });

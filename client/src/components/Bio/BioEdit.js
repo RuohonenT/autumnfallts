@@ -4,22 +4,23 @@ import { useHistory } from 'react-router-dom';
 import './Bio.css';
 
 const BioEdit = props => {
-	const { setBio, addBio } = props;
-	const [content, setContent] = useState('');
+	const { bio, content, setContent, id } = props;
 
-	useEffect(() => {
-		const getBio = async () => {
-			await axios.get('api/bio')
-				.then(res => {
-					setBio(res.data)
-				})
-				.catch(err => console.log(err))
-		};
-		return getBio();
-	}, [setBio, addBio]);
+	const addBio = async (content) => {
+		await axios
+			.post('api/bio/add', { content })
+			.then(res => {
+				setContent([res.data])
+			})
+			.catch(err => console.log(err));
+	};
 
-	const handleSubmit = event => {
-		event.preventDefault();
+	const editBio = e => {
+		e.preventDefault();
+	};
+
+	const handleSubmit = e => {
+		e.preventDefault();
 		addBio(content);
 	};
 
@@ -30,11 +31,28 @@ const BioEdit = props => {
 					type='text'
 					id={content}
 					name='content'
-					value={content}
+					value={content.content}
 					onChange={e => setContent(e.target.value)}
 				/>
 				<button onClick={handleSubmit}>Add</button>
+				<button onClick={editBio}>Edit</button>
 			</form>
+
+			<>
+				{bio.length > 0 ?
+					<>
+						{
+							bio.map((cont, i) => {
+								return (
+									<div id={cont.content} key={i}>
+										<div><p>{cont.content}</p></div>
+									</div>
+								)
+							})
+						}
+					</>
+					: <div><p>No Bio Found</p></div>}
+			</ >
 		</div>
 	)
 };

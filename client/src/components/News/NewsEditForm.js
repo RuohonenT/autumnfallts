@@ -4,7 +4,7 @@ import { updateNews } from '../../controllers/fetchFunctions';
 import './News.css'
 const axios = require('axios');
 
-const NewsEditForm = (z) => {
+const NewsEditForm = () => {
 	const { id } = useParams();
 	const [news, setNews] = useState([]);
 	const [subject, setSubject] = useState('');

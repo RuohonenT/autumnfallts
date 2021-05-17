@@ -8,7 +8,6 @@ import Contact from './components/Contact/Contact';
 import NewsForm from './components/News/NewsForm';
 import NewsEditForm from './components/News/NewsEditForm';
 import BioEdit from './components/Bio/BioEdit';
-import ShowBio from './components/Bio/ShowBio';
 import UnderConstruction from './components/under';
 import "reflect-metadata"
 
@@ -37,12 +36,8 @@ function App() {
               <NewsEditForm />
             </Route>
 
-            <Route exact path='/editbio'>
+            <Route exact path='/editbio/:id'>
               <BioEdit />
-            </Route>
-
-            <Route exact path='/showbio'>
-              <ShowBio />
             </Route>
 
             <Route exact path='/under'><UnderConstruction /></Route>
