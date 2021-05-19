@@ -1,7 +1,10 @@
-import { Entity, PrimaryColumn } from "typeorm";
+import { Entity, Column, PrimaryColumn } from "typeorm";
 
 @Entity()
 export class Bio {
-	@PrimaryColumn('text')
+	@PrimaryColumn('varchar')
+	header!: string;
+
+	@Column('varchar')
 	content!: string;
 };

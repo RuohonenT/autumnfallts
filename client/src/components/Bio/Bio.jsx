@@ -1,51 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import BioEdit from './BioEdit';
 import './Bio.css';
-import axios from 'axios';
-import { useParams } from 'react-router';
 
 const Bio = () => {
-    const { id } = useParams;
     const [bio, setBio] = useState([]);
+    const [header, setHeader] = useState([]);
     const [content, setContent] = useState([]);
-
-    const updateBio = content => {
-        axios.put(`api/bio/edit/${id}`, content)
-            .then(res => {
-                setBio(res.data);
-            })
-            .catch(err => console.log(err));
-    };
-
-    useEffect(() => {
-        const getBio = async () => {
-            await axios.get('/api/bio')
-                .then(res => {
-                    setBio(res.data)
-                })
-                .catch(err => console.log(err));
-        };
-
-        return getBio();
-
-    }, [setBio, content]);
 
 
     return (
         <div className='bio_container'>
             <div className='bio_content'>
                 <>
-                    <BioEdit bio={bio} content={content} setContent={setContent} updateBio={updateBio} id={id} />
+                    <BioEdit
+                        bio={bio}
+                        setBio={setBio}
+                        content={content}
+                        setContent={setContent}
+                        header={header}
+                        setHeader={setHeader} />
                 </>
 
                 <div className='bio_content_innards'>
                     {bio.length > 0 ?
                         <>
                             {
-                                bio.map((cont, i) => {
+                                bio.map((bgraph, i) => {
                                     return (
-                                        <div id={cont.content} key={i}>
-                                            <div><p>{cont.content}</p></div>
+                                        <div id={bgraph.header} key={i}>
+                                            <div><p>{bgraph.header}</p></div>
+                                            <div><p>{bgraph.content}</p></div>
                                         </div>
                                     )
                                 })
