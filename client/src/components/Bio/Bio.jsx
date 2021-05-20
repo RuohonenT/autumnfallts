@@ -28,7 +28,7 @@ const Bio = () => {
                                 bio.map((bgraph, i) => {
                                     return (
                                         <div id={bgraph.header} key={i}>
-                                            <div><p>{bgraph.header}</p></div>
+                                            <div><h1>{bgraph.header}</h1></div>
                                             <div><p>{bgraph.content}</p></div>
                                         </div>
                                     )

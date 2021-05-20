@@ -5,8 +5,8 @@ import News from './components/News/News';
 import Bio from './components/Bio/Bio';
 import Footer from './components/Footer/Footer';
 import Contact from './components/Contact/Contact';
-import NewsForm from './components/News/NewsForm';
-import NewsEditForm from './components/News/NewsEditForm';
+import NewsEdit from './components/News/NewsEdit';
+import NewsUpdate from './components/News/NewsUpdate';
 import BioEdit from './components/Bio/BioEdit';
 import BioUpdate from './components/Bio/BioUpdate';
 import UnderConstruction from './components/under';
@@ -30,11 +30,11 @@ function App() {
               <Contact />
             </Route>
 
-            <Route exact path="/newsform">
-              <NewsForm />
+            <Route exact path="/newsedit">
+              <NewsEdit />
             </Route>
             <Route path="/news/edit/:id">
-              <NewsEditForm />
+              <NewsUpdate />
             </Route>
 
             <Route exact path='/editbio'>

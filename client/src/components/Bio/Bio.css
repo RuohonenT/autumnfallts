@@ -26,8 +26,8 @@
     flex-direction: column;
     align-items: center;
     background-color: black;
-    width: 100%;
-    max-width: 100%;
+    width: 90%;
+    max-width: 90%;
     min-height: 20vh;
 }
 
@@ -35,23 +35,32 @@
     color: #9e9277;
     text-align: justify;
     text-justify: inter-character;
+    white-space: pre-wrap;
 }
 
 .bio_content_innards h1 {
-    color: white;
-    text-align: justify;
-    text-justify: inter-character;
-    font-size: 12px;
+    text-align: center;
+    color: #9e9277;
+    font-size: 14px;
+    width: 80%;
+    max-width: 80%;
+    padding: 4px;
+    word-wrap: break-word;
+    text-justify: inter-character;   
+    overflow-wrap: break-word;
+    word-break: break-word;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .bio_form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: black;
+    background-color: transparent;
     width: 95%;
     max-width: 95%;
     min-height: 20vh;
+    white-space: pre-wrap;
 }
 
 .header {
@@ -68,4 +77,5 @@
     color: black;
     border: solid 1px white;
     min-height: 20vh;
+    white-space: pre-wrap;
 }

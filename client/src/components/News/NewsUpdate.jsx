@@ -1,25 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 import { updateNews } from '../../controllers/fetchFunctions';
 import './News.css'
-const axios = require('axios');
 
-const NewsEditForm = () => {
+const NewsUpdate = () => {
 	const { id } = useParams();
-	const [news, setNews] = useState([]);
-	const [subject, setSubject] = useState('');
-	const [content, setContent] = useState('');
-
-
-	// const getNews = async () => {
-	// 	await axios.get('/api/news/' + id)
-	// 		.then(res => setNews(res.data))
-	// 		.catch(error => setNews('not connecting', error));
-	// };
-
-	// getNews();
-
-	let history = useHistory();
+	const location = useLocation();
+	const history = useHistory();
+	const news = location.state.params;
+	const [subject, setSubject] = useState(news.subject);
+	const [content, setContent] = useState(news.content);
 
 	const handleSubmit = async (event, id, subject, content) => {
 		event.preventDefault();
@@ -28,26 +18,27 @@ const NewsEditForm = () => {
 			console.log(update)
 			history.push('/news');
 		} else {
+			console.log('failing');
 		}
 	};
 
 
 	return (
-		<div className='news_container'>
-
-			<div className='news_content'>
-
-				<div className='news_content_innards'>
-					<form>
-						<input className='add_subject'
-							type='text'
-							id={'subject'}
-							name='subject'
-							value={subject}
-							onChange={event => setSubject(event.target.value)}
-						/>
-					</form>
-					<textarea className='add_content'
+		<div className='news_content'>
+			<div className='news_content_innards'>
+				<h1>Editoi Uutisia täällä...</h1>
+				<form className='news_form'>
+					<input
+						className='add_subject'
+						type='text'
+						id={'subject'}
+						name='subject'
+						value={subject}
+						onChange={event => setSubject(event.target.value)}
+					/>
+					<br />
+					<textarea
+						className='add_content'
 						type='text'
 						id={'content'}
 						name='content'
@@ -55,11 +46,12 @@ const NewsEditForm = () => {
 						onChange={event => setContent(event.target.value)}
 					/>
 					<button onClick={(event) => handleSubmit(event, id, subject, content)} > Edit</button>
+				</form>
 
 
-					<br />
+				<br />
 
-					{/* {news.length > 0 ?
+				{/* {news.length > 0 ?
 						<>
 							{
 								news.map((topic, i) => {
@@ -72,12 +64,12 @@ const NewsEditForm = () => {
 								})
 							}
 						</> : <div className='news_header'><p>No News</p></div>} */}
-				</div>
 			</div>
-		</div >
+		</div>
+
 	)
 };
 
 
 
-export default NewsEditForm;
+export default NewsUpdate;

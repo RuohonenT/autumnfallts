@@ -1,37 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import NewsForm from './NewsForm';
-import NewsEditForm from './NewsEditForm';
+import React, { useState } from 'react';
+import NewsEdit from './NewsEdit';
 import './News.css'
-import UnderConstruction from '../under';
-const axios = require('axios');
-
 
 function News() {
 	const [news, setNews] = useState([]);
-
-	useEffect(() => {
-		const getNews = () => {
-			axios.get('api/news')
-				.then(res => {
-					setNews(res.data)
-					console.log(res.data)
-				})
-				.catch(error => setNews('not connecting', error));
-		};
-
-		return getNews();
-	}, [setNews]);
+	const [subject, setSubject] = useState([]);
+	const [content, setContent] = useState([]);
 
 	return (
 		<div className='news_container'>
-
 			<div className='news_content'>
+				<>
+					<NewsEdit
+						news={news}
+						setNews={setNews}
+						content={content}
+						setContent={setContent}
+						subject={subject}
+						setSubject={setSubject} />
+				</>
+
 				<div className='news_content_innards'>
-					<><UnderConstruction /></>
-					<>
-						<Link to="/NewsForm">Add a new item</Link>
-					</>
+
 					{news.length > 0 ?
 						<>
 							{
@@ -40,16 +30,13 @@ function News() {
 										<div className='news_content_innards' id={topic.id} key={i}>
 											<div className='news_header'><h1>{topic.subject}</h1>{topic.date !== undefined ? <h2>{topic.date.slice(0, 10)}</h2> : <></>}</div>
 											<div><p>{topic.content}</p></div>
-											<>
-												<Link to={<NewsForm setNews={setNews} />}>EDIT</Link>
-											</>
-
 										</div>
 									)
 								})
 							}
-						</> : <div className='news_header'><p>No News</p></div>}
+						</> : <div className='news_content_innards'><p>No News Found</p></div>}
 				</div>
+
 			</div>
 		</div >
 	)
