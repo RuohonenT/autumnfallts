@@ -34,26 +34,6 @@ export const getBio = async (
 	}
 };
 
-export const editBio = async (
-	req: Request,
-	res: Response
-): Promise<Response> => {
-	const { id } = req.params;
-	const { header, content } = req.body;
-	try {
-		const bioRepository = getRepository(Bio);
-		const bio = await bioRepository.find({ header });
-		if (bio) {
-			bioRepository.update(id, { header: header, content: content });
-			return res.status(200).json('Bio updated');
-		} else {
-			return res.status(501).json({ error: 'Database error with editBio' });
-		}
-	} catch (err) {
-		console.log('editBio serverside issue', err);
-		return res.status(501).json({ error: 'Server error' });
-	};
-};
 
 export const updateBioById = async (
 	req: Request,
@@ -82,11 +62,11 @@ export const deleteBio = async (
 	res: Response
 ): Promise<Response> => {
 	try {
-		const { header } = req.body;
+		const { id } = req.body;
 		const bioRepository = getRepository(Bio);
-		const found = await bioRepository.find({ header });
+		const found = await bioRepository.find({ id });
 		if (found[0] !== undefined) {
-			const bio = await bioRepository.delete({ header });
+			const bio = await bioRepository.delete({ id });
 			if (bio) {
 				return res.status(200).json({ msg: 'Bio removed' });
 			}

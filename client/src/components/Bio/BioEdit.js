@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './Bio.css';
 
@@ -19,13 +19,13 @@ const BioEdit = props => {
 		setContent('');
 	};
 
-	const editBio = (id, data) => {
-		history.push(`bio/edit/${id}`, { params: { id, data } })
+	const editBio = (id, header, content) => {
+		history.push('bio/edit/' + id, { params: { header, content } })
 	};
 
-	const deleteBio = async header => {
-		axios
-			.delete('api/bio/delete', { data: { header } })
+	const deleteBio = async id => {
+		await axios
+			.delete('api/bio/delete', { data: { id } })
 			.then(res => setContent([res.data, ...bio]))
 			.catch(err => console.log('bioDelete', err))
 	};
@@ -54,48 +54,53 @@ const BioEdit = props => {
 	};
 
 	return (
-		<div className='bio_content_innards'>
-			<form>
-				<input
-					type='text'
-					id={header}
-					name='header'
-					value={bio.header}
-					placeholder={bio.header}
-					onChange={e => setHeader(e.target.value)}
-				/>
-				<br />
-				<textarea
-					type='text'
-					id={content}
-					name='content'
-					value={content.bio}
-					placeholder={bio.content}
-					onChange={e => setContent(e.target.value)}
-				/>
-				<br />
-				<button onClick={handleSubmit}>Add</button>
+		<div className='bio_content'>
+			<div className='bio_content_innards'>
+				<h1>Biography...</h1>
+				<form className='bio_form'>
+					<input
+						className='header'
+						type='text'
+						id={header}
+						name='header'
+						value={bio.header}
+						placeholder={bio.header}
+						onChange={e => setHeader(e.target.value)}
+					/>
+					<br />
+					<textarea
+						className='textarea'
+						type='text'
+						id={content}
+						name='content'
+						value={content.bio}
+						placeholder={bio.content}
+						onChange={e => setContent(e.target.value)}
+					/>
+					<br />
+					<button onClick={handleSubmit}>Add</button>
 
-			</form>
+				</form>
 
-			<>
-				{bio.length > 0 ?
-					<>
-						{
-							bio.map((bgraph, i) => {
-								return (
-									<div id={bgraph.header} key={i}>
-										<div><p>{bgraph.header}</p></div>
-										<div><p>{bgraph.content}</p></div>
-										<button onClick={() => { editBio(bgraph.header, bgraph.content) }}>Edit</button>
-										<button onClick={() => deleteBio(bgraph.header)}>Delete</button>
-									</div>
-								)
-							})
-						}
-					</>
-					: <div><p>No Bio Found</p></div>}
-			</ >
+				<>
+					{bio.length > 0 ?
+						<>
+							{
+								bio.map((bgraph, i) => {
+									return (
+										<div id={bgraph.id} key={i}>
+											<div><p>{bgraph.header}</p></div>
+											<div><p>{bgraph.content}</p></div>
+											<button onClick={() => editBio(bgraph.id, bgraph.header, bgraph.content)}>Edit</button>
+											<button onClick={() => deleteBio(bgraph.id)}>Delete</button>
+										</div>
+									)
+								})
+							}
+						</>
+						: <div><p>No Bio Found</p></div>}
+				</ >
+			</div>
 		</div>
 	)
 };

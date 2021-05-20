@@ -1,8 +1,11 @@
-import { Entity, Column, PrimaryColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Bio {
-	@PrimaryColumn('varchar')
+	@PrimaryGeneratedColumn()
+	id!: number;
+
+	@Column('varchar')
 	header!: string;
 
 	@Column('varchar')

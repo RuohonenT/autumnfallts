@@ -29,11 +29,43 @@
     width: 100%;
     max-width: 100%;
     min-height: 20vh;
-    border: solid 1px yellow;
 }
 
 .bio_content_innards p {
     color: #9e9277;
     text-align: justify;
     text-justify: inter-character;
+}
+
+.bio_content_innards h1 {
+    color: white;
+    text-align: justify;
+    text-justify: inter-character;
+    font-size: 12px;
+}
+
+.bio_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    width: 95%;
+    max-width: 95%;
+    min-height: 20vh;
+}
+
+.header {
+    width: 75%;
+    background-color: #9e9277;
+    color: black;
+    border: solid 1px white;
+    min-height: 5vh;
+}
+
+.textarea {
+    width: 76%;
+    background-color: #9e9277;
+    color: black;
+    border: solid 1px white;
+    min-height: 20vh;
 }
