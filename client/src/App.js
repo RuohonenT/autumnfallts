@@ -9,6 +9,7 @@ import NewsEdit from './components/News/NewsEdit';
 import NewsUpdate from './components/News/NewsUpdate';
 import BioEdit from './components/Bio/BioEdit';
 import BioUpdate from './components/Bio/BioUpdate';
+import SignUp from './components/SignUp/SignUp';
 import UnderConstruction from './components/under';
 import "reflect-metadata"
 
@@ -42,6 +43,10 @@ function App() {
             </Route>
             <Route exact path='/bio/edit/:id'>
               <BioUpdate />
+            </Route>
+
+            <Route exact path='/users'>
+              <SignUp />
             </Route>
 
             <Route exact path='/under'><UnderConstruction /></Route>

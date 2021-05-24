@@ -29,7 +29,7 @@ const BioEdit = props => {
 	const deleteBio = async id => {
 		await axios
 			.delete('api/bio/delete', { data: { id } })
-			.then(res => setContent([res.data, ...bio]))
+			.then(res => setContent([res.data]))
 			.catch(err => console.log('bioDelete', err))
 	};
 

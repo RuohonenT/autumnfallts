@@ -34,7 +34,7 @@ const NewsEdit = props => {
 	const newsDelete = async id => {
 		await axios
 			.delete('api/news/delete', { data: { id } })
-			.then(res => setContent([res.data, ...news]))
+			.then(res => setContent([res.data]))
 			.catch(err => console.log('newsDelete', err))
 	};
 
