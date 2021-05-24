@@ -24,6 +24,8 @@ const SignUp = props => {
 		if (signUpResult.status === 200) {
 			console.log(data.data.msg);
 			setErrorMessage([]);
+			setEmail('');
+			setPassword('');
 			// closeSignUpModal();
 			history.push('/');
 		}
