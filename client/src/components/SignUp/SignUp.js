@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { signUp } from '../../controllers/fetchFunctions';
 
-
-
 const SignUp = props => {
 	const { closeSignupModal } = props;
 	const [email, setEmail] = useState('');
