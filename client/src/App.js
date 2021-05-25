@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from './components/Header/Header';
 import News from './components/News/News';
@@ -11,38 +11,11 @@ import BioEdit from './components/Bio/BioEdit';
 import BioUpdate from './components/Bio/BioUpdate';
 import SignUp from './components/SignUp/SignUp';
 import UnderConstruction from './components/under';
-import Modal from 'react-modal';
 import "reflect-metadata"
 import './App.css'
 
-Modal.setAppElement('#root');
 
 function App() {
-  const [signupModalIsOpen, setSignupIsOpen] = useState(false);
-  function openSignupModal() {
-    setSignupIsOpen(true);
-  }
-
-  function closeSignupModal() {
-    setSignupIsOpen(false);
-  }
-
-  const Modals = () => {
-    return (
-      <>
-        <Modal
-          isOpen={signupModalIsOpen}
-          onRequestClose={closeSignupModal}
-          className="modal"
-          overlayClassName="overlay"
-          shouldFocusAfterRender={false}
-        >
-          <SignUp closeSignupModal={closeSignupModal} />
-        </Modal>
-      </>
-    )
-  }
-
 
   return (
     <>
