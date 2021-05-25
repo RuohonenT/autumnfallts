@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { Users } from '../../models/Users';
-import { getRepository, RepositoryNotTreeError } from 'typeorm';
-import { body } from 'express-validator';
+import { getRepository } from 'typeorm';
 
 export const getUserById = async (
 	req: Request,

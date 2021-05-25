@@ -48,22 +48,6 @@ const NewsUpdate = () => {
 					<button onClick={(event) => handleSubmit(event, id, subject, content)} > Edit</button>
 				</form>
 
-
-				<br />
-
-				{/* {news.length > 0 ?
-						<>
-							{
-								news.map((topic, i) => {
-									return (
-										<div className='news_content_innards' id={topic.id} key={i}>
-											<div className='news_header'><h1>{topic.subject}</h1>{topic.date !== undefined ? <h2>{topic.date.slice(0, 9)}</h2> : <></>}</div>
-											<div className='news_content_content'><p>{topic.content}</p></div>
-										</div>
-									)
-								})
-							}
-						</> : <div className='news_header'><p>No News</p></div>} */}
 			</div>
 		</div>
 

@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './News.css'
 
-
 const NewsEdit = props => {
 	const { news, subject, content, setNews, setSubject, setContent } = props;
 	const history = useHistory();
@@ -42,7 +41,7 @@ const NewsEdit = props => {
 	useEffect(() => {
 		const getNews = async () => {
 			await axios.get('api/news')
-				.then(res => setNews([res.data]))
+				.then(res => setNews(res.data))
 				.catch(error => setNews('not connecting', error));
 		};
 		return getNews();
@@ -71,7 +70,7 @@ const NewsEdit = props => {
 					value={news.content}
 					onChange={event => setContent(event.target.value)}
 				/>
-				<button onClick={(event) => handleSubmit(event, subject, content)}>Lisää</button>
+				<button onClick={event => handleSubmit(event, subject, content)}>Lisää</button>
 			</form>
 
 			<br />

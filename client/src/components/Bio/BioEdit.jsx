@@ -8,11 +8,11 @@ const BioEdit = props => {
 	const history = useHistory();
 
 	//addBio function to add new bio
-	const addBio = async (e, header, content) => {
+	const addBio = async (header, content) => {
 		await axios
 			.post('api/bio/add', { header, content })
 			.then(res => {
-				setContent([res.data, ...bio])
+				setContent([res.data])
 			})
 			.catch(err => console.log(err));
 
