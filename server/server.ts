@@ -21,6 +21,14 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use('/api', createRoutes());
 
+if (process.env.NODE_ENV === 'development') {
+	app.use(cors({
+		origin: 'http://localhost:3000',
+		credentials: true,
+		methods: 'GET, PUT, POST, PATCH, DELETE'
+	}));
+}
+
 const getOptions = async () => {
 	let connectionOptions: ConnectionOptions;
 	connectionOptions = {
@@ -119,12 +127,4 @@ router.post('/contact', (req, res) => {
 // 	app.get('*', (req, res) => {
 // 		res.sendFile(path.join(__dirname + '/../client/build/index.html'));
 // 	});
-// }
-
-// if (process.env.NODE_ENV === 'development') {
-// 	app.use(cors({
-// 		origin: 'http://localhost:3000',
-// 		credentials: true,
-// 		methods: 'GET, PUT, POST, PATCH, DELETE'
-// 	}));
 // }
