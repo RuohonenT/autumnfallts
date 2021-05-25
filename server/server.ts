@@ -32,7 +32,7 @@ const getOptions = async () => {
 			entitiesDir: 'models'
 		},
 		extra: {
-			ssl: { rejectUnauthorized: true }
+			ssl: { rejectUnauthorized: false }
 		},
 		entities: [News, Bio, Users]
 	};
