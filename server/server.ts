@@ -67,26 +67,26 @@ connectToDatabase().then(async () => {
 
 
 
-if (process.env.NODE_ENV === 'production') {
-	app.use(express.static(path.join(__dirname, '../client/build')));
-	app.use(cors({
-		origin: "http://localhost:3000",
-		credentials: true,
-		methods: "GET, PUT, POST, PATCH, DELETE"
-	}));
-	// 'catching-all' handler to send back React's index.html if a req doesn't match any endpoints above
-	app.get('*', (req, res) => {
-		res.sendFile(path.join(__dirname + '/../client/build/index.html'));
-	});
-}
+// if (process.env.NODE_ENV === 'production') {
+// 	app.use(express.static(path.join(__dirname, '../client/build')));
+// 	app.use(cors({
+// 		origin: "http://localhost:3000",
+// 		credentials: true,
+// 		methods: "GET, PUT, POST, PATCH, DELETE"
+// 	}));
+// 	// 'catching-all' handler to send back React's index.html if a req doesn't match any endpoints above
+// 	app.get('*', (req, res) => {
+// 		res.sendFile(path.join(__dirname + '/../client/build/index.html'));
+// 	});
+// }
 
-if (process.env.NODE_ENV === 'development') {
-	app.use(cors({
-		origin: 'http://localhost:3000',
-		credentials: true,
-		methods: 'GET, PUT, POST, PATCH, DELETE'
-	}));
-}
+// if (process.env.NODE_ENV === 'development') {
+// 	app.use(cors({
+// 		origin: 'http://localhost:3000',
+// 		credentials: true,
+// 		methods: 'GET, PUT, POST, PATCH, DELETE'
+// 	}));
+// }
 
 app.use('/', router);
 app.get('/');

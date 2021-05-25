@@ -9,12 +9,10 @@ const BioEdit = props => {
 
 	//addBio function to add new bio
 	const addBio = async (e, header, content) => {
-		e.preventDefault();
 		await axios
 			.post('api/bio/add', { header, content })
 			.then(res => {
 				setContent([res.data, ...bio])
-				console.log(res.status, content);
 			})
 			.catch(err => console.log(err));
 
