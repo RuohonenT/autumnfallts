@@ -42,7 +42,7 @@ const NewsEdit = props => {
 	useEffect(() => {
 		const getNews = async () => {
 			await axios.get('api/news')
-				.then(res => setNews(res.data))
+				.then(res => setNews([res.data]))
 				.catch(error => setNews('not connecting', error));
 		};
 		return getNews();
