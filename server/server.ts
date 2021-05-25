@@ -67,27 +67,6 @@ connectToDatabase().then(async () => {
 
 
 
-// if (process.env.NODE_ENV === 'production') {
-// 	app.use(express.static(path.join(__dirname, '../client/build')));
-// 	app.use(cors({
-// 		origin: "http://localhost:3000",
-// 		credentials: true,
-// 		methods: "GET, PUT, POST, PATCH, DELETE"
-// 	}));
-// 	// 'catching-all' handler to send back React's index.html if a req doesn't match any endpoints above
-// 	app.get('*', (req, res) => {
-// 		res.sendFile(path.join(__dirname + '/../client/build/index.html'));
-// 	});
-// }
-
-// if (process.env.NODE_ENV === 'development') {
-// 	app.use(cors({
-// 		origin: 'http://localhost:3000',
-// 		credentials: true,
-// 		methods: 'GET, PUT, POST, PATCH, DELETE'
-// 	}));
-// }
-
 app.use('/', router);
 app.get('/');
 app.listen(PORT, () => console.log(`hosting port ${PORT}`));
@@ -116,7 +95,7 @@ router.post('/contact', (req, res) => {
 	const message = req.body.message;
 	const mail = {
 		from: name,
-		to: String(process.env.CONTANT_TO),
+		to: String(process.env.CONTACT_TO),
 		subject: 'Contact Form Message',
 		html: `<p>Name: ${name}</p><p>Email: ${email}</p><p>Message: ${message}</p>`,
 	};
@@ -128,3 +107,24 @@ router.post('/contact', (req, res) => {
 		}
 	});
 });
+
+// if (process.env.NODE_ENV === 'production') {
+// 	app.use(express.static(path.join(__dirname, '../client/build')));
+// 	app.use(cors({
+// 		origin: "http://localhost:3000",
+// 		credentials: true,
+// 		methods: "GET, PUT, POST, PATCH, DELETE"
+// 	}));
+// 	// 'catching-all' handler to send back React's index.html if a req doesn't match any endpoints above
+// 	app.get('*', (req, res) => {
+// 		res.sendFile(path.join(__dirname + '/../client/build/index.html'));
+// 	});
+// }
+
+// if (process.env.NODE_ENV === 'development') {
+// 	app.use(cors({
+// 		origin: 'http://localhost:3000',
+// 		credentials: true,
+// 		methods: 'GET, PUT, POST, PATCH, DELETE'
+// 	}));
+// }
