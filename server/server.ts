@@ -32,9 +32,9 @@ if (process.env.NODE_ENV === 'development') {
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '../client/build')));
 	app.use(cors({
-		origin: "process.env.DATABASE_URL",
+		origin: 'process.env.DATABASE_URL',
 		credentials: true,
-		methods: "GET, PUT, POST, PATCH, DELETE"
+		methods: 'GET, PUT, POST, PATCH, DELETE'
 	}));
 	// 'catching-all' handler to send back React's index.html if a req doesn't match any endpoints above
 	app.get('*', (req, res) => {
@@ -60,11 +60,11 @@ const getOptions = async () => {
 	if (process.env.DATABASE_URL) {
 		Object.assign(connectionOptions, { url: process.env.DATABASE_URL });
 		app.use((req, res, next) => {
-			res.header("Access-Control-Allow-Origin", "*");
-			res.header("Access-Control-Allow-Methods", "*");
+			res.header('Access-Control-Allow-Origin', '*');
+			res.header('Access-Control-Allow-Methods', '*');
 			res.header(
-				"Access-Control-Allow-Headers",
-				"Origin, X-Requested-With, Content-Type, Accept"
+				'Access-Control-Allow-Headers',
+				'Origin, X-Requested-With, Content-Type, Accept'
 			);
 			next();
 		});
@@ -94,7 +94,7 @@ app.listen(PORT, () => console.log(`hosting port ${PORT}`));
 
 // Nodemailer for Contact
 const contactEmail = nodemailer.createTransport({
-	host: String(process.env.CONTACT_HOST),
+	host: String('smtp.gmail.com'),
 	port: Number(process.env.CONTACT_PORT),
 	auth: {
 		user: String(process.env.CONTACT_USER),

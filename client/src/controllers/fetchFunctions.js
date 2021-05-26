@@ -10,3 +10,47 @@ export const signUp = async (email, password) => {
 		credentials: 'include'
 	});
 };
+
+//check if token can be found from local storage or not
+export const checkToken = () => {
+	const token = localStorage.getItem("token");
+	return token;
+};
+
+export const checkAuth = (token) => {
+	return fetch('api/login', {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+			"Authorization": `Bearer ${token}`
+		},
+		mode: 'cors',
+		credentials: "include",
+	});
+};
+
+// login function
+export const login = (email, password) => {
+	return fetch('api/login', {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		mode: 'cors',
+		credentials: "include",
+		body: JSON.stringify({ email, password })
+	});
+};
+
+// get currently logged in user
+export const getOwnProfile = token => {
+	return fetch('api/profile/me', {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+			"Authorization": `Bearer ${token}`
+		},
+		mode: 'cors',
+		credentials: "include"
+	});
+};
