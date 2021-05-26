@@ -25,7 +25,7 @@ const SignUp = () => {
 			setErrorMessage([]);
 			setEmail('');
 			setPassword('');
-			history.push('/');
+			history.push('/login');
 		}
 		else { console.log('erroria') }
 	};
