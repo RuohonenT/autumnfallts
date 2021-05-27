@@ -30,6 +30,12 @@ const Login = () => {
 		}
 	};
 
+	const logout = () => {
+		setIsLogin(false);
+		localStorage.removeItem('token');
+		setToken(null);
+	};
+
 	return (
 		<div>
 			<form>
@@ -47,6 +53,7 @@ const Login = () => {
 				/>
 				<button
 					onClick={e => handleSubmit(e, email, password)}>Login</button>
+				<button onClick={logout}>Logout</button>
 			</form>
 		</div>
 	);
