@@ -100,6 +100,9 @@ const contactEmail = nodemailer.createTransport({
 		user: String(process.env.CONTACT_USER),
 		pass: (process.env.CONTACT_PASS),
 	},
+	tls: {
+		rejectUnauthorized: false
+	}
 });
 
 contactEmail.verify((error: any) => {
