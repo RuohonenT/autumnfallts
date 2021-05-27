@@ -35,10 +35,10 @@ function App() {
       setCurrentUser(null);
     }
   }
-  // useEffect(() => {
-  //   return getProfile();
-  // }, [token])
-  getProfile();
+  useEffect(() => {
+    return getProfile();
+  }, [token])
+
 
   return (
     <Context.Provider value={{
