@@ -24,20 +24,21 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [currentUser, setCurrentUser] = useState(null);
 
-  useEffect(() => {
-    const getProfile = async () => {
-      if (token) {
-        const result = await getOwnProfile(token);
-        if (result.status === 200) {
-          const userData = await result.json();
-          setCurrentUser(userData);
-        }
-      } else {
-        setCurrentUser(null);
+  const getProfile = async () => {
+    if (token) {
+      const result = await getOwnProfile(token);
+      if (result.status === 200) {
+        const userData = await result.json();
+        setCurrentUser(userData);
       }
+    } else {
+      setCurrentUser(null);
     }
-    return getProfile();
-  }, [token])
+  }
+  // useEffect(() => {
+  //   return getProfile();
+  // }, [token])
+  getProfile();
 
   return (
     <Context.Provider value={{
