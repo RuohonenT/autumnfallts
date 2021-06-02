@@ -7,34 +7,28 @@ import { useAppContext } from '../../Context';
 const Login = () => {
 	const [email, setEmailText] = useState('');
 	const [password, setPasswordText] = useState('');
-	const { setIsLogin, setToken } = useAppContext();
+	const { setIsLogin, setToken, logout } = useAppContext();
 	const history = useHistory();
 
 	const handleSubmit = async (e, email, password) => {
 		e.preventDefault();
 		const loginResult = await login(email, password);
-		console.log(loginResult);
 		if (loginResult.status === 200) {
-			const data = await loginResult.json();
-			console.log(data);
-			if (data.token) {
-				localStorage.setItem('token', data.token);
-				setToken(data.token);
+			const data = await loginResult;
+			if (data.data.token) {
+				localStorage.setItem('token', data.data.token);
+				setToken(data.data.token);
 				setIsLogin(true);
 				history.push('/profile');
 			} else {
-				console.log('Wrong email or passoword');
+				console.log('Wrong email or password');
 			}
 		} else {
 			console.log('Wrong email or password');
 		}
 	};
 
-	const logout = () => {
-		setIsLogin(false);
-		localStorage.removeItem('token');
-		setToken(null);
-	};
+
 
 	return (
 		<div>

@@ -1,12 +1,13 @@
 import { createContext, useContext } from 'react';
 
 const Context = createContext({
-	isLogin: false,
 	token: null,
-	setIsLogin: async () => console.log('setIsLogin function error'),
 	setToken: async () => console.log('setToken function error'),
+	isLogin: false,
+	setIsLogin: async () => console.log('setIsLogin function error'),
+	currentUser: null,
 	getProfile: async () => console.log('getProfile function error'),
-	currentUser: null
+	logout: () => console.log('logout function error')
 });
 
 export const useAppContext = () => useContext(Context);

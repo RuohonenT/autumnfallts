@@ -36,7 +36,7 @@ if (process.env.NODE_ENV === 'production') {
 		credentials: true,
 		methods: 'GET, PUT, POST, PATCH, DELETE'
 	}));
-	// 'catching-all' handler to send back React's index.html if a req doesn't match any endpoints above
+	// 'catching-all' handler to send back React's index.html if a req doesn't match any endpoints
 	app.get('*', (req, res) => {
 		res.sendFile(path.join(__dirname + '/../client/build/index.html'));
 	});

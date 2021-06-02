@@ -12,22 +12,18 @@ const SignUp = () => {
 		e.preventDefault();
 		const signUpResult = await signUp(email, password);
 		const data = await signUpResult;
-		if (data.status !== 200) {
-			console.log(data.data.msg)
-			const errorMessages = data;
-			setErrorMessage([errorMessages]);
-			setEmail('');
-			setPassword('');
-			console.log('signUpResult', data.data.errors);
-		}
 		if (data.status === 200) {
 			console.log(data.data.msg);
 			setErrorMessage([]);
 			setEmail('');
 			setPassword('');
 			history.push('/login');
+		} else {
+			const errorMessages = data.errors.map(error => error.msg);
+			setErrorMessage(errorMessages);
+			console.log('signUpResult', signUpResult);
 		}
-		else { console.log('erroria') }
+		// else { console.log('error', data.status) }
 	};
 	return (
 		<div>

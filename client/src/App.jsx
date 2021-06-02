@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Context from './Context';
 import Header from './components/Header/Header';
 import News from './components/News/News';
 import Bio from './components/Bio/Bio';
@@ -12,10 +13,10 @@ import BioUpdate from './components/Bio/BioUpdate';
 import SignUp from './components/SignUp/SignUp';
 import Login from './components/Login/Login';
 import Profile from './components/Profile/Profile';
-import Context from './Context';
 import UnderConstruction from './components/under';
 import { getOwnProfile } from './controllers/fetchFunctions';
-import "reflect-metadata"
+import jwt_decode from 'jwt-decode';
+import 'reflect-metadata'
 import './App.css'
 
 
@@ -23,21 +24,46 @@ function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [currentUser, setCurrentUser] = useState(null);
+  // const history = useHistory();
+  let result = false;
 
-  const getProfile = async () => {
-    if (token) {
-      const result = await getOwnProfile(token);
-      if (result.status === 200) {
-        const userData = await result.json();
-        setCurrentUser(userData);
-      }
+  const logout = () => {
+    setIsLogin(false);
+    localStorage.removeItem('token');
+    setToken(null);
+  };
+
+  if (token) {
+    let decodedToken = jwt_decode(token);
+    let currentDate = new Date();
+
+    if (decodedToken.exp * 1000 < currentDate.getTime()) {
+      logout();
+      console.log('Token expired.');
     } else {
-      setCurrentUser(null);
+      console.log('Valid token');
+      result = true;
     }
-  }
+  };
+
+
   useEffect(() => {
-    return getProfile();
-  }, [token])
+    const getProfile = async () => {
+      if (token && result === true) {
+        const result = await getOwnProfile(token);
+        if (result.status === 200) {
+          const userData = await result;
+          setCurrentUser(userData.data);
+        }
+      } else {
+        console.log('Visitor from outerspace')
+        setCurrentUser(null);
+      }
+    }
+    getProfile();
+  }, [token, result])
+
+  console.log('currentUser', currentUser)
 
 
   return (
@@ -46,8 +72,8 @@ function App() {
       setIsLogin,
       token,
       setToken,
-      // getProfile,
-      currentUser
+      currentUser,
+      logout
     }}>
       <Router>
         <Header />
@@ -63,10 +89,10 @@ function App() {
               <Contact />
             </Route>
 
-            <Route exact path="/newsedit">
+            <Route exact path='/newsedit'>
               <NewsEdit />
             </Route>
-            <Route path="/news/edit/:id">
+            <Route path='/news/edit/:id'>
               <NewsUpdate />
             </Route>
 
@@ -85,7 +111,7 @@ function App() {
               <Login />
             </Route>
             <Route exact path='/profile'>
-              <Profile />
+              <Profile currentUser={currentUser} />
             </Route>
 
             <Route exact path='/under'><UnderConstruction /></Route>

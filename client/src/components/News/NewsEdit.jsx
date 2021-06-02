@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './News.css'
@@ -37,16 +37,7 @@ const NewsEdit = props => {
 			.catch(err => console.log('newsDelete', err))
 	};
 
-	//fetch all news and set them to news state
-	useEffect(() => {
-		const getNews = async () => {
-			await axios.get('api/news')
-				.then(res => setNews(res.data))
-				.catch(error => setNews('not connecting', error));
-		};
-		return getNews();
 
-	}, [setNews, content])
 
 
 	return (

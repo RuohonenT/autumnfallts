@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './Bio.css';
 
 const BioEdit = props => {
-	const { bio, setBio, content, setContent, header, setHeader } = props;
+	const { bio, content, setContent, header, setHeader } = props;
 	const history = useHistory();
 
 	//addBio function to add new bio
@@ -30,19 +30,6 @@ const BioEdit = props => {
 			.then(res => setContent([res.data]))
 			.catch(err => console.log('bioDelete', err))
 	};
-
-	useEffect(() => {
-		const getBio = async () => {
-			await axios.get('/api/bio')
-				.then(res => {
-					setBio(res.data)
-				})
-				.catch(err => console.log(err));
-		};
-
-		return getBio();
-
-	}, [setBio, content]);
 
 
 	const handleSubmit = e => {

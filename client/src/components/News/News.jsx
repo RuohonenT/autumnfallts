@@ -1,13 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NewsEdit from './NewsEdit';
 import { useAppContext } from '../../Context';
 import './News.css'
+import axios from 'axios';
 
 function News() {
 	const [news, setNews] = useState([]);
 	const [subject, setSubject] = useState([]);
 	const [content, setContent] = useState([]);
 	const { token } = useAppContext();
+
+	//fetch all news and set them to news state
+	useEffect(() => {
+		async function getNews() {
+			const res = await axios.get('api/news');
+			const data = await res.data;
+			const sortedData = data.sort((a, b) => { if (a.date > b.date) { return -1 } else { return null } });
+			setNews(sortedData);
+		};
+		return getNews();
+
+	}, [setNews, content])
 
 	return (
 		<div className='news_container'>

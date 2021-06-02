@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BioEdit from './BioEdit';
 import { useAppContext } from '../../Context';
 import './Bio.css';
+import axios from 'axios';
 
 const Bio = () => {
     const [bio, setBio] = useState([]);
     const [header, setHeader] = useState([]);
     const [content, setContent] = useState([]);
     const { token } = useAppContext();
+
+    useEffect(() => {
+        const getBio = async () => {
+            await axios.get('/api/bio')
+                .then(res => setBio(res.data))
+                .catch(err => console.log(err));
+        };
+        return getBio();
+
+    }, [setBio, content]);
 
 
     return (

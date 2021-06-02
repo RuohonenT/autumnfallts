@@ -42,9 +42,10 @@ export const registerNewUser = async (
 			newUser.is_admin = false;
 			await userRepository.save(newUser);
 			return res.status(200).json({ msg: 'Account created' });
-		} else
-			return res.status(409).json({ msg: 'User already in database' });
+		} else {
+			return res.status(409).json({ msg: 'User already in database' })
+		};
 	} catch (err) {
-		return res.status(501).json({ error: 'Server error' });
+		return res.status(409).json({ error: 'Server error' });
 	}
 };
