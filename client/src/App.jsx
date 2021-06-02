@@ -58,6 +58,7 @@ function App() {
       } else {
         console.log('Visitor from outerspace')
         setCurrentUser(null);
+        logout();
       }
     }
     getProfile();
