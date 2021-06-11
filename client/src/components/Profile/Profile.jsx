@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useAppContext } from '../../Context';
+import './Profile.css';
 
 const Profile = props => {
 	const [email, setEmail] = useState('');
-	const [isAdmin, setIsAdmin] = useState('');
 	const { token } = useAppContext;
 	const { currentUser } = props;
-	console.log('profile currentUser', currentUser)
 
 	useEffect(() => {
 		const userData = () => {
 			if (currentUser) {
 				setEmail(currentUser.email);
-				setIsAdmin(currentUser.isAdmin)
 			} else {
 				setEmail('Not logged in');
 			}
@@ -21,8 +19,10 @@ const Profile = props => {
 	}, [currentUser, token])
 
 	return (
-		<div>
-			<p style={{ color: 'white' }}>{email} {isAdmin}</p>
+		<div className='profile_content'>
+			<div className='profile_content_innards'>
+				<p>{email}</p>
+			</div>
 		</div>
 	);
 };

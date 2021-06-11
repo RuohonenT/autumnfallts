@@ -16,12 +16,12 @@ const NewsEdit = props => {
 				.then(res => {
 					setNews(news => [res.data, ...news])
 					console.log(res.status, res.data)
+					setSubject('');
+					setContent('');
 				})
 				.catch(err => console.log('error', err));
 		} else { alert('More than 5 chars required!') }
 
-		setSubject('');
-		setContent('');
 	};
 
 	//function that directs us to the NewsEditFormat component w/ id
@@ -37,9 +37,6 @@ const NewsEdit = props => {
 			.catch(err => console.log('newsDelete', err))
 	};
 
-
-
-
 	return (
 		<div className='news_content_innards'>
 			<h1>Lisää uutinen</h1>
@@ -49,7 +46,7 @@ const NewsEdit = props => {
 					id={'subject'}
 					name='subject'
 					type='text'
-					value={news.subject}
+					value={subject}
 					onChange={event => setSubject(event.target.value)}
 				/>
 				<br />
@@ -58,7 +55,7 @@ const NewsEdit = props => {
 					id={'content'}
 					name='content'
 					type='text'
-					value={news.content}
+					value={content}
 					onChange={event => setContent(event.target.value)}
 				/>
 				<button onClick={event => handleSubmit(event, subject, content)}>Lisää</button>

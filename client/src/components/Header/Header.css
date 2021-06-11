@@ -46,11 +46,9 @@
     height: 0.5px solid;
 }
 
-.logo {
-    display: flex;
+.header_logo {
     justify-content: center;
-    background: black;
-    width: 500px;
-    height: 100px;
-    padding: 5px 0 0 0;
+    height: 120px;
+    width: 120px;
+    padding: 10px 0 0 0;
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { signUp } from '../../controllers/fetchFunctions';
+import './SignUp.css';
 
 const SignUp = () => {
 	const [email, setEmail] = useState('');
@@ -26,9 +27,9 @@ const SignUp = () => {
 		// else { console.log('error', data.status) }
 	};
 	return (
-		<div>
-			<div>
-				<form>
+		<div className='signup_content'>
+			<div className='signup_content_innards'>
+				<form className='signup_form'>
 					<h2>Luo uusi tili</h2>
 					<div>
 						<input

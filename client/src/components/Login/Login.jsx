@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { login } from '../../controllers/fetchFunctions';
 import { useAppContext } from '../../Context';
-// import '.Login.css';
+import './Login.css';
 
 const Login = () => {
 	const [email, setEmailText] = useState('');
@@ -31,8 +31,8 @@ const Login = () => {
 
 
 	return (
-		<div>
-			<form>
+		<div className='login_content'>
+			<form className='login_form'>
 				<input
 					type='text'
 					name='email'

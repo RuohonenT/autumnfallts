@@ -11,10 +11,9 @@ const Header = () => {
 
             <div className='header_content'>
 
-                <div className='logo'>
-
+                <div>
                     <Link to='home'>
-                        <img src={headerlogo} alt='Autumnfall logo' width='120px' height='120px' />
+                        <img src={headerlogo} alt='Autumnfall logo' className='header_logo' />
                     </Link>
                 </div>
 

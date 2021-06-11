@@ -49,8 +49,8 @@ const BioEdit = props => {
 					type='text'
 					id={header}
 					name='header'
-					value={bio.header}
-					placeholder={bio.header}
+					value={header}
+					placeholder='Add header'
 					onChange={e => setHeader(e.target.value)}
 				/>
 				<br />
@@ -59,8 +59,8 @@ const BioEdit = props => {
 					type='text'
 					id={content}
 					name='content'
-					value={content.bio}
-					placeholder={bio.content}
+					value={content}
+					placeholder='Add content'
 					onChange={e => setContent(e.target.value)}
 				/>
 				<br />
