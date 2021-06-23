@@ -1,114 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pinyon+Script&display=swap');
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 300px;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  color: black;
-  box-shadow: 0 0 10px #333;
-  border-radius: 20px;
-  overflow: hidden;
-  text-align: center;
-  z-index: 3;
-  animation: scaling 0.3s ease-in 1;
-}
-
-.ReactModal__Body--open {
-  overflow: hidden;
-}
-
-.modal:focus {
-  outline: none;
-}
-
-.overlay {
-  background: rgba(242, 201, 76, 0.9);
-  top: 0;
-  left: 0;
-  position: fixed;
-  height: 100vh;
+  margin: 0;
+  padding: 0 0 200px 0;
   width: 100%;
-  z-index: 2;
-  animation: sliding 0.2s 1;
+  min-height: 20vh;
+  position: relative;
+  display: flex;
+  flex-direction: row wrap;
 }
 
-.menu-button {
-  display: none;
+.App > * {
+    flex: 1 1 auto;
 }
 
+.App_container {
+    display: flex;
+    width: 100%;
+}
 
+.App_container > * {
+    flex: 1;
+}
 
 
 
 @media only screen and (max-width: 850px) {
-  .App {
-      padding-bottom: 700px;
-  }
+    .App {
+        padding-bottom: 200px;
+    }
 }
 
 @media only screen and (max-width: 750px) {
-  .App__container {
-      flex-direction: column;
-  }
+    .App_container {
+        flex-direction: column;
+    }
 }
 
 @media only screen and (max-width: 550px) {
-  .App {
-      padding-bottom: 1000px;
-  }
-  
-  .books__results {
-      grid-template-columns: 1fr;
-  }
-
-  .book {
-      max-width: 300px;
-      margin: 0 auto;
-  }
+    .App {
+        padding-bottom: 200px;
+    }
 }

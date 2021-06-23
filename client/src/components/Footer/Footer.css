@@ -1,49 +1,68 @@
 .footer_container {
+    position: absolute;
     background-image: linear-gradient(to bottom, rgba(213, 24, 24, 0), rgb(0, 0, 0));
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(235, 6, 6, 0.19);
-    width: 750px;
+    width: 100%;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    min-height: 180px;
+    max-height: 180px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .footer_content {
+    /* width: 100%; */
+    height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: baseline;
-    flex-flow: row wrap;
-    color: white;
-    opacity: 0.5;
-    max-width: 100%;
-    width: 750px;
+    align-items: center;
+    padding: 0;
 }
 
-.footer_content i {
-    font-size: 40px;
-    padding: 0 0 10px 5px;
-}
 
-.footer_content p {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    text-align: right;
-    font-size: 10px;
-}
-
-.footer_credits {
-    display: flex;
-    flex-direction: row wrap;
-    justify-content: center;
+.footer_grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* max-width: 750px; */
     width: 100%;
+    margin-bottom: 0px;
+    outline: none;
+    box-sizing: border-box;
 }
 
-.footer_credits p {
+.footer_info {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.footer_info p {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-align: center;
     font-size: 10px;
+    cursor: pointer;
+    color: #9e9277;
 }
 
+.footer_info i {
+    margin-right: 5px;
+}
+
+
 .footer_content a {
-    color: white;
+    color: #9e9277;
 }
 .footer_content a:hover {
-    color: #9e9277;
+    color: white;
 }
 
 .footer_content a:visited {
@@ -57,3 +76,36 @@
 .footer_content a:active {
     color:rgb(255, 255, 255)
 }
+
+
+    @media only screen and (max-width: 850px) {
+        .footer_container {
+            min-height: 120px;
+            max-height: 120px;
+            border: none;
+        }
+        .footer_grid {
+            grid-template-columns: 1fr 1fr;
+            max-width: 250px;
+        }
+        
+        .footer_info {
+            padding: 0 0 25px 0;
+            margin: 0 auto;
+        }
+    }
+    
+    @media only screen and (max-width: 550px) {
+        .footer_container {
+            min-height: 200px;
+            max-height: 200px;
+            border: none;
+        }
+        .footer__grid {
+            grid-template-columns: 1fr;
+        }
+    
+        .footer_info {
+            padding: 0px;
+        }
+    }

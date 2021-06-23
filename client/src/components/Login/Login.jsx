@@ -7,8 +7,10 @@ import './Login.css';
 const Login = () => {
 	const [email, setEmailText] = useState('');
 	const [password, setPasswordText] = useState('');
-	const { setIsLogin, setToken, logout } = useAppContext();
+	const { setIsLogin, setToken } = useAppContext();
 	const history = useHistory();
+
+
 
 	const handleSubmit = async (e, email, password) => {
 		e.preventDefault();
@@ -28,6 +30,12 @@ const Login = () => {
 		}
 	};
 
+	const logout = () => {
+		setIsLogin(false);
+		localStorage.removeItem('token');
+		setToken(null);
+		history.push('/');
+	};
 
 
 	return (

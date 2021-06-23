@@ -75,53 +75,53 @@ function App() {
       logout
     }}>
       <Router>
-        <div>
-          <Header />
-          <div>
-            <Switch>
-              <Route exact path='/news'>
-                <News />
-              </Route>
-              <Route exact path='/bio'>
-                <Bio />
-              </Route>
-              <Route exact path='/contact'>
-              </Route>
+        <div className='App'>
+          <div className='App_container'>
+            <div className='App_content'>
+              <Header />
+              <Switch>
+                <Route exact path='/news'>
+                  <News />
+                </Route>
+                <Route exact path='/bio'>
+                  <Bio />
+                </Route>
+                <Route exact path='/contact'>
+                  <Contact />
+                </Route>
 
-              <Route exact path='/newsedit'>
-                <NewsEdit />
-              </Route>
-              <Route path='/news/edit/:id'>
-                <NewsUpdate />
-              </Route>
+                <Route exact path='/newsedit'>
+                  <NewsEdit />
+                </Route>
+                <Route path='/news/edit/:id'>
+                  <NewsUpdate />
+                </Route>
 
-              <Route exact path='/editbio'>
-                <BioEdit />
-              </Route>
-              <Route exact path='/bio/edit/:id'>
-                <BioUpdate />
-              </Route>
+                <Route exact path='/editbio'>
+                  <BioEdit />
+                </Route>
+                <Route exact path='/bio/edit/:id'>
+                  <BioUpdate />
+                </Route>
 
-              <Route exact path='/users'>
-                <Contact />
-                <SignUp />
-              </Route>
+                <Route exact path='/users'>
+                  <SignUp />
+                </Route>
 
-              <Route exact path='/login'>
-                <Login />
-              </Route>
-              <Route exact path='/profile'>
-                <Profile currentUser={currentUser} />
-              </Route>
+                <Route exact path='/login'>
+                  <Login />
+                </Route>
+                <Route exact path='/profile'>
+                  <Profile currentUser={currentUser} />
+                </Route>
 
-              <Route exact path='/under'><UnderConstruction /></Route>
+                <Route exact path='/under'><UnderConstruction /></Route>
 
-            </Switch>
+              </Switch>
+            </div>
           </div>
+          <Footer />
         </div>
-
-
-        <Footer />
 
       </Router>
     </Context.Provider>
