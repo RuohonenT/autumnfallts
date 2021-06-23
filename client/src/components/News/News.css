@@ -140,7 +140,10 @@
     justify-content: flex-end;
     width: 100%;
 }
-@media only screen and (max-width: 750px) {   
+@media only screen and (max-width: 750px) { 
+    .news_container {  
+    padding-top: 5px;
+    }
     
     .news_content {
         border: 0;

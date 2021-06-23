@@ -32,10 +32,10 @@ const Header = () => {
                 <div className={'header_navigation_container' + (toggleMenu ? 'show-navigation' : '')}>
 
                     <div className='header_navigation_content show-desktop'>
+                        <div className='exit-button' onClick={closeNavigation}>
+                            <i className='fa fa-times'></i>
+                        </div>
 
-                <div className='exit-button' onClick={closeNavigation}>
-                    <i className='fa fa-times'></i>
-                </div>
                         <Link
                             className='header_link_text'
                             to='/news'
