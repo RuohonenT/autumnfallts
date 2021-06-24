@@ -13,10 +13,14 @@ function News() {
 	//fetch all news and set them to news state
 	useEffect(() => {
 		async function getNews() {
-			const res = await axios.get('api/news');
-			const data = await res.data;
-			const sortedData = data.sort((a, b) => { if (a.date > b.date) { return -1 } else { return null } });
-			setNews(sortedData);
+			try {
+				const res = await axios.get('api/news');
+				const data = await res.data;
+				const sortedData = data.sort((a, b) => { if (a.date > b.date) { return -1 } else { return null } });
+				setNews(sortedData);
+			} catch {
+				setNews('No News Found')
+			}
 		};
 		return getNews();
 
@@ -50,7 +54,7 @@ function News() {
 										)
 									})
 								}
-							</> : <div className='news_content_innards'><p>No News Found</p></div>}
+							</> : <div className='news_content_innards'><p>Loading news...</p></div>}
 					</div>
 				}
 
