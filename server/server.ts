@@ -95,7 +95,7 @@ app.listen(PORT, () => console.log(`hosting port ${PORT}`));
 // Nodemailer for Contact
 const contactEmail = nodemailer.createTransport({
 	host: String(process.env.HOST || process.env.CONTACT_HOST),
-	port: Number(process.env.PORT || process.env.CONTACT_PORT),
+	port: Number(process.env.CPORT || process.env.CONTACT_PORT),
 	auth: {
 		user: String(process.env.USER || process.env.CONTACT_USER),
 		pass: (process.env.PASS || process.env.CONTACT_PASS),
