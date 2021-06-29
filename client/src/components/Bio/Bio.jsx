@@ -11,10 +11,14 @@ const Bio = () => {
     const { token } = useAppContext();
 
     useEffect(() => {
-        const getBio = async () => {
-            await axios.get('/api/bio')
-                .then(res => setBio(res.data))
-                .catch(err => console.log(err));
+        async function getBio() {
+            try {
+                await axios.get('/api/bio')
+                    .then(res => setBio(res.data))
+            }
+            catch {
+                setBio('No biography found.')
+            }
         };
         return getBio();
 
@@ -51,7 +55,7 @@ const Bio = () => {
                                     })
                                 }
                             </>
-                            : <div><p>No Bio Found</p></div>}
+                            : <div><p>Loading biography...</p></div>}
                     </div >
                 }
             </div>

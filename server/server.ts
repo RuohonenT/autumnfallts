@@ -93,12 +93,21 @@ app.get('/');
 app.listen(PORT, () => console.log(`hosting port ${PORT}`));
 
 // Nodemailer for Contact
+const aws = require('aws-sdk');
+
+let s3 = new aws.S3({
+	CONTACT_HOST: process.env.S3_HOST,
+	CONTACT_PORT: process.env.S3_PORT,
+	CONTACT_USER: process.env.S3_USER,
+	CONTACT_PASS: process.env.S3_PASS
+});
+
 const contactEmail = nodemailer.createTransport({
-	host: String(process.env.CONTACT_HOST),
-	port: Number(process.env.CONTACT_PORT),
+	host: String(s3.CONTACT_HOST),
+	port: Number(s3.CONTACT_PORT),
 	auth: {
-		user: String(process.env.CONTACT_USER),
-		pass: (process.env.CONTACT_PASS),
+		user: String(s3.CONTACT_USER),
+		pass: (s3.CONTACT_PASS),
 	},
 	tls: {
 		rejectUnauthorized: false
@@ -119,7 +128,7 @@ router.post('/contact', (req, res) => {
 	const message = req.body.message;
 	const mail = {
 		from: name,
-		to: String(process.env.CONTACT_TO),
+		to: String('gallowssong@gmail.com'),
 		subject: 'Contact Form Message',
 		html: `<p>Name: ${name}</p><p>Email: ${email}</p><p>Message: ${message}</p>`,
 	};
