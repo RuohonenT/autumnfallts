@@ -19,6 +19,7 @@
     border-width: 0px 1px 1px 1px;
     border-color: white;
     min-height: 50vh;
+    padding-top: 10px;
 }
 
 .bio_content_innards {

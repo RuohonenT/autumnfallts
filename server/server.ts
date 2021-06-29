@@ -93,21 +93,12 @@ app.get('/');
 app.listen(PORT, () => console.log(`hosting port ${PORT}`));
 
 // Nodemailer for Contact
-const aws = require('aws-sdk');
-
-let s3 = new aws.S3({
-	CONTACT_HOST: process.env.S3_HOST,
-	CONTACT_PORT: process.env.S3_PORT,
-	CONTACT_USER: process.env.S3_USER,
-	CONTACT_PASS: process.env.S3_PASS
-});
-
 const contactEmail = nodemailer.createTransport({
-	host: String(s3.CONTACT_HOST || process.env.CONTACT_HOST),
-	port: Number(s3.CONTACT_PORT || process.env.CONTACT_PORT),
+	host: String(process.env.HOST || process.env.CONTACT_HOST),
+	port: Number(process.env.PORT || process.env.CONTACT_PORT),
 	auth: {
-		user: String(s3.CONTACT_USER || process.env.CONTACT_USER),
-		pass: (s3.CONTACT_PASS || process.env.CONTACT_PASS),
+		user: String(process.env.USER || process.env.CONTACT_USER),
+		pass: (process.env.PASS || process.env.CONTACT_PASS),
 	},
 	tls: {
 		rejectUnauthorized: false
