@@ -45,7 +45,7 @@ const BioEdit = props => {
 			<h1>Biography...</h1>
 			<form className='bio_form'>
 				<input
-					className='header'
+					className='add_subject'
 					type='text'
 					id={header}
 					name='header'
@@ -55,7 +55,7 @@ const BioEdit = props => {
 				/>
 				<br />
 				<textarea
-					className='textarea'
+					className='add_content'
 					type='text'
 					id={content}
 					name='content'
@@ -77,8 +77,8 @@ const BioEdit = props => {
 									<div id={bgraph.id} key={i}>
 										<div><p>{bgraph.header}</p></div>
 										<div><p>{bgraph.content}</p></div>
-										<button onClick={() => editBio(bgraph.id, bgraph.header, bgraph.content)}>Edit</button>
-										<button onClick={() => deleteBio(bgraph.id)}>Delete</button>
+										<button className='editremove' onClick={() => editBio(bgraph.id, bgraph.header, bgraph.content)}>Edit</button>
+										<button className='editremove' onClick={() => deleteBio(bgraph.id)}>Delete</button>
 									</div>
 								)
 							})

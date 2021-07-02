@@ -5,7 +5,10 @@
 
 .news_container {
     background-color: transparent;
-    margin-top: 0;
+    margin-top: 0%;
+    width: 100%;
+    max-width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(30,34,27,0.6), 0 6px 20px 0 rgba(133,144,118,0.19);
 }
 
 .news_content {
@@ -13,11 +16,11 @@
     background-color: black;
     justify-content: center;
     flex-flow: row wrap;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(235, 6, 6, 0.19);
-    border-style: solid;
-    border-width: 0px 1px 1px 1px;
-    border-color: white;
+    /* border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    border-color: white; */
     min-height: 110vh;
+    /* padding-bottom: 20px; */
 }
 
 .news_content_innards {
@@ -25,10 +28,15 @@
     flex-direction: column;
     align-items: center;
     background-color: black;
-    width: 100%;
+    width: 90%;
+    max-width: 90%;
+    /* min-width: 100%;
     max-width: 100%;
+    width: 100%; */
     min-height: 20vh;
-    margin: 5px;
+    /* margin: 5px; */
+    padding: 5px;
+    padding-bottom: 30px;
 }
 
 .news_content_innards p {
@@ -58,7 +66,9 @@
     align-content: center;
     align-items : top; 
     background-color: #9e9277;
-    width: 85%;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 5px;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
@@ -75,12 +85,12 @@
 
 .news_header h1 {
     display: flex;
-    flex-direction: row;
+    flex-direction: row wrap;
     justify-content: flex-start;
     color: black;
     font-size: 14px;
-    width: 80%;
-    max-width: 80%;
+    width: 75%;
+    max-width: 75%;
     padding: 4px;
     word-wrap: break-word;   
     overflow-wrap: break-word;
@@ -141,15 +151,32 @@
 
 @media only screen and (max-width: 750px) { 
     .news_container {  
-    margin-bottom: 100px;
+        margin-bottom: 100px;
     }
     
     .news_content {
         border: 0;
         width: 100%;
     }
-
-    .news_header{
+    
+    .news_content_innards {
         width: 100%;
+        max-width: 100%;
+    }
+    
+    .news_header {
+        width: 100%;
+    }
+
+    .news_header h1 {
+        width: 75%;
+        max-width: 75%;
+        margin-right: 10px;
+    }
+    
+    .news_header h2 {
+        width: 20%;
+        max-width: 20%;
+        padding-left: 10px;
     }
 }

@@ -76,7 +76,7 @@ const Header = () => {
 
                 {/* <div className='break'></div> */}
 
-                <hr className='header_content' />
+                {/* <hr className='header_content' /> */}
             </div >
 
         </div >
