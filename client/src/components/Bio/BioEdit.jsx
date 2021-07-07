@@ -77,8 +77,11 @@ const BioEdit = props => {
 									<div id={bgraph.id} key={i}>
 										<div><p>{bgraph.header}</p></div>
 										<div><p>{bgraph.content}</p></div>
-										<button className='editremove' onClick={() => editBio(bgraph.id, bgraph.header, bgraph.content)}>Edit</button>
-										<button className='editremove' onClick={() => deleteBio(bgraph.id)}>Delete</button>
+										<div className='modify'>
+											<button className='editremove' onClick={() => editBio(bgraph.id, bgraph.header, bgraph.content)}>EDIT</button>
+											<p> | </p>
+											<button className='editremove' onClick={() => deleteBio(bgraph.id)}>REMOVE</button>
+										</div>
 									</div>
 								)
 							})

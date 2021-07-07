@@ -3,12 +3,16 @@
 .App {
   text-align: center;
   margin: 0;
-  padding: 0 0 200px 0;
   width: 100%;
-  min-height: 20vh;
+  /* min-height: 20vh; */
+  /* top: 50px; */
+  /* margin-bottom: 20px; */
   position: relative;
   display: flex;
-  flex-direction: row wrap;
+  flex-flow: row wrap;
+  box-shadow: 0 4px 8px 0 rgba(30,34,27,0.6), 0 6px 20px 0 rgba(133,144,118,0.19);
+  /* min-height: 100vh; */
+  
 }
 
 .App > * {
@@ -18,28 +22,30 @@
 .App_container {
     display: flex;
     width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    flex-flow: column;
 }
 
 .App_container > * {
     flex: 1;
 }
 
-
-
-@media only screen and (max-width: 850px) {
-    .App {
-        padding-bottom: 200px;
-    }
+.App_content {
+    background-color: transparent;
+    padding-top: 10px;
 }
+
+.App_footer {
+    height: 100%;
+    background-color: transparent;
+    z-index: 0;
+}
+
 
 @media only screen and (max-width: 750px) {
     .App_container {
         flex-direction: column;
-    }
-}
-
-@media only screen and (max-width: 550px) {
-    .App {
-        padding-bottom: 200px;
     }
 }

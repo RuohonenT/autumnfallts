@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Context from './Context';
 import Header from './components/Header/Header';
+import Navigation from './components/Navigation/Navigation';
 import News from './components/News/News';
 import Bio from './components/Bio/Bio';
 import Footer from './components/Footer/Footer';
@@ -15,8 +16,8 @@ import Login from './components/Login/Login';
 import Profile from './components/Profile/Profile';
 import UnderConstruction from './components/under';
 import { getOwnProfile } from './controllers/fetchFunctions';
-import jwt_decode from 'jwt-decode';
 import 'reflect-metadata'
+import jwt_decode from 'jwt-decode';
 import './App.css'
 
 
@@ -24,8 +25,9 @@ function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [currentUser, setCurrentUser] = useState(null);
-  // const history = useHistory();
   const [result, setResult] = useState(false);
+  const [toggleMenu, setToggleMenu] = useState(false);
+  const closeNavigation = () => setToggleMenu(!toggleMenu);
 
   const logout = () => {
     setIsLogin(false);
@@ -76,9 +78,20 @@ function App() {
     }}>
       <Router>
         <div className='App'>
+          <Header
+            toggleMenu={toggleMenu}
+            setToggleMenu={setToggleMenu}
+            closeNavigation={closeNavigation}
+          />
+
           <div className='App_container'>
+            <Navigation
+              toggleMenu={toggleMenu}
+              setToggleMenu={setToggleMenu}
+              closeNavigation={closeNavigation}
+            />
+
             <div className='App_content'>
-              <Header />
               <Switch>
                 <Route exact path='/news'>
                   <News />
@@ -119,8 +132,12 @@ function App() {
 
               </Switch>
             </div>
+
+
           </div>
-          <Footer />
+          <div className='App_footer'>
+            <Footer />
+          </div>
         </div>
 
       </Router>

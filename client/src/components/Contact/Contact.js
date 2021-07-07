@@ -29,37 +29,37 @@ const Contact = () => {
     }
 
     return (
-        <div className='contact_container'>
+        // <div className='contact_container'>
 
-            <div className='contact_content'>
+        <div className='contact_content'>
 
-                <div className='contact_header'><h1>Contact us!</h1></div>
-                <div className='break' />
-                <div className='contact_header'><p>Send us a message by using the form below.</p></div>
+            <div className='contact_header'><h1>Contact us!</h1></div>
+            <div className='break' />
+            <div className='contact_header'><p>Send us a message by using the form below.</p></div>
 
-                <div className='contact_form'>
-                    <form onSubmit={handleSubmit} method='POST'>
-                        <div className='contact_row'>
-                            <label className='contact_label' htmlFor="name">Name:</label>
-                            <input className='contact_input' placeholder='Name' id='name' type='text' value={name} onChange={event => setName(event.target.value)} required />
-                        </div>
-                        <div className='contact_row'>
-                            <label className='contact_label' htmlFor="email">Email:</label>
-                            <input className='contact_input' placeholder='Email' id='email' type='email' value={email} onChange={event => setEmail(event.target.value)} required />
-                        </div>
-                        <div className='contact_row'>
-                            <label className='contact_label' htmlFor="message">Message:</label>
-                            <textarea className='text-area' placeholder='Write your message here...' id='message' value={message} onChange={event => setMessage(event.target.value)} required />
-                        </div>
-                        <div className='contact_submit'><button type='submit'>Submit</button></div>
-                        <div className='contact_submit'><p>{info}</p></div>
+            <div className='contact_form'>
+                <form onSubmit={handleSubmit} method='POST'>
+                    <div className='contact_row'>
+                        <label className='contact_label' htmlFor="name">Name:</label>
+                        <input className='contact_input' placeholder='Name' id='name' type='text' value={name} onChange={event => setName(event.target.value)} required />
+                    </div>
+                    <div className='contact_row'>
+                        <label className='contact_label' htmlFor="email">Email:</label>
+                        <input className='contact_input' placeholder='Email' id='email' type='email' value={email} onChange={event => setEmail(event.target.value)} required />
+                    </div>
+                    <div className='contact_row'>
+                        <label className='contact_label' htmlFor="message">Message:</label>
+                        <textarea className='text-area' placeholder='Write your message here...' id='message' value={message} onChange={event => setMessage(event.target.value)} required />
+                    </div>
+                    <div className='contact_submit'><button type='submit'>Submit</button></div>
+                    <div className='contact_submit'><p>{info}</p></div>
 
-                    </form>
-                </div>
-
+                </form>
             </div>
 
         </div>
+
+        // </div>
     )
 }
 
