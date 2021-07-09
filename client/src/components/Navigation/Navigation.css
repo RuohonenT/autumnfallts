@@ -34,7 +34,31 @@
 }
 
 .navigation_link:hover {
-    padding-left: 16px;
+    display: inline-block;
+    padding-right: 10px;
+    transition: 0.4s;
+    animation: .8s shake;
+    transform: rotate(15deg);
+    color: #9e9277;
+}
+
+.navigation_link:active {
+    display: inline-block;
+    padding-right: 10px;
+    transition: 0.4s;
+    /* animation: .8s shake; */
+    transform: rotate(15deg);
+    color: #9e9277;
+}
+
+@keyframes shake {
+    0% { transform: rotate(0);  color:white; }
+    100% { transform: rotate(180); color:#9e9277}  
+}
+
+@keyframes color {
+    from {background-color: black;}
+    to {background-color: white;}
 }
 
 .exit-button {
@@ -46,6 +70,10 @@
         min-width: 100%;
         max-width: 100%;
     }
+
+    .navigation_link:hover {
+        padding: 20;
+    }
 }
 
 @media only screen and (max-width: 750px) {
@@ -56,24 +84,30 @@
         background: black;
         text-align: left;
         position: fixed;
-        border: none;
+        /* border: solid #afafaf; */
         padding: 0;
         top: 0;
         z-index: 1;
         height: 100vh;
         left: -100%;
         transition: 1s;
+        justify-content: center;
+        align-items: center;
     }
-
+    
     .show-navigation {
         left: 0;
     }
-
+    
     .navigation_content {
         flex-direction: column;
-        width: 400px;
+        align-items: center;
+        width: 80%;
+        max-width: 80%;
         height: 100%;
-        background-color: white;
+        background-color:#585e52;
+        border-left: 2px solid #afafaf;
+        border-right: 2px solid #afafaf;
         /* padding: 80px 40px 0 40px; */
         transition: 1s;
         position: relative;
@@ -81,34 +115,39 @@
     
     .navigation_link {
         text-align: center;
+        color: #afafaf;
         border-left: none;
         padding-left: 0;
         /* margin-bottom: 15px; */
         font-size: 30px;
-        color: black;
         text-decoration: none;
     }
-
-    .navigation_link:active {
-        padding-left: 10px !important;
-        color: red !important;
+    
+    .navigation_link:visited {
+        color: #afafaf;
+    }
+    
+    .navigation_link:hover {
+        padding-left: 10px;
+        color: black;
+        background-color: #9e9277;
     }
     
     .exit-button {
         display: inline;
-        text-align: left;
-        position: absolute;
-        top: 20px;
-        right: -32px;
+        /* text-align: left; */
+        position: fixed;
+        bottom: 20%;
+        /* right: -34px; */
         cursor: pointer;
     }
 
     .exit-button i {
         margin: 0;
-        padding: 2px 6px;
+        /* padding: 2px 6px; */
         background: transparent;
-        color: #9e9277;
-        font-size: 32px;
+        color: #afafaf;
+        font-size: 20px;
     }
 }
 

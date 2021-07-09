@@ -33,9 +33,8 @@ const Contact = () => {
 
         <div className='contact_content'>
 
-            <div className='contact_header'><h1>Contact us!</h1></div>
-            <div className='break' />
-            <div className='contact_header'><p>Send us a message by using the form below.</p></div>
+            <div className='contact_innards'><h1>Contact us!</h1>
+                <p>Send us a message using the form below.</p></div>
 
             <div className='contact_form'>
                 <form onSubmit={handleSubmit} method='POST'>
