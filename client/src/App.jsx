@@ -5,6 +5,7 @@ import Header from './components/Header/Header';
 import Navigation from './components/Navigation/Navigation';
 import News from './components/News/News';
 import Bio from './components/Bio/Bio';
+import Disco from './components/Disco/Disco';
 import Footer from './components/Footer/Footer';
 import Contact from './components/Contact/Contact';
 import NewsEdit from './components/News/NewsEdit';
@@ -98,6 +99,9 @@ function App() {
                 </Route>
                 <Route exact path='/bio'>
                   <Bio />
+                </Route>
+                <Route exact path='/disco'>
+                  <Disco />
                 </Route>
                 <Route exact path='/contact'>
                   <Contact />

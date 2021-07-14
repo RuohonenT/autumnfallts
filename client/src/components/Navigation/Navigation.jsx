@@ -46,13 +46,13 @@ const Navigation = props => {
 				>
 					Contact
                 </Link>
-				<Link
+				{/* <Link
 					to='/'
 					className='navigation_link'
 					onClick={windowWidth < 751 ? closeNavigation : undefined}
 				>
 					Store
-                </Link>
+                </Link> */}
 			</div>
 		</div>
 	)

@@ -6,7 +6,9 @@ import dotenv from 'dotenv';
 import { createRoutes } from './routes/routes';
 import { News } from './models/News';
 import { Bio } from './models/Bio';
+import { Disco } from './models/Disco';
 import { Users } from './models/Users';
+import { DiscoMetadata } from './models/discoMetadata';
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const router = express.Router();
@@ -55,7 +57,7 @@ const getOptions = async () => {
 		extra: {
 			ssl: { rejectUnauthorized: false }
 		},
-		entities: [News, Bio, Users]
+		entities: [News, Bio, Disco, Users]
 	};
 	if (process.env.DATABASE_URL) {
 		Object.assign(connectionOptions, { url: process.env.DATABASE_URL });
