@@ -5,13 +5,13 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 var firebaseConfig = {
-	apiKey: String(process.env.API_KEY),
-	authDomain: String(process.env.AUTH_DOMAIN),
-	projectId: String(process.env.PROJECT_ID),
-	storageBucket: String(process.env.STORAGE_BUCKET),
-	messagingSenderId: Number(process.env.SENDER_INFO),
-	appId: String(process.env.APP_ID),
-	measurementId: String(process.env.MEASUREMENT_ID),
+	apiKey: 'AIzaSyCuT_xHUAwvSRH6zLks7oM6fE3MBBCsdn8',
+	authDomain: 'aftest-84535.firebaseapp.com',
+	projectId: 'aftest-84535',
+	storageBucket: 'aftest-84535.appspot.com',
+	messagingSenderId: '694428645159',
+	appId: '1:694428645159:web:48abdc604c7c59704b9b02',
+	measurementId: 'G-KPPD0WYHNP'
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
