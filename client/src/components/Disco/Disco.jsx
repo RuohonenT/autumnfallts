@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { storage } from '../../firebase';
+import { storage } from '../../firebase/firebase';
 import axios from 'axios';
 
 const Disco = () => {
