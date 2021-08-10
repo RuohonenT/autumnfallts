@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import NewsEdit from './NewsEdit';
 import { useAppContext } from '../../Context';
-import './News.css'
 import axios from 'axios';
+import './News.css'
 
 function News() {
 	const [news, setNews] = useState([]);
@@ -13,18 +13,16 @@ function News() {
 	//fetch all news and set them to news state
 	useEffect(() => {
 		async function getNews() {
-			try {
-				const res = await axios.get('api/news');
-				const data = await res.data;
-				const sortedData = data.sort((a, b) => { if (a.date > b.date) { return -1 } else { return null } });
-				setNews(sortedData);
-			} catch {
-				setNews('No News Found')
-			}
+			await axios.get('api/news')
+				.then(res => {
+					let news = res.data;
+					setNews(news);
+				})
+				.catch(err => console.log(err));
 		};
 		return getNews();
 
-	}, [setNews, content])
+	}, [content])
 
 	return (
 		// <div className='news_container'>
@@ -40,7 +38,7 @@ function News() {
 						setSubject={setSubject} />
 				</>
 				:
-				<div className='news_content_innards'>
+				<div className='news_content'>
 
 					{news.length > 0 ?
 						<>
@@ -48,8 +46,9 @@ function News() {
 								news.map((topic, i) => {
 									return (
 										<div className='news_content_innards' id={topic.id} key={i}>
-											<div className='news_header'><h1>{topic.subject}</h1>{topic.date !== undefined ? <h2>{topic.date.slice(0, 10)}</h2> : <></>}</div>
-											<div><p>{topic.content}</p></div>
+											<h1>{topic.subject}</h1>
+											<p>{topic.content}</p>
+											<h6>{topic.date !== undefined ? <>{topic.date.slice(0, 10)}</> : <></>}</h6>
 										</div>
 									)
 								})

@@ -11,10 +11,8 @@ const BioEdit = props => {
 	const addBio = async (header, content) => {
 		await axios
 			.post('api/bio/add', { header, content })
-			.then(res => {
-				setContent([res.data])
-			})
-			.catch(err => console.log(err));
+			.then(res => setContent([res.data]))
+			.catch(err => console.log(err))
 
 		setHeader('');
 		setContent('');
@@ -69,7 +67,7 @@ const BioEdit = props => {
 			</form>
 
 			<>
-				{bio.length > 0 ?
+				{bio !== undefined && bio.length > 0 ?
 					<>
 						{
 							bio.map((bgraph, i) => {

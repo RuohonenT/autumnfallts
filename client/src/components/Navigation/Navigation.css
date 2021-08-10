@@ -31,6 +31,7 @@
     margin-bottom: 10px;
     text-align: left;
     transition: 0.4s;
+    font-family: 'Pinyon Script', 'ALS Script', 'Edwardian Script ITC'; 
 }
 
 .navigation_link:hover {
@@ -39,7 +40,7 @@
     transition: 0.4s;
     animation: .8s shake;
     transform: rotate(15deg);
-    color: #9e9277;
+    color: rgba(133, 144, 118, 0.442);
 }
 
 .navigation_link:active {
@@ -48,12 +49,12 @@
     transition: 0.4s;
     /* animation: .8s shake; */
     transform: rotate(15deg);
-    color: #9e9277;
+    color: rgba(133,144,118,0.19);
 }
 
 @keyframes shake {
     0% { transform: rotate(0);  color:white; }
-    100% { transform: rotate(180); color:#9e9277}  
+    100% { transform: rotate(180); color:rgba(133, 144, 118, 0.442)}  
 }
 
 @keyframes color {
@@ -130,7 +131,7 @@
     .navigation_link:hover {
         padding-left: 10px;
         color: black;
-        background-color: #9e9277;
+        background-color: rgba(133,144,118,0.19);
     }
     
     .exit-button {

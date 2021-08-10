@@ -8,18 +8,12 @@ export class Disco {
 	@Column('varchar')
 	albumtitle!: string;
 
-	@Column('int')
-	tracknumber!: number;
+	// @Column('int')
+	// tracknumber!: number;
 
 	@Column('varchar')
 	tracktitle!: string;
 
-	@Column('bytea')
-	filename!: string;
-
-	@Column()
-	views!: number;
-
-	@Column()
-	isPublished!: boolean;
+	@Column('varchar')
+	description!: string;
 };

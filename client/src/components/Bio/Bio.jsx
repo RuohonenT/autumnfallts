@@ -12,14 +12,14 @@ const Bio = () => {
 
     useEffect(() => {
         async function getBio() {
-            try {
-                await axios.get('/api/bio')
-                    .then(res => setBio(res.data))
-            }
-            catch {
-                setBio('No biography found.')
-            }
+            await axios.get('api/bio')
+                .then(res => {
+                    let bio = res.data;
+                    setBio(bio);
+                })
+                .catch(setBio(['No biography found.']));
         };
+
         return getBio();
 
     }, [setBio, content]);

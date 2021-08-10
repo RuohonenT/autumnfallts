@@ -1,60 +1,110 @@
-import React, { useState } from 'react';
-import { storage } from '../../firebase/firebase';
+import React, { useState, useEffect } from 'react';
+import DiscoEdit from './DiscoEdit';
+import { useAppContext } from '../../Context';
+import firebase from 'firebase/app';
 import axios from 'axios';
+import 'firebase/storage';
+import './Disco.css';
 
 const Disco = () => {
-	const [file, setFile] = useState(null);
-	const [url, setURL] = useState("");
+	const { token } = useAppContext();
+	const [data, setData] = useState([]);
+	const [covers, setCovers] = useState([]);
+	let storageRef = firebase.storage().ref();
 
-	function handleChange(e) {
-		setFile(e.target.files[0]);
-	}
+	const [albumtitle, setAlbumtitle] = useState([]);
+	const [tracktitle, setTracktitle] = useState([]);
+	const [description, setDescription] = useState([]);
 
-	function handleUpload(e) {
-		e.preventDefault();
-		const ref = storage.ref(`/images/${file.name}`);
-		const uploadTask = ref.put(file);
-		uploadTask.on("state_changed", console.log, console.error, () => {
-			ref
-				.getDownloadURL()
-				.then((url) => {
-					setFile(null);
-					setURL(url);
-				});
-		});
-	}
+	useEffect(() => {
+		//fetching images from Firebase
+		const fetchImages = async () => {
+			let result = await storageRef.child('images/covers/').listAll();
+			let urlPromises = result.items.map(imageRef => imageRef.getDownloadURL());
+
+			return Promise.all(urlPromises);
+		};
+
+		//using the fetch function 
+		const loadImages = async () => {
+			const urls = await fetchImages();
+			setCovers(urls);
+		};
+
+		return loadImages();
+
+	}, [setCovers, storageRef]);
+
+
+	//Loading data from Heroku PostgreSQL
+	useEffect(() => {
+		const getData = async () => {
+			await axios.get('api/disco')
+				.then(res => {
+					let albumData = res.data;
+					setData(albumData);
+					console.log('albumData', albumData)
+				})
+				.catch(setData(['No Discography found']));
+		};
+
+		return getData();
+
+	}, [setData, albumtitle]);
 
 	return (
-		<div>
-			<form onSubmit={handleUpload}>
-				<input type="file" onChange={handleChange} />
-				<button disabled={!file}>upload to firebase</button>
-			</form>
-			<img src={url} alt="" />
+		<div className='disco_content'>
+			{token ?
+				<>
+					<DiscoEdit
+						covers={covers}
+						data={data}
+						setData={setData}
+						albumtitle={albumtitle}
+						setAlbumtitle={setAlbumtitle}
+						tracktitle={tracktitle}
+						setTracktitle={setTracktitle}
+						description={description}
+						setDescription={setDescription}
+					/>
+				</>
+
+				:
+
+				<div className='disco_content_innards'>
+
+					<div className='disco_covers'>
+						{
+							covers.map((url, idx) => {
+								return <img className='disco_cover' key={idx} src={url} alt=''></img>
+							})
+						}
+
+					</div>
+					<div>
+						{(data !== undefined) && (data.length > 0) ?
+							<>
+								{
+									data.map((info, i) => {
+										return (
+											<div id={info.albumtitle} key={i}>
+												<div>{info.tracktitle}</div>
+											</div>
+										)
+									})}
+							</>
+
+							:
+
+							<div><p>Loading data...</p></div>
+						}
+
+					</div>
+				</div>
+			}
+
 		</div>
 	);
-}
+};
 
 export default Disco;
-
-
-// const Disco = () => {
-// 	const [state, setState] = useState({ selectedFile: null });
-
-
-// 	const onFileChange = event => {
-// 		setState({ selecetedFile: event.target.files[0] });
-// 	};
-
-// 	const fileUploadHandler = () => {
-// 		axios.post()
-// 	};
-
-// 	return (
-// 		<div>
-// 			<input type='file' onChange={onFileChange} />
-// 			<button onClick={fileUploadHandler}>Upload</button>
-// 		</div>
-// 	);
-
-// };

@@ -8,7 +8,6 @@ import { News } from './models/News';
 import { Bio } from './models/Bio';
 import { Disco } from './models/Disco';
 import { Users } from './models/Users';
-import { DiscoMetadata } from './models/discoMetadata';
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const router = express.Router();

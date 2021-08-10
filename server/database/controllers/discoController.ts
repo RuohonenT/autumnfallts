@@ -6,16 +6,14 @@ export const addAlbum = async (
 	req: Request,
 	res: Response
 ): Promise<Response> => {
-	const { albumtitle, tracknumber, tracktitle, filename, views, isPublished } = req.body;
+	const { albumtitle, tracktitle, description } = req.body;
 	try {
 		const discoRepository = getRepository(Disco);
 		const disco = new Disco();
-		disco.albumtitle = 'albumtitle';
-		disco.tracknumber = 1;
-		disco.tracktitle = 'tracktitle';
-		disco.filename = filename;
-		disco.views = 1;
-		disco.isPublished = true;
+		disco.albumtitle = albumtitle;
+		// disco.tracknumber = tracknumber;
+		disco.tracktitle = tracktitle;
+		disco.description = description;
 		await discoRepository.save(disco);
 		return res.status(200).json({ msg: 'Album added', disco });
 	} catch (err) {
@@ -42,13 +40,13 @@ export const editAlbumById = async (
 	req: Request,
 	res: Response
 ): Promise<Response> => {
-	const { albumtitle, tracknumber, tracktitle, filename } = req.body;
+	const { albumtitle, tracktitle, description } = req.body;
 	const { id } = req.params;
 	try {
 		const discoRepository = getRepository(Disco);
 		const disco = await discoRepository.find({ where: { id } });
 		if (disco) {
-			discoRepository.update(id, { albumtitle: albumtitle, tracknumber: tracknumber, tracktitle: tracktitle, filename: filename });
+			discoRepository.update(id, { albumtitle: albumtitle, tracktitle: tracktitle, description: description });
 			return res.status(200).json('Album info updated');
 		} else {
 			return res.status(501).json({ error: 'Database error' });

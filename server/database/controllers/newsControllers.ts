@@ -29,7 +29,8 @@ export const getNews = async (
 	try {
 		const newsRepository = getRepository(News);
 		const allNews = await newsRepository.find();
-		return res.status(200).json(allNews);
+		const sortedAllNews = allNews.sort((a, b) => +new Date(b.id) - +new Date(a.id));
+		return res.status(200).json(sortedAllNews);
 	} catch (err) {
 		console.log(err);
 		return res.status(501).json({ error: 'Server error' });

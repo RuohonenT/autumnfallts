@@ -9,18 +9,7 @@
       justify-content: center;
   }
 
-  .bio_container {
-      display: flex;
-    background-color: transparent;
-    margin-top: 0%;
-    width: 100%;
-    max-width: 100%;
-    justify-content: center;
-    /* box-shadow: 0 4px 8px 0 rgba(30,34,27,0.6), 0 6px 20px 0 rgba(133,144,118,0.19); */
-}
-
-
-.bio_content {
+.disco_content {
     display: flex;
     background-color: black;
     justify-content: center;
@@ -29,7 +18,7 @@
     /* height: 100%; */
 }
 
-.bio_content_innards {
+.disco_content_innards {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,27 +30,27 @@
     padding-bottom: 30px;
 }
 
-.bio_content_innards p {
+.disco_content_innards p {
     color: #9e9277;
     text-align: justify;
     text-justify: inter-character;
     white-space: pre-wrap;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+	font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-.bio_content_innards h1 {
-    color: #9e9277;
+.disco_content_innards h1 {
+	color: #9e9277;
     text-align: justify;
     text-justify: inter-character;
     white-space: pre-wrap;
     overflow-wrap: break-word;
     word-break: break-word;
     word-wrap: break-word;
-    font-size: 30px;
+    font-size: 20px;
 }
 
-.bio_form {
-    display: flex;
+.disco_form {
+	display: flex;
     flex-direction: column;
     align-items: center;
     background-color: transparent;
@@ -69,7 +58,12 @@
     max-width: 95%;
     min-height: 20vh;
     white-space: pre-wrap;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.disco_cover {
+	width: 200px;
+	height: 200px;
 }
 
 .header {
@@ -84,11 +78,11 @@
 }
 
 .header h1 {
-    display: flex;
+	display: flex;
     flex-direction: row;
     justify-content: flex-start;
     color: black;
-    font-size: 24px;
+    font-size: 14px;
     width: 80%;
     max-width: 80%;
     padding: 4px;
@@ -139,25 +133,25 @@
 }
 
 @media only screen and (max-width: 750px) { 
-    .bio_container {  
+    .disco_container {  
     margin-bottom: 120px;
     max-width: 100%;
     background: black;
 }
 
-.bio_content {
+.disco_content {
     border: 0;
     max-width: 100%;
     width: 100%;
     justify-content: center;
 }
 
-.bio_content_innards {
+.disco_content_innards {
     width: 98%;
     max-width: 98%;
 }
 
-    .bio_header {
+    .disco_header {
         width: 75%;
     }
 

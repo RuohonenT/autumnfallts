@@ -6,6 +6,7 @@ import Navigation from './components/Navigation/Navigation';
 import News from './components/News/News';
 import Bio from './components/Bio/Bio';
 import Disco from './components/Disco/Disco';
+import DiscoEdit from './components/Disco/DiscoEdit';
 import Footer from './components/Footer/Footer';
 import Contact from './components/Contact/Contact';
 import NewsEdit from './components/News/NewsEdit';
@@ -119,6 +120,10 @@ function App() {
                 </Route>
                 <Route exact path='/bio/edit/:id'>
                   <BioUpdate />
+                </Route>
+
+                <Route exact path='/editdisco'>
+                  <DiscoEdit />
                 </Route>
 
                 <Route exact path='/users'>
