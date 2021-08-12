@@ -8,8 +8,8 @@ export class Disco {
 	@Column('varchar')
 	albumtitle!: string;
 
-	// @Column('int')
-	// tracknumber!: number;
+	@Column('int')
+	year!: number;
 
 	@Column('varchar')
 	tracktitle!: string;

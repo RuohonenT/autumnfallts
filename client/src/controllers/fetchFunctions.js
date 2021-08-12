@@ -1,4 +1,5 @@
 import axios from 'axios';
+import firebase from 'firebase/app';
 
 //check if token can be found from local storage or not
 export const checkToken = () => {
@@ -48,6 +49,15 @@ export const getOwnProfile = token => {
 		},
 	});
 };
+
+export const fetchImages = async () => {
+	let storageRef = firebase.storage().ref();
+	let result = await storageRef.child('images/covers/').listAll();
+	let urlPromises = result.items.map(imageRef => imageRef.getDownloadURL());
+
+	return Promise.all(urlPromises);
+};
+
 
 
 

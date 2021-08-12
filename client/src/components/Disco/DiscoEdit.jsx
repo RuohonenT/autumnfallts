@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const DiscoEdit = props => {
 	//states for data upload (heroku)
-	const { covers, data, setData, albumtitle, tracktitle, description, setTracktitle, setAlbumtitle, setDescription } = props;
+	const { covers, data, setData, albumtitle, tracktitle, year, setYear, description, setTracktitle, setAlbumtitle, setDescription } = props;
 	// const [albumtitle, setAlbumtitle] = useState([]);
 	// const [tracktitle, setTracktitle] = useState([]);
 	// const [description, setDescription] = useState([]);
@@ -13,9 +13,9 @@ const DiscoEdit = props => {
 	const [url, setURL] = useState('');
 
 	//upload album data to database
-	const addAlbumData = async (albumtitle, tracktitle, description) => {
+	const addAlbumData = async (albumtitle, year, tracktitle, description) => {
 		await axios
-			.post('api/disco/add', { albumtitle, tracktitle, description })
+			.post('api/disco/add', { albumtitle, year, tracktitle, description })
 			.then(res => setData([res.data]))
 			.catch(err => console.log(err));
 	};
@@ -37,7 +37,7 @@ const DiscoEdit = props => {
 
 	const handleDataSubmit = e => {
 		e.preventDefault();
-		addAlbumData(albumtitle, tracktitle, description);
+		addAlbumData(albumtitle, year, tracktitle, description);
 	};
 
 
@@ -52,6 +52,14 @@ const DiscoEdit = props => {
 					value={albumtitle}
 					placeholder='Untitled album'
 					onChange={e => setAlbumtitle(e.target.value)}
+				/>
+				<input
+					type='text'
+					id={year}
+					name='year'
+					value={year}
+					placeholder='Year'
+					onChange={e => setYear(e.target.value)}
 				/>
 				<input
 					type='text'
@@ -76,7 +84,7 @@ const DiscoEdit = props => {
 				<input type='file' onChange={e => setFile(e.target.files[0])} />
 				<button disabled={!file}>upload to firebase</button>
 			</form>
-			<img src={url} alt='' />
+			{/* <img src={url} alt='' /> */}
 
 			<br />
 
@@ -90,14 +98,17 @@ const DiscoEdit = props => {
 					}
 
 				</div>
-				<div>
+				<div className='disco_details'>
 					{(data !== undefined) && (data.length > 0) ?
 						<>
 							{
-								data.map((info, i) => {
+								data.map((details, i) => {
 									return (
-										<div id={info.albumtitle} key={i}>
-											<div>{info.tracktitle}</div>
+										<div id={details.albumtitle} key={i}>
+											<div><p>{details.albumtitle}</p></div>
+											<div><p>{details.year}</p></div>
+											<div><p>{details.tracktitle}</p></div>
+											<div><p>{details.description}</p></div>
 										</div>
 									)
 								})}

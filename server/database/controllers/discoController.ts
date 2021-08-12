@@ -6,12 +6,12 @@ export const addAlbum = async (
 	req: Request,
 	res: Response
 ): Promise<Response> => {
-	const { albumtitle, tracktitle, description } = req.body;
+	const { albumtitle, year, tracktitle, description } = req.body;
 	try {
 		const discoRepository = getRepository(Disco);
 		const disco = new Disco();
 		disco.albumtitle = albumtitle;
-		// disco.tracknumber = tracknumber;
+		disco.year = year;
 		disco.tracktitle = tracktitle;
 		disco.description = description;
 		await discoRepository.save(disco);
@@ -40,13 +40,13 @@ export const editAlbumById = async (
 	req: Request,
 	res: Response
 ): Promise<Response> => {
-	const { albumtitle, tracktitle, description } = req.body;
+	const { albumtitle, year, tracktitle, description } = req.body;
 	const { id } = req.params;
 	try {
 		const discoRepository = getRepository(Disco);
 		const disco = await discoRepository.find({ where: { id } });
 		if (disco) {
-			discoRepository.update(id, { albumtitle: albumtitle, tracktitle: tracktitle, description: description });
+			discoRepository.update(id, { albumtitle: albumtitle, year: year, tracktitle: tracktitle, description: description });
 			return res.status(200).json('Album info updated');
 		} else {
 			return res.status(501).json({ error: 'Database error' });

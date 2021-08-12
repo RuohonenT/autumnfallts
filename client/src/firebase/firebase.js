@@ -1,8 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/storage';
 import 'firebase/analytics';
-import dotenv from 'dotenv';
-dotenv.config();
+
 
 var firebaseConfig = {
 	apiKey: 'AIzaSyCuT_xHUAwvSRH6zLks7oM6fE3MBBCsdn8',

@@ -1,56 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import DiscoEdit from './DiscoEdit';
 import { useAppContext } from '../../Context';
-import firebase from 'firebase/app';
+import { fetchImages } from '../../controllers/fetchFunctions';
 import axios from 'axios';
-import 'firebase/storage';
 import './Disco.css';
 
 const Disco = () => {
 	const { token } = useAppContext();
 	const [data, setData] = useState([]);
 	const [covers, setCovers] = useState([]);
-	let storageRef = firebase.storage().ref();
-
 	const [albumtitle, setAlbumtitle] = useState([]);
 	const [tracktitle, setTracktitle] = useState([]);
 	const [description, setDescription] = useState([]);
+	const [year, setYear] = useState([]);
+
+	const [isLoading, setIsLoading] = useState(false);
+	const [allData, setAllData] = useState([]);
 
 	useEffect(() => {
-		//fetching images from Firebase
-		const fetchImages = async () => {
-			let result = await storageRef.child('images/covers/').listAll();
-			let urlPromises = result.items.map(imageRef => imageRef.getDownloadURL());
-
-			return Promise.all(urlPromises);
-		};
-
 		//using the fetch function 
 		const loadImages = async () => {
+			//fetchImages imported from fetchFunctions
 			const urls = await fetchImages();
-			setCovers(urls);
+			setCovers([urls]);
 		};
 
-		return loadImages();
+		loadImages();
 
-	}, [setCovers, storageRef]);
-
-
-	//Loading data from Heroku PostgreSQL
-	useEffect(() => {
 		const getData = async () => {
 			await axios.get('api/disco')
 				.then(res => {
 					let albumData = res.data;
 					setData(albumData);
-					console.log('albumData', albumData)
 				})
 				.catch(setData(['No Discography found']));
 		};
 
-		return getData();
+		getData();
 
-	}, [setData, albumtitle]);
+	}, [setCovers, setAlbumtitle], []);
+
+
+
+
+
 
 	return (
 		<div className='disco_content'>
@@ -62,6 +55,8 @@ const Disco = () => {
 						setData={setData}
 						albumtitle={albumtitle}
 						setAlbumtitle={setAlbumtitle}
+						year={year}
+						setYear={setYear}
 						tracktitle={tracktitle}
 						setTracktitle={setTracktitle}
 						description={description}
@@ -71,38 +66,70 @@ const Disco = () => {
 
 				:
 
-				<div className='disco_content_innards'>
+				<>
+					<div className='wrapper'>
+						<>
+							{
+								covers.map((url, i) => {
+									return <div className='wrapper'>
 
-					<div className='disco_covers'>
-						{
-							covers.map((url, idx) => {
-								return <img className='disco_cover' key={idx} src={url} alt=''></img>
-							})
-						}
+										<div className='one' key={i}><img className='disco_cover' key={i} src={url} alt=''></img></div>
 
+									</div>
+								})
+							}
+						</>
+						<>
+							{data.map((details, i) => {
+								return (
+									<div id={albumtitle} key={i} className='two'>{details.albumtitle}<br />
+										{details.tracktitle}<br />
+										{details.year}</div>
+								)
+							})}
+						</>
+						<div className='three'>Three</div>
+
+						{/* <div className='four'>Four</div>
+						<div className='five'>Five</div>
+						<div className='six'>Six</div> */}
 					</div>
-					<div>
-						{(data !== undefined) && (data.length > 0) ?
-							<>
-								{
-									data.map((info, i) => {
-										return (
-											<div id={info.albumtitle} key={i}>
-												<div>{info.tracktitle}</div>
-											</div>
-										)
-									})}
-							</>
 
-							:
+					<div className='disco_content_innards'>
 
-							<div><p>Loading data...</p></div>
-						}
+						<div className='disco_covers'>
+							{/* {
+								covers.map((url, i) => {
+									return <img className='disco_cover' key={i} src={url} alt=''></img>
+								})
+							} */}
+							{/* </div>
 
+					<div className='disco_details'> */}
+							{(data !== undefined) && (data.length > 0) ?
+								<>
+									{
+										data.map((details, i) => {
+											return (
+												<div id={details.albumtitle} key={i}>
+													<div><p>{details.albumtitle}</p></div>
+													<p>{details.year}</p>
+													<p>{details.tracktitle}</p>
+													<div className='disco_description'><p>{details.description}</p></div>
+												</div>
+											)
+										})}
+								</>
+
+								:
+
+								<div><p>Loading data...</p></div>
+							}
+
+						</div>
 					</div>
-				</div>
+				</>
 			}
-
 		</div>
 	);
 };
