@@ -23,11 +23,11 @@
 
 .App_container {
     display: flex;
-    width: 100%;
+    flex-flow: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
     background-color: black;
-    flex-flow: column;
     padding: 0;
 }
 
@@ -37,15 +37,14 @@
 
 .App_content {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
     background-color: transparent;
     padding-top: 10px;
     min-width: 100%;
     max-width: 100%;
     width: 100%;
-    justify-content: center;
-    align-items: center;
-
-    flex-flow: column;
 }
 
 .App_footer {

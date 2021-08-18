@@ -5,6 +5,7 @@ import { fetchImages } from '../../controllers/fetchFunctions';
 import axios from 'axios';
 import './Disco.css';
 
+
 const Disco = () => {
 	const { token } = useAppContext();
 	const [data, setData] = useState([]);
@@ -14,36 +15,54 @@ const Disco = () => {
 	const [description, setDescription] = useState([]);
 	const [year, setYear] = useState([]);
 
+	const [allData, setAllData] = useState([])
 	const [isLoading, setIsLoading] = useState(false);
-	const [allData, setAllData] = useState([]);
 
 	useEffect(() => {
 		//using the fetch function 
 		const loadImages = async () => {
+			setIsLoading(true);
 			//fetchImages imported from fetchFunctions
 			const urls = await fetchImages();
-			setCovers([urls]);
-		};
-
-		loadImages();
-
-		const getData = async () => {
 			await axios.get('api/disco')
 				.then(res => {
 					let albumData = res.data;
+					setCovers(urls);
 					setData(albumData);
+					// setIsLoading(false);
 				})
-				.catch(setData(['No Discography found']));
+				.catch(err => console.log('error', err));
+		};
+		return loadImages();
+	}, [setData], [])
+
+	useEffect(() => {
+
+		// setIsLoading(true);
+		const dataWork = async () => {
+			await setAllData([{ covers: [...covers], data: [...data] }]);
+			setTimeout(setIsLoading(false), 4000);
 		};
 
-		getData();
+		return dataWork();
 
-	}, [setCovers, setAlbumtitle], []);
+	}, [data, covers])
 
+	// console.log(allData)
 
+	// useEffect(() => {
+	// 	const getData = async () => {
+	// 		await axios.get('api/disco')
+	// 			.then(res => {
+	// 				let albumData = res.data;
+	// 				setData(albumData)
+	// 			})
+	// 			.catch(setData(['No Discography found']));
+	// 	};
 
+	// 	return getData();
 
-
+	// }, [setCovers]);
 
 	return (
 		<div className='disco_content'>
@@ -67,71 +86,99 @@ const Disco = () => {
 				:
 
 				<>
-					<div className='wrapper'>
-						<>
-							{
-								covers.map((url, i) => {
-									return <div className='wrapper'>
+					{
 
-										<div className='one' key={i}><img className='disco_cover' key={i} src={url} alt=''></img></div>
+						isLoading ?
 
-									</div>
-								})
-							}
-						</>
-						<>
-							{data.map((details, i) => {
-								return (
-									<div id={albumtitle} key={i} className='two'>{details.albumtitle}<br />
-										{details.tracktitle}<br />
-										{details.year}</div>
-								)
-							})}
-						</>
-						<div className='three'>Three</div>
+							console.log('Loading...')
 
-						{/* <div className='four'>Four</div>
-						<div className='five'>Five</div>
-						<div className='six'>Six</div> */}
-					</div>
+							:
 
-					<div className='disco_content_innards'>
 
-						<div className='disco_covers'>
-							{/* {
-								covers.map((url, i) => {
-									return <img className='disco_cover' key={i} src={url} alt=''></img>
-								})
-							} */}
-							{/* </div>
+							<div className='disco_content_innards'>
 
-					<div className='disco_details'> */}
-							{(data !== undefined) && (data.length > 0) ?
-								<>
-									{
-										data.map((details, i) => {
-											return (
-												<div id={details.albumtitle} key={i}>
-													<div><p>{details.albumtitle}</p></div>
-													<p>{details.year}</p>
-													<p>{details.tracktitle}</p>
-													<div className='disco_description'><p>{details.description}</p></div>
+								{allData.map((datas, i) => {
+									return <>
+										<div className='wrapper'>
+											<>
+												<div>
+													{datas.covers.map((url, i) => {
+														return <div className='one'>
+															<img src={url} alt='' width='50%' />
+														</div>
+													})}
 												</div>
-											)
-										})}
-								</>
 
-								:
 
-								<div><p>Loading data...</p></div>
-							}
+												<div>
+													{
+														datas.data.map((det, i) => {
+															return <>
+																<div className='two'>
+																	<>
+																		<p>{det.albumtitle}</p>
+																		<p>{det.year}</p>
+																		<p>{det.tracktitle}</p>
+																	</>
+																</div>
+																<div className='three'>
 
-						</div>
-					</div>
+																	<p>{det.description}</p>
+
+																</div>
+															</>
+														})
+													}
+												</div>
+
+
+
+
+											</>
+
+										</div>
+									</>
+
+
+								})}
+							</div>
+
+					}
+
+					{/* <>{datas.data.map((det, i) => {
+													//punainen
+													return <div className='disco_data'>
+														{det.albumtitle}
+														{det.year}
+														{det.tracktitle}
+														{det.description}
+													</div>
+												})}
+												</> */}
+
+
+
+
 				</>
+
 			}
-		</div>
+		</div >
 	);
 };
 
 export default Disco;
+
+								// {
+								// 	datas.data.map((det, i) => {
+								// 		return <div className='disco_description'>
+								// 			<div>
+
+								// 				<div key={i}>
+								// 					{/* <div className='disco_data'> */}
+								// <p>{det.description}</p>
+								// {/* </div> */}
+								// </div>
+								// </div>
+								// </div>
+								// })
+								// }
