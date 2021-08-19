@@ -94,54 +94,24 @@ const Disco = () => {
 
 							:
 
+							<>
 
-							<div className='disco_content_innards'>
-
-								{allData.map((datas, i) => {
-									return <>
-										<div className='wrapper'>
-											<>
-												<div>
-													{datas.covers.map((url, i) => {
-														return <div className='one'>
-															<img src={url} alt='' width='50%' />
-														</div>
-													})}
-												</div>
-
-
-												<div>
-													{
-														datas.data.map((det, i) => {
-															return <>
-																<div className='two'>
-																	<>
-																		<p>{det.albumtitle}</p>
-																		<p>{det.year}</p>
-																		<p>{det.tracktitle}</p>
-																	</>
-																</div>
-																<div className='three'>
-
-																	<p>{det.description}</p>
-
-																</div>
-															</>
-														})
-													}
-												</div>
-
-
-
-
-											</>
-
-										</div>
-									</>
-
-
+								{covers.map((url, i) => {
+									return <div><img src={url} key={i} className='covers' alt='' width='50%' /></div>
 								})}
-							</div>
+
+								{data.map((det, i) =>
+									<div className='' key={i}>
+										<p>{det.albumtitle}</p>
+										<p>{det.year}</p>
+										<p>{det.tracktitle}</p>
+										<p>{det.description}</p>
+									</div>
+								)
+								}
+
+
+							</>
 
 					}
 
