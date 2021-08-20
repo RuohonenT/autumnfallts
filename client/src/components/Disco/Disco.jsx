@@ -94,41 +94,55 @@ const Disco = () => {
 
 							:
 
-							<>
 
-								{covers.map((url, i) => {
-									return <div><img src={url} key={i} className='covers' alt='' width='50%' /></div>
-								})}
+							<div className='disco_content_innards'>
 
-								{data.map((det, i) =>
-									<div className='' key={i}>
-										<p>{det.albumtitle}</p>
-										<p>{det.year}</p>
-										<p>{det.tracktitle}</p>
-										<p>{det.description}</p>
-									</div>
-								)
-								}
+								<div className='wrapper'>
+									<>
+										<div>
+											{covers.map((url, i) => {
+												return <div className='one'>
+													<img src={url} alt='' width='100%' />
+												</div>
+											})}
+										</div>
 
+										<div>
+											{
+												data.map((det, i) => {
+													return <div className='two'>
 
-							</>
+														<p>{det.albumtitle}</p>
+														<p>{det.year}</p>
+														<p>{det.tracktitle}</p>
+														<p>{det.description}</p>
+
+													</div>
+												})
+											}
+										</div>
+
+										<div>
+											{
+												data.map((det, i) => {
+													return <div className='three'>
+
+														<p>{det.albumtitle}</p>
+														<p>{det.year}</p>
+														<p>{det.tracktitle}</p>
+														<p>{det.description}</p>
+
+													</div>
+												})
+											}
+										</div>
+									</>
+
+								</div>
+
+							</div>
 
 					}
-
-					{/* <>{datas.data.map((det, i) => {
-													//punainen
-													return <div className='disco_data'>
-														{det.albumtitle}
-														{det.year}
-														{det.tracktitle}
-														{det.description}
-													</div>
-												})}
-												</> */}
-
-
-
-
 				</>
 
 			}
@@ -137,18 +151,3 @@ const Disco = () => {
 };
 
 export default Disco;
-
-								// {
-								// 	datas.data.map((det, i) => {
-								// 		return <div className='disco_description'>
-								// 			<div>
-
-								// 				<div key={i}>
-								// 					{/* <div className='disco_data'> */}
-								// <p>{det.description}</p>
-								// {/* </div> */}
-								// </div>
-								// </div>
-								// </div>
-								// })
-								// }

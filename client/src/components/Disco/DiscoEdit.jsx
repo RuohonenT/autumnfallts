@@ -4,10 +4,11 @@ import axios from 'axios';
 
 const DiscoEdit = props => {
 	//states for data upload (heroku)
-	const { covers, data, setData, albumtitle, tracktitle, year, setYear, description, setTracktitle, setAlbumtitle, setDescription } = props;
-	// const [albumtitle, setAlbumtitle] = useState([]);
-	// const [tracktitle, setTracktitle] = useState([]);
-	// const [description, setDescription] = useState([]);
+	const { covers, data, setData } = props;
+	const [albumtitle, setAlbumtitle] = useState([]);
+	const [tracktitle, setTracktitle] = useState([]);
+	const [description, setDescription] = useState([]);
+	const [year, setYear] = useState([]);
 	//states for image upload (firebase)
 	const [file, setFile] = useState(null);
 	const [url, setURL] = useState('');
@@ -88,7 +89,7 @@ const DiscoEdit = props => {
 
 			<br />
 
-			<div className='disco_content_innards'>
+			{/* <div className='disco_content_innards'>
 
 				<div className='disco_covers'>
 					{
@@ -120,7 +121,7 @@ const DiscoEdit = props => {
 					}
 
 				</div>
-			</div>
+			</div> */}
 
 		</div>
 	);

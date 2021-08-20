@@ -22,22 +22,7 @@ const Header = props => {
                 </div >
             </div >
         </>
-    )
-}
-
-/* <div className='header_container'>
-<div className='menu-button hide-button' onClick={() => setToggleMenu(!toggleMenu)}>
-    <i className='fa fa-bars'></i>
-</div>
-<div className='header_content'>
-
-    <div className='header_logo'>
-        <Link to='home'>
-            <img src={headerlogo} alt='Autumnfall logo' className='header_logo' />
-        </Link>
-    </div>
-</div >
-</div > */
-
+    );
+};
 
 export default Header;
