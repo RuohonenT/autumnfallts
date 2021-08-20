@@ -98,45 +98,42 @@ const Disco = () => {
 							<div className='disco_content_innards'>
 
 								<div className='wrapper'>
-									<>
-										<div>
-											{covers.map((url, i) => {
-												return <div className='one'>
-													<img src={url} alt='' width='100%' />
+
+									<div>
+										{covers.map((url, i) => {
+											return <div className='one' key={i}>
+												<img src={url} alt='' width='100%' />
+											</div>
+										})}
+									</div>
+
+									<div>
+										{
+											data.map((det, i) => {
+												return <div className='two' key={i}>
+
+													<p>{det.albumtitle}</p>
+													<p>{det.year}</p>
+													<p>{det.tracktitle}</p>
+													<p>{det.description}</p>
+													{/* <div className='three'>
+														<p>{det.description}</p>
+
+													</div> */}
 												</div>
-											})}
-										</div>
+											})
+										}
+										{
+											data.map((det, i) => {
+												return <div className='three'>
+													<p>{det.description}</p>
 
-										<div>
-											{
-												data.map((det, i) => {
-													return <div className='two'>
+												</div>
+											})
+										}
+									</div>
 
-														<p>{det.albumtitle}</p>
-														<p>{det.year}</p>
-														<p>{det.tracktitle}</p>
-														<p>{det.description}</p>
 
-													</div>
-												})
-											}
-										</div>
-
-										<div>
-											{
-												data.map((det, i) => {
-													return <div className='three'>
-
-														<p>{det.albumtitle}</p>
-														<p>{det.year}</p>
-														<p>{det.tracktitle}</p>
-														<p>{det.description}</p>
-
-													</div>
-												})
-											}
-										</div>
-									</>
 
 								</div>
 
