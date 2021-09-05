@@ -7,6 +7,7 @@ import News from './components/News/News';
 import Bio from './components/Bio/Bio';
 import Disco from './components/Disco/Disco';
 import DiscoEdit from './components/Disco/DiscoEdit';
+import DiscoForm from './components/Disco/DiscoForm/DiscoForm';
 import Footer from './components/Footer/Footer';
 import Contact from './components/Contact/Contact';
 import NewsEdit from './components/News/NewsEdit';
@@ -17,7 +18,7 @@ import SignUp from './components/SignUp/SignUp';
 import Login from './components/Login/Login';
 import Profile from './components/Profile/Profile';
 import UnderConstruction from './components/under';
-import { getOwnProfile } from './controllers/fetchFunctions';
+import { getOwnProfile } from './utils/fetchFunctions';
 import 'reflect-metadata'
 import jwt_decode from 'jwt-decode';
 import './App.css'
@@ -31,11 +32,13 @@ function App() {
   const [toggleMenu, setToggleMenu] = useState(false);
   const closeNavigation = () => setToggleMenu(!toggleMenu);
 
-  const logout = () => {
+  function logout() {
     setIsLogin(false);
     localStorage.removeItem('token');
     setToken(null);
+    // history.push('/');
   };
+
 
   useEffect(() => {
     const checkToken = async () => {
@@ -45,7 +48,7 @@ function App() {
         let exp = decodedToken.exp * 1000 < currentDate.getTime();
         if (exp) {
           console.log('Token expired.');
-          logout();
+          return logout();
         } else {
           console.log('Valid token');
           setResult(true);
@@ -66,7 +69,7 @@ function App() {
     };
 
     checkToken();
-    return getProfile();
+    getProfile();
 
   }, [result, token])
 
@@ -76,7 +79,7 @@ function App() {
       setIsLogin,
       token,
       setToken,
-      logout
+      logout,
     }}>
       <Router>
         <div className='App'>
@@ -124,6 +127,10 @@ function App() {
 
                 <Route exact path='/editdisco'>
                   <DiscoEdit />
+                </Route>
+
+                <Route exact path='/discoform'>
+                  <DiscoForm />
                 </Route>
 
                 <Route exact path='/users'>

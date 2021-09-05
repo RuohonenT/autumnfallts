@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer, useRef } from 'react';
 import DiscoEdit from './DiscoEdit';
+import DiscoForm from './DiscoForm/DiscoForm';
 import { useAppContext } from '../../Context';
-import { fetchImages } from '../../controllers/fetchFunctions';
+import { fetchImages } from '../../utils/fetchFunctions';
 import axios from 'axios';
 import './Disco.css';
 
@@ -11,13 +12,16 @@ const Disco = () => {
 	const [data, setData] = useState([]);
 	const [covers, setCovers] = useState([]);
 	const [albumtitle, setAlbumtitle] = useState([]);
-	const [tracktitle, setTracktitle] = useState([]);
+	
+	// const [tracktitle, setTracktitle] = useState([]);
 	const [description, setDescription] = useState([]);
 	const [year, setYear] = useState([]);
-
-	const [allData, setAllData] = useState([])
 	const [isLoading, setIsLoading] = useState(false);
+	const [isEnabled, setIsEnabled] = useState(true);
+	const inputRef = useRef();
 
+
+	//Load data to display
 	useEffect(() => {
 		//using the fetch function 
 		const loadImages = async () => {
@@ -29,46 +33,22 @@ const Disco = () => {
 					let albumData = res.data;
 					setCovers(urls);
 					setData(albumData);
-					// setIsLoading(false);
+					setIsLoading(false);
 				})
 				.catch(err => console.log('error', err));
 		};
+
 		return loadImages();
-	}, [setData], [])
 
-	useEffect(() => {
+	}, [setData, setCovers])
 
-		// setIsLoading(true);
-		const dataWork = async () => {
-			await setAllData([{ covers: [...covers], data: [...data] }]);
-			setTimeout(setIsLoading(false), 4000);
-		};
 
-		return dataWork();
-
-	}, [data, covers])
-
-	// console.log(allData)
-
-	// useEffect(() => {
-	// 	const getData = async () => {
-	// 		await axios.get('api/disco')
-	// 			.then(res => {
-	// 				let albumData = res.data;
-	// 				setData(albumData)
-	// 			})
-	// 			.catch(setData(['No Discography found']));
-	// 	};
-
-	// 	return getData();
-
-	// }, [setCovers]);
 
 	return (
 		<div className='disco_content'>
 			{token ?
 				<>
-					<DiscoEdit
+					{/* <DiscoEdit
 						covers={covers}
 						data={data}
 						setData={setData}
@@ -77,9 +57,14 @@ const Disco = () => {
 						year={year}
 						setYear={setYear}
 						tracktitle={tracktitle}
-						setTracktitle={setTracktitle}
+						// setTracktitle={setTracktitle}
 						description={description}
 						setDescription={setDescription}
+						dispath={dispatch}
+						addTitle={addTitle}
+						inputRef={inputRef}
+					/> */}
+					<DiscoForm
 					/>
 				</>
 
@@ -95,37 +80,13 @@ const Disco = () => {
 							:
 
 
-							<div className='disco_content_innards'>
+							(data.length > 0 ?
 
-								<div className='wrapper'>
-
-									<div>
-										{covers.map((url, i) => {
-											return <div className='one' key={i}>
-												<img src={url} alt='' width='100%' />
-											</div>
-										})}
-									</div>
-
-									<div>
+								< div className='disco_content_innards'>
+									<div className='three'>
 										{
 											data.map((det, i) => {
-												return <div className='two' key={i}>
-
-													<p>{det.albumtitle}</p>
-													<p>{det.year}</p>
-													<p>{det.tracktitle}</p>
-													<p>{det.description}</p>
-													{/* <div className='three'>
-														<p>{det.description}</p>
-
-													</div> */}
-												</div>
-											})
-										}
-										{
-											data.map((det, i) => {
-												return <div className='three'>
+												return <div className='test' key={i}>
 													<p>{det.description}</p>
 
 												</div>
@@ -133,12 +94,44 @@ const Disco = () => {
 										}
 									</div>
 
+									<div className='wrapper'>
 
+										<div>
+											{covers.map((url, i) => {
+												return <div className='one' key={i}>
+													<img src={url} alt='' width='100%' />
+												</div>
+											})}
+										</div>
+
+										<div>
+											{
+												data.map((det, i) => {
+													return <div className='two' key={i}>
+
+														<p>{det.albumtitle}</p>
+														<p>{det.year}</p>
+														{/* <ol>
+															{det.tracktitle.map((item, index) => {
+																return <li key={item.id}>
+																	{item.name}
+																</li>
+															})}
+														</ol> */}
+
+													</div>
+												})
+											}
+										</div>
+
+									</div>
 
 								</div>
 
-							</div>
+								:
 
+								<><p>No data found</p></>
+							)
 					}
 				</>
 

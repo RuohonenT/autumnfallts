@@ -15,9 +15,6 @@
     flex-flow: row wrap;
     width: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(235, 6, 6, 0.19);
-    border-style: solid;
-    border-width: 0px 1px 1px 1px;
-    border-color: white;
     min-height: 50vh;
 }
 

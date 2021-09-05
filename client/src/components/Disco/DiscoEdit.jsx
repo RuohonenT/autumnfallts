@@ -1,90 +1,126 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useReducer } from 'react';
 import { storage } from '../../firebase/firebase';
 import axios from 'axios';
 
 const DiscoEdit = props => {
 	//states for data upload (heroku)
-	const { covers, data, setData } = props;
-	const [albumtitle, setAlbumtitle] = useState([]);
-	const [tracktitle, setTracktitle] = useState([]);
-	const [description, setDescription] = useState([]);
-	const [year, setYear] = useState([]);
+	const { data, albumtitle, description, dispatch, addTitle, inputRef, tracktitle, year, setAlbumtitle, setDescription, setYear, setData } = props;
 	//states for image upload (firebase)
 	const [file, setFile] = useState(null);
+	// eslint-disable-next-line no-unused-vars
 	const [url, setURL] = useState('');
+	// const [tracknumber, setTracknumber] = useState([]);
+	// const [title, setTitle] = useState('');
 
-	//upload album data to database
+
+	const validation = (albumtitle, year, tracktitle, description) => {
+		return {
+			albumtitle: albumtitle.length === 0,
+			year: year.length < 4 || year.length > 4 || isNaN(year),
+			tracktitle: tracktitle.length === 0,
+			description: description.length === 0
+		};
+	};
+
+	const errors = validation(albumtitle, year, tracktitle, description);
+	const isEnabled = !Object.keys(errors).some(x => errors[x]);
+
+	//upload album data to heroku database
 	const addAlbumData = async (albumtitle, year, tracktitle, description) => {
 		await axios
 			.post('api/disco/add', { albumtitle, year, tracktitle, description })
-			.then(res => setData([res.data]))
-			.catch(err => console.log(err));
+			.then(res => {
+				setData([res.data]);
+				console.log(res.data.msg);
+				setAlbumtitle([]);
+				// setTracktitle([]);
+				setYear([]);
+				setDescription([]);
+			})
+			.catch(err => console.log(err, data.data.msg));
 	};
 
 	//upload image to firebase
 	const handleImageSubmit = e => {
 		e.preventDefault();
-		const ref = storage.ref(`/images/covers/${file.name}`);
+		addAlbumData(albumtitle, year, tracktitle, description);
+		//firebase storage doesn't keep the order thus we create
+		//newDate to rename the uploadable file in order to easily sort the images
+		let date = new Date();
+		let name = date.toLocaleString();
+		const ref = storage.ref(`/images/covers/${name}`);
 		const uploadTask = ref.put(file);
-		uploadTask.on('state_changed', console.log, console.error, () => {
-			ref
-				.getDownloadURL()
-				.then((url) => {
-					setFile(null);
+		uploadTask.on('state_changed', console.log('Uploading album art, please wait!'), console.error, () => {
+			ref.getDownloadURL()
+				.then(url => {
 					setURL(url);
-				});
+					setFile(null);
+					console.log('Album cover uploaded!')
+				})
+				.catch(err => console.log(err));
 		});
 	};
 
-	const handleDataSubmit = e => {
-		e.preventDefault();
-		addAlbumData(albumtitle, year, tracktitle, description);
-	};
-
-
 
 	return (
-		<div>
-			<form>
+		<div className='disco_content_innards'>
+			<form className='disco_form' onSubmit={handleImageSubmit}>
+				<label>Album title:</label>
 				<input
 					type='text'
 					id={albumtitle}
 					name='albumtitle'
 					value={albumtitle}
 					placeholder='Untitled album'
+					className={errors.albumtitle ? 'error' : ''}
 					onChange={e => setAlbumtitle(e.target.value)}
 				/>
+
+				<label>Release year:</label>
 				<input
 					type='text'
 					id={year}
 					name='year'
 					value={year}
 					placeholder='Year'
+					className={errors.year ? 'error' : ''}
 					onChange={e => setYear(e.target.value)}
 				/>
-				<input
-					type='text'
-					id={tracktitle}
-					name='tracktitle'
-					value={tracktitle}
-					placeholder='Track title'
-					onChange={e => setTracktitle(e.target.value)}
-				/>
-				<input
+
+				<label>Additional info:</label>
+				<textarea
 					type='text'
 					id={description}
 					name='description'
 					value={description}
 					placeholder='Album description'
+					className={errors.description ? 'error' : ''}
 					onChange={e => setDescription(e.target.value)}
 				/>
-				<button onClick={handleDataSubmit}>Upload Data</button>
+
+
+				<label>Cover art:</label>
+				<input
+					type='file'
+					onChange={e => setFile(e.target.files[0])}
+				/>
+
+
+				<button disabled={!file || !isEnabled}>Upload album</button>
+
 			</form>
 
-			<form onSubmit={handleImageSubmit}>
-				<input type='file' onChange={e => setFile(e.target.files[0])} />
-				<button disabled={!file}>upload to firebase</button>
+			<form className='disco_form' onSubmit={addTitle}>
+				<input ref={inputRef} onSubmit={addTitle} />
 			</form>
+			<ol>
+				{tracktitle.map((item, index) => {
+					return <li key={item.id}>
+						{item.name}
+					</li>
+				})}
+			</ol>
+
 			{/* <img src={url} alt='' /> */}
 
 			<br />

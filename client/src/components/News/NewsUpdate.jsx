@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
-import { updateNews } from '../../controllers/fetchFunctions';
+import { updateNews } from '../../utils/fetchFunctions';
 import './News.css'
 
 const NewsUpdate = () => {

@@ -73,6 +73,24 @@
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
+.bio_form textarea {
+    resize: vertical;
+    width: 80%;
+    background-color: #9e9277;
+    color: black;
+    border: solid 1px white;
+    min-height: 20vh;
+    white-space: pre-wrap;
+}
+
+.bio_form input {
+    width: 80%;
+    background-color: #9e9277;
+    color: black;
+    border: solid 1px white;
+    min-height: 5vh;
+}
+
 .header {
     display: flex;
     flex-direction: row wrap;
@@ -96,23 +114,6 @@
     word-wrap: break-word;   
     overflow-wrap: break-word;
     word-break: break-word;
-}
-
-.add_subject {
-    width: 80%;
-    background-color: #9e9277;
-    color: black;
-    border: solid 1px white;
-    min-height: 5vh;
-}
-
-.add_content {
-    width: 81%;
-    background-color: #9e9277;
-    color: black;
-    border: solid 1px white;
-    min-height: 20vh;
-    white-space: pre-wrap;
 }
 
 .editremove {

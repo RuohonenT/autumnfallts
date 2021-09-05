@@ -1,28 +1,28 @@
+.error {
+    border: solid red 2px;
+    resize: none;
+}
+
 .wrapper {
     display: grid;
-    gap: 5px;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
+    grid-auto-rows: auto;
     background: transparent;
     border: solid red 2px;
 }
 
 .one {
-    /* display: flex; */
     grid-area: 1/1/1/1;
-    grid-auto-rows: 1fr;
     border: solid green 2px;
     background: transparent;
     margin: 10px;
     min-height: 500px;
     max-height: 500px;
     overflow: hidden;
-    /* width: 50%; */
 }
 
 .two {
     grid-area: 1/2/1/2;
-    /* grid-auto-rows: 1fr; */
     border: solid blue 2px;
     margin: 10px;
     min-height: 500px;
@@ -30,14 +30,39 @@
 }
 
 .three {
-    /* display: flex; */
-    position: relative;
-    top: 0;
-    align-self: flex-start;
-    /* grid-row: 2;
-    grid-column: 1/2; */
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    left: 0;
     border: solid yellow 2px;
 }
+
+.test {
+    opacity: 50%;
+    display: flex;
+    background: whitesmoke;
+    border: solid violet 2px;
+    height: 500px;
+    margin-left: 20px;
+    margin-top: 10px;;
+    width: 95%;
+    padding: 5px;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.test p {
+    color: #9e9277;
+    white-space: pre-wrap;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background: chartreuse;
+    text-align: center;
+    text-justify: inter-character;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    word-wrap: break-word;
+    }
 
 .break {
     flex-basis: 100%;
@@ -58,10 +83,13 @@
     padding: 5px;
     min-height: 80vh;
     min-width: 100%;
+    height: 80%;
 }
 
 .disco_content_innards {
-    /* display: flex; */
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
     padding: 5px;
     padding-bottom: 30px;
     border: transparent;
@@ -69,12 +97,11 @@
 
 .disco_content_innards p {
     color: #9e9277;
-    text-align: justify;
+    /* text-align: justify; */
     text-justify: inter-character;
     white-space: pre-wrap;
 	font-family: Georgia, 'Times New Roman', Times, serif;
     width: 100%;
-    text-align: justify;
 }
 
 .disco_content_innards h1 {
@@ -89,15 +116,44 @@
 }
 
 .disco_form {
+    border: solid 5px crimson;
 	display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-flow: row wrap;
     background-color: transparent;
     width: 95%;
     max-width: 95%;
     min-height: 20vh;
     white-space: pre-wrap;
 	font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.disco_form label {
+    flex-flow: row wrap;
+    min-width: 45%;
+    max-width: 45%;
+    width: 45%;
+    border: solid yellow 2px;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    word-wrap: break-word;
+}
+
+.disco_form input {
+    min-width: 50%;
+    max-width: 50%;
+    width: 50%;
+    resize: none;
+}
+
+.disco_form textarea {
+    resize: vertical;
+    width: 50%;
+    min-width: 50%;
+    max-width: 50%;
+    min-height: 250px;
+    white-space: pre-wrap;
+    border: solid blue 3px;
 }
 
 

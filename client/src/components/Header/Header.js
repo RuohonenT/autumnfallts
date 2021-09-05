@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAppContext } from '../../Context';
 import headerlogo from '../../img/headerlogo.png';
 import './Header.css';
 
 const Header = props => {
     const { toggleMenu, setToggleMenu } = props;
+    const { token, logout } = useAppContext();
 
     return (
         <>
@@ -12,6 +14,13 @@ const Header = props => {
                 <div className='menu-button' onClick={() => setToggleMenu(!toggleMenu)}>
                     <i className='fa fa-bars'></i>
                 </div>
+
+                {token ?
+                    <div className='logout' onClick={logout}>Logout</div>
+                    :
+                    ''
+                }
+
                 <div className='header_content'>
 
                     <div className='header_logo'>

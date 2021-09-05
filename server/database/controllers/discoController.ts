@@ -15,7 +15,7 @@ export const addAlbum = async (
 		disco.tracktitle = tracktitle;
 		disco.description = description;
 		await discoRepository.save(disco);
-		return res.status(200).json({ msg: 'Album added', disco });
+		return res.status(200).json({ msg: 'Album data added', disco });
 	} catch (err) {
 		console.log('addAlbum serverside error', err);
 		return res.status(501).json({ error: 'Server error with addAlbum' });

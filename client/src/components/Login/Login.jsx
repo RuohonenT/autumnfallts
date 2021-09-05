@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { login } from '../../controllers/fetchFunctions';
+import { login } from '../../utils/fetchFunctions';
 import { useAppContext } from '../../Context';
 import './Login.css';
 
 const Login = () => {
 	const [email, setEmailText] = useState('');
 	const [password, setPasswordText] = useState('');
-	const { setIsLogin, setToken } = useAppContext();
+	const { setIsLogin, setToken, logout } = useAppContext();
 	const history = useHistory();
 
 
@@ -29,14 +29,6 @@ const Login = () => {
 			console.log('Wrong email or password');
 		}
 	};
-
-	const logout = () => {
-		setIsLogin(false);
-		localStorage.removeItem('token');
-		setToken(null);
-		history.push('/');
-	};
-
 
 	return (
 		<div className='login_content'>

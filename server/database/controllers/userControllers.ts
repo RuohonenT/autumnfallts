@@ -22,6 +22,7 @@ export const getUserById = async (
 	}
 };
 
+
 export const registerNewUser = async (
 	req: Request,
 	res: Response

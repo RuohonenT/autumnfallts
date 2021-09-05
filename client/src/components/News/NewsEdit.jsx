@@ -14,8 +14,8 @@ const NewsEdit = props => {
 			await axios
 				.post('api/news/add', { subject, content })
 				.then(res => {
-					setNews(news => [res.data, ...news])
-					console.log(res.status, res.data)
+					setNews([res.data])
+					console.log(res.status)
 					setSubject('');
 					setContent('');
 				})

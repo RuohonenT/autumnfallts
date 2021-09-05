@@ -54,49 +54,7 @@ export const fetchImages = async () => {
 	let storageRef = firebase.storage().ref();
 	let result = await storageRef.child('images/covers/').listAll();
 	let urlPromises = result.items.map(imageRef => imageRef.getDownloadURL());
+	let sort = urlPromises.sort((a, b) => a - b)
 
-	return Promise.all(urlPromises);
+	return Promise.all(sort);
 };
-
-
-
-
-
-//FETCH
-
-// export const checkAuth = (token) => {
-// 	return fetch('api/login', {
-// 		method: "GET",
-// 		headers: {
-// 			"Content-Type": "application/json",
-// 			"Authorization": `Bearer ${token}`
-// 		},
-// 		mode: 'cors',
-// 		credentials: "include",
-// 	});
-// };
-
-// export const getOwnProfile = token => {
-// 	return fetch('api/profile/me', {
-// 		method: "GET",
-// 		headers: {
-// 			"Content-Type": "application/json",
-// 			"Authorization": `Bearer ${token}`
-// 		},
-// 		mode: 'cors',
-// 		credentials: "include"
-// 	});
-// };
-
-
-// export const login = (email, password) => {
-// 	return fetch('api/login', {
-// 		method: "POST",
-// 		headers: {
-// 			"Content-Type": "application/json",
-// 		},
-// 		mode: 'cors',
-// 		credentials: "include",
-// 		body: JSON.stringify({ email, password })
-// 	});
-// };

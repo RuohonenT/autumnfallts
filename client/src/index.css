@@ -25,6 +25,7 @@ body {
   height: 100%;
   max-width: 100%;
   overflow-y: scroll;
+  color: #afafaf
 }
 
 code {

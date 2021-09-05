@@ -53,7 +53,6 @@ const BioEdit = props => {
 				/>
 				<br />
 				<textarea
-					className='add_content'
 					type='text'
 					id={content}
 					name='content'
