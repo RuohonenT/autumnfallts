@@ -11,7 +11,7 @@ const formReducer = (state, action) => {
 		case 'handleTitleChange':
 			return {
 				...state,
-				[action.field]: [action.payload]
+				tracktitles: [...state.tracktitles, { id: state.tracktitles.length, name: action.name }]
 			}
 
 		default:
