@@ -11,8 +11,8 @@ export class Disco {
 	@Column('int')
 	year!: number;
 
-	@Column('varchar')
-	tracktitle!: string;
+	@Column('jsonb')
+	tracktitles!: object[];
 
 	@Column('varchar')
 	description!: string;

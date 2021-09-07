@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useReducer, useRef } from 'react';
-import DiscoEdit from './DiscoEdit';
 import DiscoForm from './DiscoForm/DiscoForm';
 import { useAppContext } from '../../Context';
 import { fetchImages } from '../../utils/fetchFunctions';
@@ -9,38 +8,42 @@ import './Disco.css';
 
 const Disco = () => {
 	const { token } = useAppContext();
+	const [albumData, setAlbumData] = useState([]);
+	const [file, setFile] = useState(null);
+	const [url, setURL] = useState();
+	const initialFormStates = {
+		albumtitle: '',
+		year: '',
+		description: '',
+		tracktitles: []
+	};
 	const [data, setData] = useState([]);
 	const [covers, setCovers] = useState([]);
-	const [albumtitle, setAlbumtitle] = useState([]);
-	
-	// const [tracktitle, setTracktitle] = useState([]);
-	const [description, setDescription] = useState([]);
-	const [year, setYear] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isEnabled, setIsEnabled] = useState(true);
-	const inputRef = useRef();
 
 
 	//Load data to display
 	useEffect(() => {
 		//using the fetch function 
-		const loadImages = async () => {
+		const loadData = async () => {
 			setIsLoading(true);
 			//fetchImages imported from fetchFunctions
 			const urls = await fetchImages();
 			await axios.get('api/disco')
 				.then(res => {
 					let albumData = res.data;
-					setCovers(urls);
-					setData(albumData);
+					setAlbumData(albumData);
+					setCovers(urls)
 					setIsLoading(false);
 				})
 				.catch(err => console.log('error', err));
 		};
 
-		return loadImages();
+		console.log('albumData', albumData)
+		return loadData();
 
-	}, [setData, setCovers])
+	}, [setAlbumData])
 
 
 
@@ -65,6 +68,13 @@ const Disco = () => {
 						inputRef={inputRef}
 					/> */}
 					<DiscoForm
+						albumData={albumData}
+						setAlbumData={setAlbumData}
+						file={file}
+						setFile={setFile}
+						url={url}
+						setURL={setURL}
+						initialFormStates={initialFormStates}
 					/>
 				</>
 
@@ -80,17 +90,20 @@ const Disco = () => {
 							:
 
 
-							(data.length > 0 ?
+							(albumData.length > 0 ?
 
 								< div className='disco_content_innards'>
 									<div className='three'>
 										{
-											data.map((det, i) => {
+											albumData.map((det, i) => {
 												return <div className='test' key={i}>
 													<p>{det.description}</p>
 
 												</div>
 											})
+										}
+										{
+											albumData.map((det, i) => console.log(det))
 										}
 									</div>
 
@@ -106,18 +119,18 @@ const Disco = () => {
 
 										<div>
 											{
-												data.map((det, i) => {
+												albumData.map((det, i) => {
 													return <div className='two' key={i}>
 
 														<p>{det.albumtitle}</p>
 														<p>{det.year}</p>
-														{/* <ol>
-															{det.tracktitle.map((item, index) => {
-																return <li key={item.id}>
+														<ol>
+															{Object.values(det.tracktitles).map((item, index) => {
+																return <li key={index}>
 																	{item.name}
 																</li>
 															})}
-														</ol> */}
+														</ol>
 
 													</div>
 												})

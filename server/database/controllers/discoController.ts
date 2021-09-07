@@ -6,19 +6,19 @@ export const addAlbum = async (
 	req: Request,
 	res: Response
 ): Promise<Response> => {
-	const { albumtitle, year, tracktitle, description } = req.body;
+	const { albumtitle, year, tracktitles, description } = req.body;
 	try {
 		const discoRepository = getRepository(Disco);
 		const disco = new Disco();
 		disco.albumtitle = albumtitle;
 		disco.year = year;
-		disco.tracktitle = tracktitle;
+		disco.tracktitles = tracktitles;
 		disco.description = description;
 		await discoRepository.save(disco);
 		return res.status(200).json({ msg: 'Album data added', disco });
 	} catch (err) {
 		console.log('addAlbum serverside error', err);
-		return res.status(501).json({ error: 'Server error with addAlbum' });
+		return res.status(501).json({ err: 'Server error with addAlbum' });
 	}
 };
 
@@ -40,13 +40,13 @@ export const editAlbumById = async (
 	req: Request,
 	res: Response
 ): Promise<Response> => {
-	const { albumtitle, year, tracktitle, description } = req.body;
+	const { albumtitle, year, tracktitles, description } = req.body;
 	const { id } = req.params;
 	try {
 		const discoRepository = getRepository(Disco);
 		const disco = await discoRepository.find({ where: { id } });
 		if (disco) {
-			discoRepository.update(id, { albumtitle: albumtitle, year: year, tracktitle: tracktitle, description: description });
+			discoRepository.update(id, { albumtitle: albumtitle, year: year, tracktitles: tracktitles, description: description });
 			return res.status(200).json('Album info updated');
 		} else {
 			return res.status(501).json({ error: 'Database error' });

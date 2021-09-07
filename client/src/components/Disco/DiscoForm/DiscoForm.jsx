@@ -1,19 +1,14 @@
-import React, { useReducer, useRef, useState } from 'react';
+import React, { useReducer, useRef } from 'react';
 import formReducer from '../../../utils/formReducer';
 import { v4 as uuidv4 } from 'uuid';
 import { storage } from '../../../firebase/firebase';
 import '../Disco.css';
+import axios from 'axios';
 
-const DiscoForm = () => {
-	const [file, setFile] = useState(null);
-	const [url, setURL] = useState()
+const DiscoForm = props => {
+	const { file, url, setFile, setURL, initialFormStates } = props;
 	const inputRef = useRef();
-	const initialFormStates = {
-		albumtitle: '',
-		year: '',
-		description: '',
-		tracktitles: []
-	};
+
 
 	const [formState, dispatch] = useReducer(formReducer, initialFormStates);
 
@@ -25,6 +20,19 @@ const DiscoForm = () => {
 		});
 	};
 
+	const addData = async (formState) => {
+		await axios
+			.post('api/disco/add', {
+				albumtitle: formState.albumtitle,
+				year: formState.year,
+				tracktitles: formState.tracktitles,
+				description: formState.description
+			})
+			.then(res => console.log(res.data.msg))
+			// .then(res => { return setAllData({[res.data]), console.log(res.data) })
+			.catch(err => console.log(err))
+	};
+
 	const submitTitle = e => {
 		e.preventDefault();
 		dispatch({
@@ -32,13 +40,13 @@ const DiscoForm = () => {
 			name: inputRef.current.value,
 		});
 		inputRef.current.value = '';
-		console.log(formState)
 	};
 
 	const handleSubmit = e => {
 		e.preventDefault();
 		dispatch({ type: 'handleTitleChange' });
 		dispatch({ type: 'handleInputChange' });
+		addData(formState);
 
 		//firebase storage doesn't keep the order thus we create
 		//newDate to rename the uploadable file in order to easily sort the images
@@ -46,7 +54,7 @@ const DiscoForm = () => {
 		let name = date.toLocaleString();
 		const ref = storage.ref(`/images/covers/${name}`);
 		const uploadTask = ref.put(file);
-		uploadTask.on('state_changed', console.log('Uploading album art, please wait!'), console.error, () => {
+		uploadTask.on('state_changed', console.log('Uploading album art, please wait...'), console.error, () => {
 			ref.getDownloadURL()
 				.then(url => {
 					setURL(url);
@@ -80,7 +88,9 @@ const DiscoForm = () => {
 				value={formState.description}
 				onChange={handleChange}
 			/>
-			<button disabled={!file} type='submit' onClick={handleSubmit}>Tästä näin</button>
+			<label>Cover art: </label>
+			<input type='file' onChange={e => setFile(e.target.files[0])} />
+			<button type='submit' onClick={handleSubmit}>Tästä näin</button>
 		</form>
 
 		<form onSubmit={submitTitle}>
