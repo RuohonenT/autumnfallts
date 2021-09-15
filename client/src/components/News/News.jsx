@@ -26,7 +26,7 @@ function News() {
 
 	return (
 		// <div className='news_container'>
-		<div className='news_content'>
+		<>
 			{token ?
 				<>
 					<NewsEdit
@@ -57,7 +57,7 @@ function News() {
 				</div>
 			}
 
-		</div>
+		</>
 		// </div >
 	)
 };

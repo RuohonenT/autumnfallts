@@ -69,7 +69,7 @@ export const updateNewsById = async (
 			return res.status(501).json({ error: 'Database error' });
 		}
 	} catch (err) {
-		console.log(err);
+		console.log('Update error, updateNewsById, line 72 => :: ', err);
 		return res.status(501).json({ error: 'Server error' });
 	}
 };

@@ -7,10 +7,8 @@ import './Login.css';
 const Login = () => {
 	const [email, setEmailText] = useState('');
 	const [password, setPasswordText] = useState('');
-	const { setIsLogin, setToken, logout } = useAppContext();
+	const { token, setIsLogin, setToken, logout } = useAppContext();
 	const history = useHistory();
-
-
 
 	const handleSubmit = async (e, email, password) => {
 		e.preventDefault();
@@ -21,13 +19,17 @@ const Login = () => {
 				localStorage.setItem('token', data.data.token);
 				setToken(data.data.token);
 				setIsLogin(true);
+				setEmailText('');
+				setPasswordText('');
 				history.push('/profile');
 			} else {
 				console.log('Wrong email or password');
-			}
+				setPasswordText('');
+			};
 		} else {
 			console.log('Wrong email or password');
-		}
+			setPasswordText('');
+		};
 	};
 
 	return (
@@ -45,9 +47,16 @@ const Login = () => {
 					onChange={e => setPasswordText(e.target.value)}
 					placeholder='Password'
 				/>
-				<button
-					onClick={e => handleSubmit(e, email, password)}>Login</button>
-				<button onClick={logout}>Logout</button>
+				{
+					token ?
+						<button
+							onClick={logout}>
+							Logout</button>
+						:
+						<button
+							onClick={e => handleSubmit(e, email, password)}>
+							Login</button>
+				}
 			</form>
 		</div>
 	);

@@ -89,7 +89,6 @@
 .disco_content_innards {
     display: flex;
     flex-flow: column;
-    justify-content: center;
     padding: 5px;
     padding-bottom: 30px;
     border: transparent;
@@ -114,48 +113,6 @@
     word-wrap: break-word;
     font-size: 20px;
 }
-
-.disco_form {
-    border: solid 5px crimson;
-	display: flex;
-    flex-flow: row wrap;
-    background-color: transparent;
-    width: 95%;
-    max-width: 95%;
-    min-height: 20vh;
-    white-space: pre-wrap;
-	font-family: Georgia, 'Times New Roman', Times, serif;
-}
-
-.disco_form label {
-    flex-flow: row wrap;
-    min-width: 45%;
-    max-width: 45%;
-    width: 45%;
-    border: solid yellow 2px;
-    white-space: pre-wrap;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    word-wrap: break-word;
-}
-
-.disco_form input {
-    min-width: 50%;
-    max-width: 50%;
-    width: 50%;
-    resize: none;
-}
-
-.disco_form textarea {
-    resize: vertical;
-    width: 50%;
-    min-width: 50%;
-    max-width: 50%;
-    min-height: 250px;
-    white-space: pre-wrap;
-    border: solid blue 3px;
-}
-
 
 .disco_covers_innards {
     /* display: flex; */

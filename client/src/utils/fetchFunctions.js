@@ -21,6 +21,11 @@ export const updateNews = (id, subject, content) => {
 	return axios.put('/api/news/edit/' + id, { subject, content })
 };
 
+
+export const updateDisco = (id, albumtitle, year, description, tracktitles) => {
+	return axios.put('/api/disco/edit/' + id, { albumtitle, year, description, tracktitles })
+};
+
 export const signUp = async (email, password) => {
 	return await axios.post('api/users', { email: email, password: password }, {
 		'withCredentials': true,
@@ -28,7 +33,6 @@ export const signUp = async (email, password) => {
 		'Content-Type': 'application/json;charset=UTF-8'
 	});
 };
-
 
 // login function
 export const login = (email, password) => {
@@ -50,6 +54,7 @@ export const getOwnProfile = token => {
 	});
 };
 
+//fetch images from firebase
 export const fetchImages = async () => {
 	let storageRef = firebase.storage().ref();
 	let result = await storageRef.child('images/covers/').listAll();

@@ -9,36 +9,26 @@
       justify-content: center;
   }
 
-  .bio_container {
-    display: flex;
-    background-color: transparent;
-    margin-top: 0%;
-    width: 100%;
-    max-width: 100%;
-    justify-content: center;
-    /* box-shadow: 0 4px 8px 0 rgba(30,34,27,0.6), 0 6px 20px 0 rgba(133,144,118,0.19); */
-}
-
-
 .bio_content {
     display: flex;
-    background-color: black;
-    justify-content: center;
     flex-flow: row wrap;
-    min-height: 80vh;
+    background-color: yellow;
+    justify-content: center;
+    min-width: 95%;
+    max-width: 95%;
     width: 95%;
-    /* height: 100%; */
+    padding-bottom: 20px;
 }
 
 .bio_content_innards {
     display: flex;
-    flex-direction: column;
+    flex-flow: column wrap;
     align-items: center;
-    background-color: yellow;
-    width: 100%;
+    justify-content: center;
+    background-color: transparent;
+    min-width: 100%;
     max-width: 100%;
-    min-height: 20vh;
-    padding: 5px;
+    width: 100%;
     padding-bottom: 30px;
 }
 
@@ -51,19 +41,22 @@
 }
 
 .bio_content_innards h1 {
-    color: #9e9277;
-    text-align: justify;
+    background-color: transparent;
+    max-width: 100%;
+    font-size: 30px;
+    padding: 8px;
+    margin: 0;
+    color: #afafaf;
     text-justify: inter-character;
     white-space: pre-wrap;
     overflow-wrap: break-word;
     word-break: break-word;
     word-wrap: break-word;
-    font-size: 30px;
 }
 
 .bio_form {
     display: flex;
-    flex-direction: column;
+    flex-flow: column wrap;
     align-items: center;
     background-color: transparent;
     width: 95%;

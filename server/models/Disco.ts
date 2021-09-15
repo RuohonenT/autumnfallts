@@ -12,7 +12,7 @@ export class Disco {
 	year!: number;
 
 	@Column('jsonb')
-	tracktitles!: object[];
+	tracktitles!: string;
 
 	@Column('varchar')
 	description!: string;
