@@ -13,42 +13,24 @@ const DiscoUpdate = () => {
 		albumtitle: data.albumtitle,
 		year: data.year,
 		description: data.description,
+		tracktitles: data.tracktitles
 	});
 
-
-
-	const [tracktitles, setTracktitles] = useState(data.tracktitles);
-	console.log(tracktitles)
-
-	console.log(Object.keys(tracktitles).map((titles) =>
-		Object.values(tracktitles[titles]).map(title =>
-			title.name)))
-
-	// console.log(titles.map((name, i) => console.log(name, i)));
-	// console.log(items.albumtitle)
-	// console.log(items.tracktitles)
-	// let titles = [...items.tracktitles]
 	const handleChange = e => {
 		setItems(prev => {
 			return { ...prev, [e.target.name]: e.target.value }
 		})
 	};
 
-	console.log(items.tracktitles)
-
 	const handleTitles = (e, i) => {
-		let titles = { ...tracktitles };
-		titles[i].name = e.target.value;
-		setTracktitles(titles);
+		let titles = { ...items };
+		titles.tracktitles[i][e.target.name] = e.target.value;
+		setItems(titles);
 	};
 
-	const submitTitles = e => {
-		e.preventDefault();
-		console.log(tracktitles)
-	}
 	const handleSubmit = async e => {
 		e.preventDefault();
-		const update = await updateDisco(id, items.albumtitle, items.year, items.description, tracktitles);
+		const update = await updateDisco(id, items.albumtitle, items.year, items.description, items.tracktitles);
 		if (update.status === 200) {
 			console.log(update)
 			history.push('/disco');
@@ -56,18 +38,6 @@ const DiscoUpdate = () => {
 			console.log('failing')
 		}
 	};
-
-	// useEffect(() => {
-	// 	const getAlbumData = async () => {
-	// 		await axios.get('/api/disco/' + id)
-	// 			.then(res => {
-	// 				let result = res.data;
-	// 				setItems({ albumtitle: result })
-	// 			})
-	// 			.catch(err => console.log(err))
-	// 	}
-	// 	return getAlbumData()
-	// }, [])
 
 	return (
 		<div>
@@ -95,21 +65,17 @@ const DiscoUpdate = () => {
 					value={items.description}
 					onChange={handleChange}
 				/>
-				{Object.values(tracktitles).map((title, i) => (
+				{Object.values(items.tracktitles).map((title, i) => (
 					<div key={i}>
 						<input
 							type='text'
-							name='title'
-							value={tracktitles[i].name}
+							name='name'
+							value={items.tracktitles[i].name}
 							onChange={e => handleTitles(e, i)}
 						/>
 						<p>{title.name}</p></div>
 				))}
 				<button type='submit'>submit</button>
-			</form>
-
-			<form onSubmit={handleTitles}>
-				<button onClick={submitTitles}>titles</button>
 			</form>
 		</div>
 	);

@@ -97,7 +97,7 @@ const Disco = () => {
 					.catch(err => console.log(err));
 				console.log('handleSubmit', formState)
 			})
-		} else { return uploadTask.off }
+		} else { return uploadTask.on() }
 	};
 
 	//Load data to display
