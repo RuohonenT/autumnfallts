@@ -15,14 +15,6 @@ const formReducer = (state, action) => {
 				hasError: false
 			};
 
-		case 'editTitle':
-			return {
-				...state,
-				tracktitles: [...state.tracktitles.map(title =>
-					title.name === action.name)]
-			}
-
-
 		case 'removeTitle':
 			return {
 				...state,

@@ -97,7 +97,7 @@ const Disco = () => {
 					.catch(err => console.log(err));
 				console.log('handleSubmit', formState)
 			})
-		} else { return uploadTask.on() }
+		} else { history.push('/disco') }
 	};
 
 	//Load data to display
@@ -162,6 +162,7 @@ const Disco = () => {
 							(albumData.length > 0 ?
 
 								< div className='disco_content_innards'>
+									"jollain soi puhelin"
 									<div className='three'>
 										{
 											albumData.map((det, i) => {
@@ -192,9 +193,13 @@ const Disco = () => {
 														<p>{det.year}</p>
 														<ol>
 															{Object.values(det.tracktitles).map((item, index) => {
-																return <li key={index}>
-																	{item.name}
-																</li>
+																if (item === null) {
+																	return item === ''
+																} else {
+																	return <li key={index}>
+																		{item.name}
+																	</li>
+																}
 															})}
 														</ol>
 

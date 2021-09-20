@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getDisco, addAlbum, getAlbumById, updateAlbumById } from '../database/controllers/discoController';
+import { getDisco, addAlbum, getAlbumById, updateAlbumById, deleteAlbumData } from '../database/controllers/discoController';
 
 export const discoRoutes = (): Router => {
 	const router = Router();
@@ -7,5 +7,6 @@ export const discoRoutes = (): Router => {
 	router.post('/add', addAlbum);
 	router.get('/:id', getAlbumById);
 	router.put('/edit/:id', updateAlbumById);
+	router.delete('/edit/:id', deleteAlbumData);
 	return router;
 };

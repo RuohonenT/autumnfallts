@@ -1,25 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
-import axios from 'axios';
-import { updateDisco } from '../../../utils/fetchFunctions'
+import { updateDisco } from '../../../utils/fetchFunctions';
 
 const DiscoUpdate = () => {
 	const { id } = useParams();
 	const location = useLocation();
 	const data = location.state.params;
 	const history = useHistory();
+	const [edit, setEdit] = useState(false);
 
 	const [items, setItems] = useState({
 		albumtitle: data.albumtitle,
 		year: data.year,
 		description: data.description,
-		tracktitles: data.tracktitles
+		tracktitles: data.tracktitles,
 	});
 
 	const handleChange = e => {
-		setItems(prev => {
-			return { ...prev, [e.target.name]: e.target.value }
-		})
+		setItems({ ...items, [e.target.name]: e.target.value })
 	};
 
 	const handleTitles = (e, i) => {
@@ -28,11 +26,18 @@ const DiscoUpdate = () => {
 		setItems(titles);
 	};
 
+	const deleteTitle = i => {
+		let titles = { ...items };
+		delete titles.tracktitles[i];
+		console.log(titles)
+		return setItems(titles);
+	};
+
 	const handleSubmit = async e => {
 		e.preventDefault();
 		const update = await updateDisco(id, items.albumtitle, items.year, items.description, items.tracktitles);
 		if (update.status === 200) {
-			console.log(update)
+			console.log('album data updated :: =>', update)
 			history.push('/disco');
 		} else {
 			console.log('failing')
@@ -65,19 +70,39 @@ const DiscoUpdate = () => {
 					value={items.description}
 					onChange={handleChange}
 				/>
-				{Object.values(items.tracktitles).map((title, i) => (
-					<div key={i}>
-						<input
-							type='text'
-							name='name'
-							value={items.tracktitles[i].name}
-							onChange={e => handleTitles(e, i)}
-						/>
-						<p>{title.name}</p></div>
-				))}
+				<p>Double click title to edit:</p>
+				<ol>
+					{Object.values(items.tracktitles).map((e, i) => {
+						if (e === null) {
+							return e === '';
+						}
+						return <div onDoubleClick={() => setEdit(true)} key={i}>
+							{edit ?
+
+								<li key={i}>
+									{e.name}
+									<input
+										type='text'
+										name='name'
+										value={items.tracktitles[i].name}
+										onChange={e => handleTitles(e, i)}
+									/>
+								</li>
+								
+								:
+
+								<div key={i}>
+									{e.name}
+									<button onClick={() => deleteTitle(i)}>X</button>
+								</div>
+							}
+						</div>
+
+					})}
+				</ol>
 				<button type='submit'>submit</button>
 			</form>
-		</div>
+		</div >
 	);
 };
 

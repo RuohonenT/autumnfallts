@@ -72,3 +72,22 @@ export const updateAlbumById = async (
 	}
 };
 
+export const deleteAlbumData = async (
+	req: Request,
+	res: Response
+): Promise<Response> => {
+	try {
+		const { tracktitles } = req.body;
+		const discoRepository = getRepository(Disco);
+		const found = await discoRepository.find({ tracktitles });
+		if (found[0] !== undefined) {
+			const disco = await discoRepository.delete({ tracktitles });
+			if (disco) {
+				return res.status(200).json({ msg: 'Title removed' });
+			} return res.status(501).json({ error: 'Server errror' });
+		} return res.status(404).json({ error: 'Title not found' });
+	} catch (err) {
+		return res.status(501).json({ error: 'Server error' });
+	}
+}
+
