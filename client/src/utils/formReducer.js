@@ -8,7 +8,7 @@ const formReducer = (state, action) => {
 				[action.field]: action.name
 			};
 
-		case 'handleTitleChange':
+		case 'addTitle':
 			return {
 				...state,
 				tracktitles: [...state.tracktitles, { id: uuidv4(), name: action.name }],
@@ -18,8 +18,23 @@ const formReducer = (state, action) => {
 		case 'removeTitle':
 			return {
 				...state,
-				tracktitles: state.tracktitles.filter((_, idx) => idx !== action.idx),
+				tracktitles: [...state.tracktitles.filter((_, idx) => idx !== action.idx)]
 			};
+
+
+		case 'editTitle':
+			console.log(action.payload)
+			return {
+				...state,
+				tracktitles: state.tracktitles.map(title => {
+					if (title.id === action.idx) {
+						return { ...title, ...action.payload };
+					} else {
+						return title;
+					}
+				})
+			};
+
 
 		case 'clear':
 			return {

@@ -43,7 +43,7 @@ const Disco = () => {
 	const submitTitle = e => {
 		e.preventDefault();
 		dispatch({
-			type: 'handleTitleChange',
+			type: 'addTitle',
 			name: inputRef.current.value,
 		});
 		inputRef.current.value = '';
@@ -121,7 +121,7 @@ const Disco = () => {
 
 		return loadData();
 
-	}, [formState, setFile])
+	}, [setFile])
 
 	const editDisco = (id, albumtitle, year, tracktitles, description) => {
 		history.push('disco/' + id, { params: { albumtitle, year, tracktitles, description } })
