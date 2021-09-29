@@ -1,68 +1,3 @@
-.error {
-    border: solid red 2px;
-    resize: none;
-}
-
-.wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-auto-rows: auto;
-    background: transparent;
-    border: solid red 2px;
-}
-
-.one {
-    grid-area: 1/1/1/1;
-    border: solid green 2px;
-    background: transparent;
-    margin: 10px;
-    min-height: 500px;
-    max-height: 500px;
-    overflow: hidden;
-}
-
-.two {
-    grid-area: 1/2/1/2;
-    border: solid blue 2px;
-    margin: 10px;
-    min-height: 500px;
-    max-height: 500px;
-}
-
-.three {
-    display: inline-block;
-    position: absolute;
-    width: 100%;
-    left: 0;
-    border: solid yellow 2px;
-}
-
-.test {
-    opacity: 50%;
-    display: flex;
-    background: whitesmoke;
-    border: solid violet 2px;
-    height: 500px;
-    margin-left: 20px;
-    margin-top: 10px;;
-    width: 95%;
-    padding: 5px;
-    align-items: flex-end;
-    justify-content: center;
-}
-
-.test p {
-    color: #9e9277;
-    white-space: pre-wrap;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    background: chartreuse;
-    text-align: center;
-    text-justify: inter-character;
-    white-space: pre-wrap;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    word-wrap: break-word;
-    }
 
 .break {
     flex-basis: 100%;
@@ -75,142 +10,15 @@
     justify-content: center;
 }
     
-.disco_content {
+.disco_container {
     display: flex;
     flex-flow: column wrap;
-    background-color: black;
+    background-color: transparent;
     justify-content: center;
     padding: 5px;
     min-height: 80vh;
     min-width: 100%;
-    height: 80%;
-}
-
-.disco_content_innards {
-    display: flex;
-    flex-flow: column;
-    padding: 5px;
-    padding-bottom: 30px;
-    border: transparent;
-}
-
-.disco_content_innards p {
-    color: #9e9277;
-    /* text-align: justify; */
-    text-justify: inter-character;
-    white-space: pre-wrap;
-	font-family: Georgia, 'Times New Roman', Times, serif;
-    width: 100%;
-}
-
-.disco_content_innards h1 {
-	color: #9e9277;
-    text-align: justify;
-    text-justify: inter-character;
-    white-space: pre-wrap;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    word-wrap: break-word;
-    font-size: 20px;
-}
-
-.disco_covers_innards {
-    /* display: flex; */
-    background-color: black;
-    padding-bottom: 10px;
-    max-width: 260px;
-    height: fit-content;
-    min-height: 26px;
-    flex-flow: column;
-    border: pink solid 2px;
-}
-
-
-.detail {
-    max-width: 250px;
-    max-height: 250px;
-}
-
-.disco_infos {
-    display: flex;
-    flex-flow: column;
-    border: white solid 2px;
-    max-width: 70%;
-    width: 70%;
-}
-
-.disco_infos_innards {
-    border: solid green 1px;
-    min-height: 260px;
-
-}
-
-
-
-.disco_description {
-    display: flex;
-    flex-flow: column;
-    border: #9e9277 solid 1px;   
-}
-
-.header {
-    display: flex;
-    flex-direction: row wrap;
-    justify-content: center;
-    align-content: center;
-    align-items: top;
-    width: 100%;
-    max-width: 100%;
-    color: black;
-}
-
-.header h1 {
-	display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    color: black;
-    font-size: 14px;
-    width: 80%;
-    max-width: 80%;
-    padding: 4px;
-    word-wrap: break-word;   
-    overflow-wrap: break-word;
-    word-break: break-word;
-}
-
-.add_subject {
-    width: 80%;
-    background-color: #9e9277;
-    color: black;
-    border: solid 1px white;
-    min-height: 5vh;
-}
-
-.add_content {
-    width: 81%;
-    background-color: #9e9277;
-    color: black;
-    border: solid 1px white;
-    min-height: 20vh;
-    white-space: pre-wrap;
-}
-
-.editremove {
-    font-family:Georgia, 'Times New Roman', Times, serif;
-    font-size: 10px;
-    justify-content: right;
-    color: gray;
-    font-weight: bold;
-    background-color: transparent;
-    border: transparent;
-}
-
-.editremove:hover{
-    font-family:Georgia, 'Times New Roman', Times, serif;
-    font-size: 10px;
-    justify-content: right;
-    color:#9e9277;
-    cursor: pointer;
+    height: 100%;
 }
 
 .right {
@@ -258,4 +66,44 @@
         min-height: 20vh;
         white-space: pre-wrap;
     }
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: black;
+    box-shadow: 0 0 10px #333;
+    border-radius: 20px;
+    overflow: hidden;
+    text-align: center;
+    z-index: 3;
+    animation: scaling 0.3s ease-in 1;
+}
+
+.ReactModal__Body--open {
+    overflow: hidden;
+}
+
+.modal:focus {
+    outline: none;
+}
+
+.overlay {
+    background: rgba(242, 201, 76, 0.9);
+    top: 0;
+    left: 0;
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    z-index: 2;
+    animation: sliding 0.2s 1;
 }

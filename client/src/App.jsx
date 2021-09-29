@@ -6,7 +6,7 @@ import Navigation from './components/Navigation/Navigation';
 import News from './components/News/News';
 import Bio from './components/Bio/Bio';
 import Disco from './components/Disco/Disco';
-import DiscoEdit from './components/Disco/DiscoEdit/DiscoEdit';
+import DiscoAdd from './components/Disco/DiscoAdd/DiscoAdd';
 import DiscoUpdate from './components/Disco/DiscoUpdate/DiscoUpdate';
 import Footer from './components/Footer/Footer';
 import Contact from './components/Contact/Contact';
@@ -18,7 +18,7 @@ import SignUp from './components/SignUp/SignUp';
 import Login from './components/Login/Login';
 import Profile from './components/Profile/Profile';
 import UnderConstruction from './components/under';
-import { getOwnProfile } from './utils/fetchFunctions';
+import { getOwnProfile } from './utils/functions';
 import jwt_decode from 'jwt-decode';
 import 'reflect-metadata'
 import './App.css'
@@ -30,7 +30,11 @@ function App() {
 	const [currentUser, setCurrentUser] = useState(null);
 	const [result, setResult] = useState(false);
 	const [toggleMenu, setToggleMenu] = useState(false);
+	const [state, setState] = useState('Loading...');
+	const [isLoading, setIsLoading] = useState(false);
+	const [modalIsOpen, setIsOpen] = useState(false);
 	const closeNavigation = () => setToggleMenu(!toggleMenu);
+
 
 	function logout() {
 		setIsLogin(false);
@@ -50,7 +54,6 @@ function App() {
 					return logout();
 				} else {
 					setResult(true);
-					console.log('Valid token');
 				}
 			}
 		};
@@ -79,6 +82,12 @@ function App() {
 			token,
 			setToken,
 			logout,
+			state,
+			setState,
+			isLoading,
+			setIsLoading,
+			setIsOpen,
+			modalIsOpen
 		}}>
 			<Router>
 				<div className='App'>
@@ -124,8 +133,8 @@ function App() {
 									<BioUpdate />
 								</Route>
 
-								<Route exact path='/editdisco'>
-									<DiscoEdit />
+								<Route exact path='/adddisco'>
+									<DiscoAdd />
 								</Route>
 
 								<Route exact path='/disco/:id'>

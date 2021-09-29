@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { signUp } from '../../utils/fetchFunctions';
+import { signUp } from '../../utils/functions';
 import './SignUp.css';
 
 const SignUp = () => {

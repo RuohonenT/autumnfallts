@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { login } from '../../utils/fetchFunctions';
+import { login } from '../../utils/functions';
 import { useAppContext } from '../../Context';
 import './Login.css';
 

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getRepository, getConnection } from 'typeorm';
+import { getRepository } from 'typeorm';
 import { Disco } from '../../models/Disco';
 
 export const addAlbum = async (
@@ -72,22 +72,22 @@ export const updateAlbumById = async (
 	}
 };
 
-export const deleteAlbumData = async (
+export const deleteAlbum = async (
 	req: Request,
 	res: Response
 ): Promise<Response> => {
 	try {
-		const { tracktitles } = req.body;
+		const { id } = req.body;
 		const discoRepository = getRepository(Disco);
-		const found = await discoRepository.find({ tracktitles });
+		const found = await discoRepository.find({ id });
 		if (found[0] !== undefined) {
-			const disco = await discoRepository.delete({ tracktitles });
+			const disco = await discoRepository.delete({ id });
 			if (disco) {
-				return res.status(200).json({ msg: 'Title removed' });
-			} return res.status(501).json({ error: 'Server errror' });
-		} return res.status(404).json({ error: 'Title not found' });
+				return res.status(200).json({ msg: 'Album removed' });
+			} return res.status(501).json({ error: 'Server error' });
+		} return res.status(404).json({ error: 'Album not found' });
 	} catch (err) {
 		return res.status(501).json({ error: 'Server error' });
 	}
-}
+};
 

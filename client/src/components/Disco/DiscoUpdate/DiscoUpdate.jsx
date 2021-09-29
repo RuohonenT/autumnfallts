@@ -1,10 +1,9 @@
-import React, { useReducer, useState, useEffect, useRef } from 'react';
+import React, { useReducer, useState, useRef } from 'react';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
-import { updateDisco } from '../../../utils/fetchFunctions';
+import { updateDisco } from '../../../utils/functions';
 import formReducer from '../../../utils/formReducer';
 
 const DiscoUpdate = props => {
-	// const { handleChange } = props;
 	const { id } = useParams();
 	const location = useLocation();
 	const data = location.state.params;

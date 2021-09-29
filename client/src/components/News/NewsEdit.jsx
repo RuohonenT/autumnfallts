@@ -29,7 +29,7 @@ const NewsEdit = props => {
 		history.push('news/edit/' + id, { params: { subject, content } })
 	};
 
-	//delete function to remove wanted news
+	//delete function to remove news by id
 	const newsDelete = async id => {
 		await axios
 			.delete('api/news/delete', { data: { id } })

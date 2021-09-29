@@ -40,7 +40,7 @@
     flex-flow: column wrap;
     justify-content: center;
     align-items: center;
-    align-content: center;
+    /* align-content: center; */
     background-color: transparent;
     padding-top: 10px;
     min-width: 100%;

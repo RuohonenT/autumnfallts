@@ -18,7 +18,7 @@ const Header = props => {
                 {token ?
                     <div className='logout' onClick={logout}>Logout</div>
                     :
-                    ''
+                    <Link to='login' className='logout'>Login</Link>
                 }
 
                 <div className='header_content'>
