@@ -4,6 +4,7 @@
     height: 100%;
     min-height: 120px;
     max-height: 190px;
+    justify-content: right;
     padding: 0;
     background-color: black;
 }
@@ -49,7 +50,6 @@
 
 .logout {
     position: absolute;
-    width: 100%;
     color: #afafaf;
     padding-right: 25px;
     text-align: right;
