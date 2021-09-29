@@ -123,7 +123,7 @@ const DiscoEdit = props => {
 						className={formState.hasError ? 'error' : ''}
 					/>
 				</form>
-				<button disabled={!file || !isEnabled} type='submit' onClick={handleSubmit}>Tästä näin</button>
+				<button disabled={file || !isEnabled} type='submit' onClick={handleSubmit}>Tästä näin</button>
 				<ol>
 					{formState.tracktitles.map((title, idx) =>
 						<li key={title.id}>
