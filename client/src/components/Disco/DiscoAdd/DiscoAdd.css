@@ -1,0 +1,109 @@
+.content {
+	display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+    /* padding-bottom: 30px; */
+}
+
+.content p {
+    color: #9e9277;
+    text-align: justify center;
+    text-justify: inter-character;
+    white-space: pre-wrap;
+    font-family: 'Times New Roman', Times, serif;
+    padding-left: 10px;
+    padding: 2px;
+    margin: 0;
+    max-width: 100%;
+    background-color: transparent;
+}
+
+.content h1 {
+	background-color: transparent;
+    max-width: 100%;
+    font-size: 30px;
+    padding: 8px;
+    margin: 0;
+    color: #afafaf;
+    text-justify: inter-character;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    word-wrap: break-word;
+}
+
+.forms {
+	width: 100%;
+	align-items: center;
+	background-color: transparent;
+}
+
+.form {
+	display: flex;
+    flex-flow: row wrap;
+	align-self: center;
+	justify-content: center;
+    background-color: transparent;
+    width: 95%;
+    max-width: 95%;
+    white-space: pre-wrap;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.form label {
+    flex-flow: row wrap;
+	text-align: right;
+    min-width: 25%;
+    max-width: 25%;
+    width: 25%;
+    border: solid transparent 2px;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    word-wrap: break-word;
+    margin: 2px;
+}
+
+.form input {
+	background-color: black;
+	color: #afafaf;
+    min-width: 65%;
+    max-width: 65%;
+    width: 65%;
+	white-space: pre-wrap;
+    resize: none;
+    margin: 2px;
+}
+
+.form textarea {
+	background-color: black;
+	color: #afafaf;
+    width: 65%;
+    min-width: 65%;
+    max-width: 65%;
+    white-space: pre-wrap;
+	resize: vertical;
+    margin: 2px;
+}
+
+.form button {
+	align-self: center;
+	border: 2px solid #afafaf;
+	background-color: black;
+	font-size: 12px;
+	color: #9e9277;
+}
+
+::placeholder {
+	color: #9e9277;
+}
+
+.error {
+    border: solid crimson 2px;
+}
+

@@ -1,46 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAppContext } from '../../Context';
 import headerlogo from '../../img/headerlogo.png';
-// import aflogo from '../../img/af.png';
 import './Header.css';
 
-
-const Header = () => {
+const Header = props => {
+    const { toggleMenu, setToggleMenu } = props;
+    const { token, logout } = useAppContext();
 
     return (
-        <div className='header_container'>
-
-            <div className='header_content'>
-
-                <div className='logo'>
-
-                    <Link to='home'>
-                        <img src={headerlogo} alt='Autumnfall logo' width='120px' height='120px' />
-                    </Link>
+        <>
+            <div className='header_container'>
+                <div className='menu-button' onClick={() => setToggleMenu(!toggleMenu)}>
+                    <i className='fa fa-bars'></i>
                 </div>
 
-                <div className='header_navigation'>
+                {token ?
+                    <div className='logout' onClick={logout}>Logout</div>
+                    :
+                    <Link to='login' className='logout'>Login</Link>
+                }
 
-                    <Link className='header_link' to='/news'>
-                        <p>News</p>
-                    </Link>
+                <div className='header_content'>
 
-                    <Link className='header_link' to='/bio'>
-                        <p>Bio</p>
-                    </Link>
-
-                    <p>Disco</p>
-
-
-                    <Link className='header_link' to='/contact'><p>Contact</p></Link>
-                    <p>Store</p>
-
-                </div>
-                <hr className='header_content' />
-            </div>
-
-        </div >
-    )
-}
+                    <div className='header_logo'>
+                        <Link to='home'>
+                            <img src={headerlogo} alt='Autumnfall logo' className='header_logo' />
+                        </Link>
+                    </div>
+                </div >
+            </div >
+        </>
+    );
+};
 
 export default Header;

@@ -1,0 +1,9 @@
+.rows {
+	display: flex;
+	justify-content: center;
+}
+.col {
+	flex: 1 0;
+	max-width: 45%;
+	padding: 10px;
+}
