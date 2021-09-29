@@ -48,7 +48,7 @@ const Disco = () => {
 		const loadData = async () => {
 			setIsLoading(true);
 			//fetchImages imported from fetchFunctions
-			const urls = await fetchImages();
+			const urls = fetchImages();
 			await axios.get('api/disco')
 				.then(res => {
 					let albumDetails = res.data;

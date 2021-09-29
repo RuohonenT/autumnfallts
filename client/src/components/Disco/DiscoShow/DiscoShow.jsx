@@ -2,6 +2,7 @@ import React from 'react';
 import { removeCover } from '../../../utils/functions';
 import { useAppContext } from '../../../Context';
 import { useHistory } from 'react-router-dom';
+import nocover from '../../../img/nocover.png';
 import axios from 'axios';
 import './DiscoShow.css';
 
@@ -52,8 +53,13 @@ const DiscoShow = props => {
 
 
 							</div>
+
 							:
-							'no cover to show'}
+
+							<div className='col' style={{ minHeight: '500px' }}>
+								{albumData.map(item => <img src={nocover} alt='no cover' width='100%' />)}
+							</div>
+						}
 
 						<div className='col'>
 							{
