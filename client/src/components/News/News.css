@@ -70,7 +70,7 @@
     display: flex;
     flex-flow: column wrap;
     align-items: center;
-    background-color: yellow;
+    background-color: transparent;
     width: 95%;
     max-width: 95%;
     min-height: 20vh;
