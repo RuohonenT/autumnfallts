@@ -1,26 +1,13 @@
 import React from 'react';
 import { removeCover } from '../../../utils/functions';
 import { useAppContext } from '../../../Context';
-import { useHistory } from 'react-router-dom';
 import nocover from '../../../img/nocover.png';
-import axios from 'axios';
+
 import './DiscoShow.css';
 
 const DiscoShow = props => {
 	const { token, isLoading, state } = useAppContext();
-	const { albumData, covers, setCovers } = props;
-	const history = useHistory();
-
-	//delete album data from backend
-	const removeAlbum = async id => {
-		await axios.delete('api/disco/delete', { data: { id } })
-			.then(res => console.log(res.data))
-			.catch(err => console.log('data deletion', err));
-	};
-
-	const editDisco = (id, albumtitle, year, tracktitles, description) => {
-		history.push('disco/' + id, { params: { albumtitle, year, tracktitles, description } });
-	};
+	const { albumData, covers, setCovers, removeData, editData } = props;
 
 
 	return (
@@ -56,8 +43,8 @@ const DiscoShow = props => {
 
 							:
 
-							<div className='col' style={{ minHeight: '500px' }}>
-								{albumData.map(item => <img src={nocover} alt='no cover' width='100%' />)}
+							<div className='col'>
+								{albumData.map(item => <div style={{ minHeight: '500px' }} key={item.id}><img src={nocover} alt='no cover' width='100%' /></div>)}
 							</div>
 						}
 
@@ -83,8 +70,8 @@ const DiscoShow = props => {
 										{/* if user is logged in she/he can remove selected data*/}
 										{token ?
 											<>
-												<button onClick={() => editDisco(det.id, det.albumtitle, det.year, det.tracktitles, det.description)}>EDIT</button>
-												<button onClick={() => removeAlbum(det.id)}>DELETE DATA</button>
+												<button onClick={() => editData(det.id, det.albumtitle, det.year, det.tracktitles, det.description)}>EDIT</button>
+												<button onClick={() => removeData(det.id)}>DELETE DATA</button>
 											</> : null}
 									</div>
 								)

@@ -30,7 +30,6 @@ function App() {
 	const [currentUser, setCurrentUser] = useState(null);
 	const [result, setResult] = useState(false);
 	const [toggleMenu, setToggleMenu] = useState(false);
-	const [state, setState] = useState('Loading...');
 	const [isLoading, setIsLoading] = useState(false);
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const closeNavigation = () => setToggleMenu(!toggleMenu);
@@ -82,8 +81,6 @@ function App() {
 			token,
 			setToken,
 			logout,
-			state,
-			setState,
 			isLoading,
 			setIsLoading,
 			setIsOpen,

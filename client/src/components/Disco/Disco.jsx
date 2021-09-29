@@ -3,6 +3,7 @@ import DiscoShow from './DiscoShow/DiscoShow';
 import DiscoAdd from './DiscoAdd/DiscoAdd';
 import formReducer from '../../utils/formReducer';
 import { useAppContext } from '../../Context';
+import { useHistory } from 'react-router-dom';
 import { fetchImages } from '../../utils/functions';
 import axios from 'axios';
 import './Disco.css';
@@ -18,11 +19,13 @@ const initialFormStates = {
 };
 
 const Disco = () => {
-	const { token, setState, setIsLoading, setIsOpen } = useAppContext();
-	const [albumData, setAlbumData] = useState([]);
+	const { token, setIsOpen, setIsLoading } = useAppContext();
+	const [state, setState] = useState('Loading...');
 	const [file, setFile] = useState(null);
 	const [covers, setCovers] = useState([]);
+	const history = useHistory();
 	const [formState, dispatch] = useReducer(formReducer, initialFormStates);
+	const [albumData, setAlbumData] = useState({ formState });
 	const inputRef = useRef();
 
 
@@ -38,7 +41,7 @@ const Disco = () => {
 			})
 			.then(res => {
 				console.log(res.data.msg);
-				setAlbumData(res.data);
+				console.log(res.data.disco);
 			})
 			.catch(err => console.log(err));
 	};
@@ -51,30 +54,39 @@ const Disco = () => {
 			const urls = fetchImages();
 			await axios.get('api/disco')
 				.then(res => {
-					let albumDetails = res.data;
-					setAlbumData(albumDetails);
+					setAlbumData(res.data);
 					setCovers(urls);
 					setIsLoading(false);
-					setState('Loading...');
 				})
 				.catch(err => {
 					console.log('error', err);
 					setIsLoading(false);
-					setState('Error while loading data...');
 				});
-
 		};
 
 		return loadData();
 
-	}, [setIsLoading, setState, setAlbumData]);
+	}, [setIsLoading, state]);
+
+
+	const editData = (id, albumtitle, year, tracktitles, description) => {
+		history.push('disco/' + id, { params: { albumtitle, year, tracktitles, description } });
+	};
+
+	//delete album data from backend
+	const removeData = async id => {
+		await axios.delete('api/disco/delete', { data: { id } })
+			.then(setState('data removed'))
+			.catch(err => console.log('data deletion', err));
+	};
 
 	return (
 		<div className='disco_container'>
 			<h1>Discography ::</h1>
 
-			{token ?
-				<>
+
+			<>
+				{token ?
 					<DiscoAdd
 						file={file}
 						setFile={setFile}
@@ -83,26 +95,24 @@ const Disco = () => {
 						dispatch={dispatch}
 						setIsOpen={setIsOpen}
 						addData={addData}
+						setState={setState}
 					/>
-					<DiscoShow
-						albumData={albumData}
-						covers={covers}
-						setCovers={setCovers}
 
-					/>
-				</>
+					:
 
-				:
+					null
+				}
 
-				<>
-					<DiscoShow
-						albumData={albumData}
-						covers={covers}
-						setCovers={setCovers}
-					/>
-				</>
+				<DiscoShow
+					albumData={albumData}
+					covers={covers}
+					setCovers={setCovers}
+					removeData={removeData}
+					editData={editData}
+					setAlbumData={setAlbumData}
+				/>
 
-			}
+			</>
 		</div >
 	);
 };

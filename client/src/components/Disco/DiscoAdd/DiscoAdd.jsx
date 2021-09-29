@@ -7,9 +7,9 @@ import './DiscoAdd.css';
 
 Modal.setAppElement('#root');
 
-const DiscoEdit = props => {
-	const { addData, file, setFile, formState, inputRef, dispatch } = props;
-	const { modalIsOpen, setIsOpen, setState } = useAppContext();
+const DiscoAdd = props => {
+	const { addData, file, setFile, formState, inputRef, dispatch, setState } = props;
+	const { modalIsOpen, setIsOpen } = useAppContext();
 	const [isEnabled, setIsEnabled] = useState(false);
 
 	//event handler to fire dispatch when one of the initialFormStates values are being changed
@@ -35,7 +35,7 @@ const DiscoEdit = props => {
 	const handleSubmit = async e => {
 		e.preventDefault();
 		await addData(formState);
-		setState('Loading new data...')
+		setState('adding new data');
 		dispatch({ type: 'clear' });
 		file !== null ?
 			//if file has been selected we can execute the uploadCover function
@@ -52,12 +52,12 @@ const DiscoEdit = props => {
 			alert('Include the image!')
 	};
 
-	//checking for 'hasErrors' by mapping through each field...
+	//checking for 'hasErrors' by forEaching through each field...
 	useEffect(() => {
 		Object.values(formState).forEach(state =>
 			state.hasError !== false && formState.hasError !== false ?
 				setIsEnabled(false) : setIsEnabled(true)
-		);
+		)
 
 	}, [formState]);
 
@@ -133,9 +133,10 @@ const DiscoEdit = props => {
 					)}
 				</ol>
 			</div>
+
 		</div>
 
-	);
+	)
 };
 
-export default DiscoEdit;
+export default DiscoAdd;
