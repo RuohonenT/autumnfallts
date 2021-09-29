@@ -34,20 +34,26 @@ const DiscoShow = props => {
 				{albumData.length > 0 ?
 					<div className='rows'>
 
-						<div className='col'>
-							{covers.map((url, i) =>
-								<div style={{ minHeight: '500px' }} key={i}>
-									<img src={url} alt='' width='100%' />
+						{covers.length > 0 ?
+							<div className='col'>
 
-									{/* if user is logged in she/he can remove selected cover*/}
-									{token ?
-										<button
-											onClick={() => removeCover(url).then(setCovers(covers.filter(img => img !== url)))}>
-											DELETE COVER</button> : null}
+								{covers.map((url, i) =>
+									<div style={{ minHeight: '500px' }} key={i}>
+										<img src={url} alt='' width='100%' />
 
-								</div>
-							)}
-						</div>
+										{/* if user is logged in she/he can remove selected cover*/}
+										{token ?
+											<button
+												onClick={() => removeCover(url).then(setCovers(covers.filter(img => img !== url)))}>
+												DELETE COVER</button> : null}
+
+									</div>
+								)}
+
+
+							</div>
+							:
+							'no cover to show'}
 
 						<div className='col'>
 							{
