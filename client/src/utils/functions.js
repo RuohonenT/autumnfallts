@@ -77,7 +77,7 @@ export const uploadCoverToFirebase = async (file) => {
 	const ref = storage.ref(`/images/covers/${name}`);
 	const uploadTask = ref.put(file);
 	uploadTask.on('state_changed', console.log('Uploading album art, please wait...'), console.error, () => {
-		ref.getDownloadURL()
+		ref.getDownloadURL();
 	});
 };
 
@@ -86,7 +86,7 @@ export const fetchImages = async () => {
 	let storageRef = firebase.storage().ref();
 	let result = await storageRef.child('images/covers/').listAll();
 	let urlPromises = result.items.map(imageRef => imageRef.getDownloadURL());
-	let sort = urlPromises.sort((a, b) => a - b)
+	let sort = urlPromises.sort((a, b) => a - b);
 
 	return Promise.all(sort);
 };

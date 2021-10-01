@@ -7,6 +7,7 @@ const Footer = () => {
         // <div className='footer_container'>
 
         <div className='footer_content'>
+            <hr width='75%' style={{ color: '#afafaf', backgroundColor: '#afafaf' }} />
             <div className='footer_info'><p>Follow us on:</p></div>
             {/* <div className='footer_grid'> */}
             <div className='footer_info'><a target='_blank' rel='noreferrer' href='https://www.facebook.com/autumnfallband'><i className="fa fa-facebook"></i></a>

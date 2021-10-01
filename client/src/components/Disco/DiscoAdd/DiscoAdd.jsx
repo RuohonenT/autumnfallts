@@ -9,7 +9,7 @@ Modal.setAppElement('#root');
 
 const DiscoAdd = props => {
 	const { addData, file, setFile, formState, inputRef, dispatch, setState } = props;
-	const { modalIsOpen, setIsOpen } = useAppContext();
+	const { token, modalIsOpen, setIsOpen } = useAppContext();
 	const [isEnabled, setIsEnabled] = useState(false);
 
 	//event handler to fire dispatch when one of the initialFormStates values are being changed
@@ -123,7 +123,7 @@ const DiscoAdd = props => {
 						className={formState.hasError ? 'error' : ''}
 					/>
 				</form>
-				<button disabled={file || !isEnabled} type='submit' onClick={handleSubmit}>Tästä näin</button>
+				<button disabled={!file || !isEnabled} type='submit' onClick={handleSubmit}>Tästä näin</button>
 				<ol>
 					{formState.tracktitles.map((title, idx) =>
 						<li key={title.id}>

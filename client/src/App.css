@@ -5,16 +5,11 @@
   margin: 0;
   width: 100%;
   height: 100%;
-  /* min-height: 20vh; */
-  /* top: 50px; */
-  /* margin-bottom: 20px; */
   position: relative;
   justify-content: center;
   display: flex;
   flex-flow: row wrap;
-  box-shadow: 0 4px 8px 0 rgba(30,34,27,0.6), 0 6px 20px 0 rgba(133,144,118,0.19);
-  /* min-height: 100vh; */
-  
+  box-shadow: 0 4px 8px 0 rgba(30,34,27,0.6), 0 6px 20px 0 rgba(133,144,118,0.19);  
 }
 
 .App > * {
@@ -29,6 +24,7 @@
     width: 100%;
     background-color: black;
     padding: 0;
+    padding-bottom: 30px;
 }
 
 .App_container > * {
@@ -40,7 +36,6 @@
     flex-flow: column wrap;
     justify-content: center;
     align-items: center;
-    /* align-content: center; */
     background-color: transparent;
     padding-top: 10px;
     min-width: 100%;

@@ -18,7 +18,10 @@ function News() {
 					let news = res.data;
 					setNews(news);
 				})
-				.catch(err => console.log(err));
+				.catch(err => {
+					console.log(err)
+					setNews(['No news found.'])
+				});
 		};
 		return getNews();
 

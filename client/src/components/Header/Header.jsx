@@ -24,7 +24,7 @@ const Header = props => {
                 <div className='header_content'>
 
                     <div className='header_logo'>
-                        <Link to='home'>
+                        <Link to='/'>
                             <img src={headerlogo} alt='Autumnfall logo' className='header_logo' />
                         </Link>
                     </div>

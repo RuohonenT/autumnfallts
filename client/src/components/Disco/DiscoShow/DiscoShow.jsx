@@ -6,9 +6,8 @@ import nocover from '../../../img/nocover.png';
 import './DiscoShow.css';
 
 const DiscoShow = props => {
-	const { token, isLoading, state } = useAppContext();
-	const { albumData, covers, setCovers, removeData, editData } = props;
-
+	const { token, state } = useAppContext();
+	const { albumData, covers, setCovers, removeData, editData, isLoading } = props;
 
 	return (
 
@@ -23,6 +22,7 @@ const DiscoShow = props => {
 					<div className='rows'>
 
 						{covers.length > 0 ?
+
 							<div className='col'>
 
 								{covers.map((url, i) =>

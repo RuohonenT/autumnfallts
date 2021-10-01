@@ -47,7 +47,7 @@ function App() {
 			if (token) {
 				let decodedToken = jwt_decode(token);
 				let currentDate = new Date();
-				let exp = decodedToken.exp * 1000 < currentDate.getTime();
+				let exp = decodedToken.exp * 100000 < currentDate.getTime();
 				if (exp) {
 					console.log('Token expired.');
 					return logout();
@@ -84,7 +84,7 @@ function App() {
 			isLoading,
 			setIsLoading,
 			setIsOpen,
-			modalIsOpen
+			modalIsOpen,
 		}}>
 			<Router>
 				<div className='App'>

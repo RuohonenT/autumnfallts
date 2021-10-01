@@ -22,7 +22,7 @@ export const login = async (
 				//generate token
 				const token = jwt.sign({
 					data: existingUser.id,
-				}, secret, { expiresIn: 10 * 100000 });
+				}, secret, { expiresIn: 10 * 1000 });
 				return res.json({ token });
 			} else { return res.status(501).json({ error: 'Unauthorized' }); }
 		} else { return res.status(501).json({ error: 'Unauthorized' }); }

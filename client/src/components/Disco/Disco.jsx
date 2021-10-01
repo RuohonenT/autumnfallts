@@ -19,13 +19,14 @@ const initialFormStates = {
 };
 
 const Disco = () => {
-	const { token, setIsOpen, setIsLoading } = useAppContext();
+	const { token, setIsOpen } = useAppContext();
 	const [state, setState] = useState('Loading...');
 	const [file, setFile] = useState(null);
 	const [covers, setCovers] = useState([]);
-	const history = useHistory();
 	const [formState, dispatch] = useReducer(formReducer, initialFormStates);
 	const [albumData, setAlbumData] = useState({ formState });
+	const [isLoading, setIsLoading] = useState(false);
+	const history = useHistory();
 	const inputRef = useRef();
 
 
@@ -51,11 +52,12 @@ const Disco = () => {
 		const loadData = async () => {
 			setIsLoading(true);
 			//fetchImages imported from fetchFunctions
-			const urls = fetchImages();
+			await fetchImages()
+				.then(res => setCovers(res))
+				.catch(err => console.log('while loading cover :: =>', err))
 			await axios.get('api/disco')
 				.then(res => {
 					setAlbumData(res.data);
-					setCovers(urls);
 					setIsLoading(false);
 				})
 				.catch(err => {
@@ -105,11 +107,13 @@ const Disco = () => {
 
 				<DiscoShow
 					albumData={albumData}
-					covers={covers}
 					setCovers={setCovers}
 					removeData={removeData}
 					editData={editData}
 					setAlbumData={setAlbumData}
+					covers={covers}
+					setIsLoading={setIsLoading}
+					isLoading={isLoading}
 				/>
 
 			</>
